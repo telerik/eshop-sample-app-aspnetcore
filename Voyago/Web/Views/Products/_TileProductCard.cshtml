@@ -1,0 +1,47 @@
+﻿<div class="k-card">
+	<a style="position: relative;" href="/Products/Details?productId=#:Id#">
+		<img class="k-card-image" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" width="330" height="244" alt="#:Name# image" />
+		# if(DiscountPct != 0) { #
+			<span class="discount-pct">#:Number(DiscountPct) * 100#% off</span>
+		# } #
+	</a>
+	<div class="k-card-body">
+		<a style="text-decoration: none;" href="/Products/Details?productId=#:Id#">
+			<h5 style="color: black;">#:Name#</h5>
+		</a>
+		@{
+			if (!Context.Request.Path.ToString().Contains("Home"))
+			{
+				<div class="avg-rating">
+					<img class="rating-icon" src="~/images/star.svg" alt="star icon" />
+					<span class="rating-text">#:AverageRating#/5</span>
+				</div>
+			}
+		}
+		<div class="price-container">
+			#if (FinalPrice != Price) { #
+				<h5 class="card-old-price">#:kendo.toString(Price, "c")#</h5>
+			#}#
+			<h5 class="card-price">#:kendo.toString(FinalPrice, "c")#</h5>
+		</div>
+		<div class="card-buttons">
+			@(Html.Kendo().Button()
+				.Name("addToCartButton_#=Id#")
+				.Content("Add to cart")
+				.ImageUrl(Url.Content("~/images/shopping_cart.svg"))
+				.HtmlAttributes(new { type = "button", @class = "card-cart-button" })
+				.Events(e => e.Click("addProductToShoppingCart"))
+				.ToClientTemplate()
+			)			
+			@(Html.Kendo().Button()
+				.Name("addToFavoritesButton_#=Id#")
+				.ImageUrl(Url.Content("~/images/heart.svg"))
+				.HtmlAttributes(new { type = "button", @class = "card-favorites-button" })
+				.Events(e => e.Click("addProductToFavorites"))
+				.ToClientTemplate()
+			)
+		</div>
+	</div>
+</div>
+
+<link rel="stylesheet" href="/css/tile_product_card.css">

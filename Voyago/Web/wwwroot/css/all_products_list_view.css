@@ -1,0 +1,21 @@
+﻿.k-listview-content {
+    width: 1120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+    border: none;
+}
+
+.k-pager-wrap {
+    border: none;
+    background: none;
+    color: none;
+}
+
+.k-pager-sizes > .k-picker {
+    border: 1px solid #898989;
+    border-radius: 2px;
+    background: none;
+    color: none;
+}

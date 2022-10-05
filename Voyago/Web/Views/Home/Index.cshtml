@@ -1,0 +1,241 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="home-content">
+	@(Html.Kendo().ScrollView()
+		.Name("scrollView")
+		.Items(x =>
+		{
+			x.Add().Content("<img src='/images/home_main_1.png' style='width: 100%;'/>");
+			x.Add().Content("<img src='/images/home_main_2.jpg' style='width: 100%;'/>");
+			x.Add().Content("<img src='/images/home_main_3.jpg' style='width: 100%;'/>");
+			x.Add().Content("<img src='/images/home_main_4.jpg' style='width: 100%;'/>");
+			x.Add().Content("<img src='/images/home_main_5.jpg' style='width: 100%;'/>");
+		})
+		.HtmlAttributes(new { style = "margin: auto; height: 601px; width: 100%;" })
+	)
+
+	<div id="top-picks" class="top-picks-container">
+		<div class="top-picks-inner">
+			<h4 class="home-heading">Top picks</h4>
+			@(Html.Kendo().ScrollView()
+			.Name("topPicks")
+			.EnablePager(false)
+			.ContentHeight("100%")
+			.TemplateId("topPicks-template")
+			.DataSource(dataSource => dataSource
+				.Ajax()
+				.Read(read => read.Action("GetTopSellingSubCategories", "Home", new { count = 12 }).Type(HttpVerbs.Get))
+				.Sort(s => s.Add("TotalSales").Descending())
+				.PageSize(4)
+			)
+			.HtmlAttributes(new { style = "width: 1440px; height: 320px; background: none; border: none;" })
+			)
+		</div>
+	</div>
+
+	<div class="categories-container">
+		<h4 class="home-heading">Categories</h4>
+		<div class="categories-inner">
+			<div class="hc-sub">
+				<a href="/Home/Accessories">
+					<h5 class="category-heading">Accessories</h5>
+					<img src="~/images/accessories.png" width="453" height="484" class="category-image" />
+				</a>
+			</div>
+			<div class="hc-sub">
+				<a href="/Home/Bikes">
+					<h5 class="category-heading">Bikes</h5>
+					<img src="~/images/bikes.png" width="454" height="200" class="category-image" style="margin-bottom: 52px" />
+				</a>
+				<a href="/Home/Components">
+					<h5 class="category-heading">Components</h5>
+					<img src="~/images/components.png" width="454" height="200" class="category-image" />
+				</a>
+			</div>
+			<div class="hc-sub">
+				<a href="/Home/Clothing">
+					<h5 class="category-heading">Clothing</h5>
+					<img src="~/images/clothes.png" width="453" height="484" class="category-image" />
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="recently-viewed">
+		<h4 class="home-heading">Recently Viewed</h4>
+		@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+			.Name("recentlyViewedListView")
+			.TagName("div")
+			.ClientTemplateId("product-template")
+			.Bordered(false)
+			.DataSource(dataSource => dataSource
+				.Ajax()
+				.ServerOperation(true)
+				.Read(r => r.Action("GetRecentlyViewedProducts", "Home").Type(HttpVerbs.Get))
+			)
+			.Events(e => e.DataBound("onRecentlyViewedDataBound"))
+		)
+	</div>
+	<hr class="splitter" style="">
+	<div class="download-app">
+		<span class="download-text">Download Voyago application</span>
+		<img src="~/images/gplay.svg" width="180" height="52" />
+		<img src="~/images/appstore.svg" width="180" height="52" style="margin-left:24px;" />
+	</div>
+</div>
+
+<script id="topPicks-template" type="text/html">
+	<div class="top-picks">
+		# for (var i = 0; i < data.length; i++) { #
+		<div class="top-pick-card">
+			<a href="/Products/Category?subCategory=#=data[i].Name#">
+			<h4 class="top-pick-heading" style="color: black">#= data[i].Name #</h4>
+			<img src="~/images/#=data[i].ImageName#" class="top-pick-image"/>
+			</a>
+		</div>
+		# } #
+	</div>
+</script>
+
+<script type="text/html" id="product-template">
+	@await Html.PartialAsync("/Views/Products/_TileProductCard.cshtml")
+</script>
+
+<style>
+	.top-picks {
+		display: flex;
+		flex-direction: row;
+		margin-left: 82px;
+		margin-right: 82px;
+		gap: 30px;
+	}
+
+	.top-pick-card {
+		display: flex;
+		flex-direction: column;
+		background: white;
+		border-radius: 10px 10px 10px 10px;
+	}
+
+	.top-pick-image {
+		width: 296.5px;
+		height: 276px;
+		border-radius: 0px 0px 10px 10px;
+	}
+
+	.top-pick-heading {
+		margin-left: 16px;
+		font-weight: 500;
+		font-size: 22px;
+		line-height: 29px;
+		display: flex;
+		color: #1D252C;
+	}
+
+	.home-heading {
+		font-weight: 500;
+		font-size: 40px;
+		line-height: 58px;
+		letter-spacing: -0.9px;
+		color: #000000;
+		margin-bottom: 24px;
+	}
+
+	.home-content {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.top-picks-container {
+		height: 480px;
+		background: rgba(74, 166, 117, 0.2);
+	}
+
+	.top-picks-inner {
+		width: 1440px;
+		height: 480px;
+		margin: auto;
+		margin-top: 25px;
+		margin-bottom: 54px;
+	}
+
+	.categories-container {
+		margin-top: 80px;
+		width: 1440px;
+		height: 690px;
+		align-self: center;
+	}
+
+	.categories-inner {
+		margin-right: 40px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		width: 1440px;
+		height: 690px;
+		align-self: center;
+	}
+
+	.hc-sub {
+		display: flex;
+		flex-direction: column;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.category-heading {
+		color: black;
+		margin-left: 16px;
+		margin-bottom: 12px;
+	}
+
+	.category-image {
+		border-radius: 0px 0px 10px 10px
+	}
+
+	.recently-viewed {
+		display: flex;
+		flex-direction: column;
+		width: 1440px;
+		align-self: center;
+	}
+
+	.k-listview-content {
+		display: flex;
+		flex-direction: row;
+		justify-content: left;
+		border: none;
+	}
+
+	.splitter {
+		border: 1px solid #E5E5E5;
+		width: 1440px;
+		margin: auto;
+		margin-top: 60px;
+		margin-bottom: 80px;
+	}
+
+	.download-app {
+		display: flex;
+		flex-direction: row;
+		width: 1440px;
+		align-self: center;
+	}
+
+	.download-text {
+		font-style: normal;
+		font-weight: 400;
+		font-size: 40px;
+		line-height: 58px;
+		letter-spacing: -0.9px;
+		color: #272727;
+		margin-left: 240px;
+		margin-right: 64px;
+	}
+</style>

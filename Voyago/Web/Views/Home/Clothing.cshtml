@@ -1,0 +1,88 @@
+﻿@{
+	ViewData["Title"] = "Clothing";
+}
+
+<div class="sub-category-container">
+	@(Html.Kendo().Breadcrumb()
+	.Name("breadcrumb")
+	.Navigational(true)
+	.Items(items =>
+	{
+	items.Add()
+	.Type(BreadcrumbItemType.RootItem)
+	.Href("Index")
+	.ShowText(false)
+	.Icon("home")
+	.ShowIcon(true);
+	items.Add()
+	.Type(BreadcrumbItemType.Item)
+	.Href("Clothing")
+	.Text("Clothing")
+	.ShowText(true);
+	})
+	)
+	<h4 class="category-heading-large">Clothing</h4>
+	<div class="sub-category-images">
+		<div>
+			<a href="/Products/Category?subCategory=Jerseys">
+				<h5 class="category-heading">Jerseys</h5>
+				<img src="~/images/jerseys.png" width="700" height="484" class="category-image" />
+			</a>
+		</div>
+		<div>
+			<a href="/Products/Category?subCategory=Shorts">
+				<h5 class="category-heading">Shorts</h5>
+				<img src="~/images/shorts.png" width="700" height="484" class="category-image" />
+			</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	a {
+		text-decoration: none;
+		color: black;
+	}
+
+	.sub-category-container {
+		width: 1440px;
+		margin: auto;
+		margin-bottom: 80px;
+	}
+
+	#breadcrumb {
+		margin-top: 70px;
+		margin-bottom: 58px;
+	}
+
+	.k-breadcrumb-link {
+		color: var(--voyago-green);
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.sub-category-images {
+		display: flex;
+		flex-direction: row;
+		gap: 40px;
+	}
+
+	.category-image {
+		border-radius: 0px 0px 10px 10px
+	}
+
+	.category-heading-large {
+		font-weight: 500;
+		font-size: 40px;
+		line-height: 58px;
+		letter-spacing: -0.9px;
+		margin-bottom: 24px;
+	}
+
+	.category-heading {
+		color: black;
+		margin-left: 16px;
+		margin-bottom: 12px;
+	}
+</style>

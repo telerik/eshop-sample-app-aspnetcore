@@ -1,0 +1,85 @@
+﻿.k-listview {
+    border: none;
+}
+
+.k-card {
+    box-shadow: 0px 4px 24px rgba(123, 123, 123, 0.15);
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.k-card-image {
+    border: 10px 10px 0px 0px
+}
+
+span.discount-pct {
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 10px;
+    margin-left: 245px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    background: var(--voyago-green);
+    padding: 5px;
+    padding-right: 15px;
+    left: 10px;
+    opacity: 0.75;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.card-old-price {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 46px;
+    letter-spacing: -0.9px;
+    color: indianred;
+    text-decoration: line-through;
+}
+
+.card-price {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 46px;
+    letter-spacing: -0.9px;
+    color: var(--voyago-green);
+}
+
+.rating-text {
+    margin-bottom: 12px;
+}
+
+.card-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.card-cart-button {
+    width: 250px;
+    height: 40px;
+    background: var(--voyago-green);
+    border-radius: 4px;
+    color: #FFFFFF !important;
+}
+
+    .card-cart-button:hover {
+        background: #6AA985;
+    }
+
+.card-favorites-button {
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #272727;
+    border-radius: 4px;
+}

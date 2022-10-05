@@ -1,0 +1,27 @@
+﻿<div class="list-view">
+	@await Html.PartialAsync("_ListViewHeader.cshtml")
+
+	@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+		.Name("allProductsListView")
+		.TagName("div")
+		.ClientTemplateId("product-template")
+		.Pageable(pageable => pageable
+			.ButtonCount(10)
+			.PageSizes(new[] { 6, 12, 24, 48 })
+		)
+		.Navigatable()
+		.DataSource(dataSource => dataSource
+			.Ajax()
+			.PageSize(12)
+			.ServerOperation(true)
+			.Read(r => r.Action("ReadSubCategoryProducts", "Products").Type(HttpVerbs.Get))
+			.Filter(f => {
+				f.Add(a => a.SubCategory).IsEqualTo(ViewBag.SubCategory);
+				f.Add(a => a.Name).Contains(ViewBag.SearchParam);
+			})
+		)
+		.Events(e => e.DataBound("onCategoryDataBound"))
+	)
+</div>
+
+<link rel="stylesheet" href="/css/all_products_list_view.css">

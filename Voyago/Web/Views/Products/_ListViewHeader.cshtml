@@ -1,0 +1,30 @@
+﻿<div class="list-view-header">
+	<div class="result-count">
+		<p id="resultCount"></p>
+		<p>@ViewBag.SubCategory</p>
+	</div>
+
+	<div class="list-view-header-controls">
+		@(Html.Kendo().Button()
+			.Name("excelExport")
+			.Content("Export to Excel")
+			.IconClass("k-icon k-i-file-excel k-button-icon")
+			.HtmlAttributes(new { style = "width: 130px; height:30px;" })
+			.Events(e => e.Click("exportDataSource"))
+			)
+
+		@(Html.Kendo().DropDownList()
+			.Name("sortBy")
+			.OptionLabel("Sort by")
+			.DataTextField("Text")
+			.DataValueField("Value")
+			.HtmlAttributes(new { style = "width: 200px; height:30px;" })
+			.DataSource(dataSource => dataSource
+			.Read(r => r.Action("GetAllSortParameters", "Products").Type(HttpVerbs.Get))
+			)
+			.Events(e => e.Change("sortDataSource"))
+			)
+	</div>
+</div>
+
+<link rel="stylesheet" href="/css/list_view_header.css">

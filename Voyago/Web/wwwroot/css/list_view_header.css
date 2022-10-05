@@ -1,0 +1,36 @@
+﻿.list-view-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.result-count {
+    margin-bottom: -30px;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 58px;
+    letter-spacing: -0.9px;
+    color: #000000;
+}
+
+.list-view-header-controls {
+    align-self: end;
+    display: flex;
+    flex-direction: row;
+    margin-right: 30px;
+    gap: 20px;
+}
+
+#excelExport {
+    background: none;
+    border-radius: 0;
+}
+
+[aria-controls="sortBy_listbox"] {
+    background: none;
+    border-radius: 0;
+}

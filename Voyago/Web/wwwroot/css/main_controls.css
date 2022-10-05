@@ -1,0 +1,23 @@
+﻿.clear-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.controls {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    padding: 30px;
+    background: #F2F2F2;
+    border-radius: 10px;
+}
+
+.control {
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+}

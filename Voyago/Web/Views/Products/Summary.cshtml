@@ -1,0 +1,117 @@
+﻿@{
+	ViewData["Title"] = "Summary";
+}
+
+<div class="summary-container">
+	@await Html.PartialAsync("_MainControls.cshtml")
+
+	<div class="list-view">
+		<div>
+			<p class="search-result" id="searchResultCount"></p>
+			<hr class="splitter">
+		</div>
+
+		@await Html.PartialAsync("_ListViewHeader.cshtml")
+
+		@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+			.Name("allProductsListView")
+			.TagName("div")
+			.DataSource(dataSource => dataSource
+				.Ajax()
+				.ServerOperation(true)
+				.Read(r => r.Action("ReadAllProducts", "Products").Type(HttpVerbs.Get))
+				.Group(g => g.Add(f => f.SubCategory))
+				.Filter(f => {
+					f.Add(a => a.Name).Contains(ViewBag.SearchParam);
+				})
+			)
+			.ClientTemplateId("product-template")
+			.Events(e => e.DataBound("onSummaryDataBound"))
+		)
+	</div>
+</div>
+
+<script type="text/html" id="product-template">
+	# var searchParam = $("\\#searchBar").data("kendoAutoComplete").value(); #
+
+	<a href="/Products/Category?subCategory=#=data.value#&searchParam=#=searchParam#">
+		<h4 class="k-group-title">#= data.value # (#=data.items.length#)</h4>
+	</a>
+	<div class="sub-category-cards">
+		# for (var i = 0; i < data.items.length && i < 3; ++i) { #
+			# var Id = data.items[i].Id; #
+			# var Name = data.items[i].Name; #
+			# var Price = data.items[i].Price; #
+			# var FinalPrice = data.items[i].FinalPrice; #
+			# var AverageRating = data.items[i].AverageRating; #
+			# var DiscountPct = data.items[i].DiscountPct; #
+			# var PhotoId = data.items[i].PhotoId; #			
+			@await Html.PartialAsync("_TileProductCard.cshtml")
+		# } #
+	</div>
+	# if(data.items.length > 3) { #		
+		<a href="/Products/Category?subCategory=#=data.value#&searchParam=#=searchParam#">
+			<p class="show-all">Show all results from <strong>#=data.value#</strong> subcategory</p>
+		</a>
+	# } #
+</script>
+
+<script>
+	$(document).ready(function () {
+		var searchParam = '@ViewBag.SearchParam';
+		if (searchParam != null) {
+			$("#searchBar").data("kendoAutoComplete").value(searchParam);
+		}
+	});
+</script>
+
+<style>
+	.search-result {
+		margin-top: 10px;
+		font-weight: 500;
+		font-size: 40px;
+		line-height: 58px;
+		letter-spacing: -0.9px;
+	}
+
+	.splitter {
+		border: 1px solid #E5E5E5;
+		margin: auto;
+		margin-bottom: 25px;
+	}
+
+	.summary-container {
+		margin: auto;
+		display: flex;
+		flex-direction: row;
+		width: 1500px;
+	}
+
+	.k-listview-content {
+		overflow: hidden;
+	}
+
+	.k-group-title {
+		margin-top: 25px;
+		margin-left: 25px;
+		margin-bottom: -15px;
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 58px;
+		letter-spacing: -0.9px;
+		color: #000000;
+	}
+
+	.sub-category-cards {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.show-all {
+		text-align: center;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 24px;
+		color: #272727;
+	}
+</style>

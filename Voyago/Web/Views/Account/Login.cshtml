@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="login-form">
+    <img class="logo" src="~/images/logo.svg" alt="Voyago">
+
+    @(Html.Kendo().Form<Models.InputModels.LoginUserInpuModel>()
+        .Name("loginForm")
+        .HtmlAttributes(new { controller="Account", action="Login", method="POST"})
+        .Validatable(v => 
+        {
+            v.ValidateOnBlur(true);
+            v.ValidationSummary(vs => vs.Enable(true));
+        })
+        .Items(items => 
+        {
+            items.Add()
+                .Field(f => f.Email)
+                .Label(l => l.Text("Email"));
+            items.Add()
+                .Field(f => f.Password)
+                .Label(l => l.Text("Password"))
+                .InputHtmlAttributes(new { type="password"})
+                .Hint("Forgot Password?");
+        })
+        .ButtonsTemplateId("formButtonsTmpl")
+    )
+
+    <div class="register-prompt">
+        <p>Don’t have an account?</p><a href="/Account/Register" style="text-decoration:none; color:var(--voyago-green);">Register</a>
+    </div>
+</div>
+
+<script id="formButtonsTmpl" type="text/html">
+    <button class="k-button k-form-submit" type="submit">
+        <span class="k-button-text">Login</span>
+    </button>
+</script>
+
+<style>
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        gap: 64px;        
+        position: absolute;
+        width: 420px;
+        height: 570px;
+        left: calc(50% - 420px/2);
+        top: calc(50% - 570px/2 - 1px);
+    }
+
+    .k-form-field  {
+        margin-bottom: 32px;
+    }
+
+    .k-form-hint {
+        width: 127px;
+        height: 24px;        
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;        
+        display: flex;
+        align-items: center;        
+        color: var(--voyago-green);
+    }
+
+    .logo {
+        width: 238px;
+        height: 58px;        
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    .k-input-inner {
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        width: 420px;
+        height: 48px;
+    }
+
+    .k-label.k-form-label {
+        width: 420px;
+        height: 48px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: #424242;
+    }
+
+    .k-button.k-form-submit {
+        width: 420px;
+        height: 48px;
+        margin-top: 32px;
+        background: var(--voyago-green);
+        border: none;
+        border-radius: 4px;
+    }
+
+    .k-button-text {
+        width: 53px;
+        height: 24px;        
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;            
+        color: #FFFFFF;
+    }
+
+    .register-prompt {
+        display: flex;
+        gap: 10px;
+    }
+</style>

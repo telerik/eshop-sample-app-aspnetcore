@@ -1,0 +1,174 @@
+﻿<div class="header">
+	<a href="/Home/Index">
+		<img class="logo" src="~/images/logo.svg" alt="Voyago">
+	</a>
+	<div class="search-bar-container">
+		@(Html.Kendo().AutoComplete()
+			.Name("searchBar")
+			.DataTextField("ProductName")
+			.Placeholder("Search")
+			.ClearButton(false)
+			.Filter("contains")
+			.MinLength(2)
+			.DataSource(source => source
+			.ServerFiltering(true)
+			.Read(read => read.Action("GetSearchSuggestions", "Home").Data("onAdditionalData"))
+			)
+			.TemplateId("searchBar-template")
+			.Events(e => e.Select("onSearchSelect").Change("searchProducts"))
+			)
+	</div>
+	<div class="header-menu">
+		@(Html.Kendo().DropDownList()
+			.Name("headerCategoriesDDL")
+			.OptionLabel("Categories")
+			.Value((string)ViewBag.SubCategory)
+			.DataSource(ds => ds
+				.Read(r => r.Action("GetAllSubCategories", "Products"))
+			)			
+			.Events(e => e.Change("goToCategoryPage"))
+		)
+		<a href="/Products/Summary">
+			<h6 style="color: black; white-space:nowrap;">All Products</h6>
+		</a>
+		<a href="/Account/Favorites" style="display: flex; flex-direction:row;">
+			<h6 style="color: black;">Favorites</h6>
+			@(Html.Kendo().Badge()
+				.Name("favoritesBadge")
+				.Text(0)
+				.Position(BadgePosition.Inside)
+				.Shape(BadgeShape.Circle)
+				.ThemeColor(BadgeColor.Primary)
+				)
+		</a>
+		<div class="profile">
+			<a href="/Account/LogOut" style="display: flex; flex-direction:row; background-color: none !important;">
+				<img src="~/images/profile_icon.svg" alt="Profile">
+			</a>
+		</div>
+		<div class="shopping-cart">
+			<a href="/Account/ShoppingCart" style="display: flex; flex-direction:row;">
+				<img src="~/images/shopping_cart_header.svg" alt="Shopping Cart">
+				@(Html.Kendo().Badge()
+					.Name("shoppingCartBadge")
+					.Text(0)
+					.Position(BadgePosition.Inside)
+					.Shape(BadgeShape.Circle)
+					.ThemeColor(BadgeColor.Primary)
+					)
+			</a>
+		</div>
+	</div>
+</div>
+
+<script id="searchBar-template" type="text/html">
+	<span class="k-state-default" style="font-weight: 400; font-size: 16px; line-height: 24px;">
+		<span style="color: \\#849A8E;">
+			#:data.ProductName#
+		</span>
+		# if(data.SubCategory != null) { #
+			in #:data.SubCategory#
+		# } #
+	</span>
+</script>
+
+<script>
+	$(document).ready(function () {
+		getFavoritesCount();
+		getShoppingCartItemsCount();
+	})
+</script>
+
+<style>
+	.header {
+		position: absolute;
+		top: 0;
+		height: 114px;
+		width: 100%;
+		justify-content: center;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.logo {
+		margin-top: 28px;
+	}
+
+	.search-bar-container {
+		display: flex;
+		flex-direction: row;
+		margin-top: 37px;
+		margin-left: 38px;
+		width: 634px;
+		height: 40px;
+	}
+
+	#searchBar {
+		width: 634px;
+		height: 40px;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		color: #616161;
+	}
+
+	#searchSubmit {
+		border: none;
+		border-radius: 0px 5px 5px 0px;
+		padding: 6px 4px;
+		gap: 10px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.header-menu {
+		align-self: center;
+		height: 40px;
+		margin-left: 123px;
+		display: flex;
+		flex-direction: row;
+		align-items: baseline;
+		gap: 24px;
+	}
+
+	#favoritesBadge {
+		margin-top: -15px;
+		margin-left: 55px;
+	}
+
+	#shoppingCartBadge {
+		margin-top: -15px;
+		margin-left: 18px;
+	}
+
+	[aria-controls="headerCategoriesDDL_listbox"] {
+		box-shadow: none !important;
+		background: none !important;
+		border: none !important;
+		font-weight: 500 !important;
+		font-size: 16px !important;
+		line-height: 24px !important;
+		text-align: center !important;
+		color: #1D252C !important;
+	}
+
+	.k-list-item.k-selected, .k-selected.k-list-optionlabel {
+		color: #fff;
+		background-color: var(--voyago-green);
+	}
+
+	.profile {
+		width: 24px;
+		height: 24px;
+	}
+
+	.shopping-cart {
+		width: 24px;
+		height: 24px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+</style>

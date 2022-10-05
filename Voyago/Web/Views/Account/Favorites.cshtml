@@ -1,0 +1,199 @@
+﻿@{
+	ViewData["Title"] = "Favorites";
+}
+
+<div class="favorites-container">
+	<h3 class="favorites-heading">Favorites</h3>
+	<a class="continue-shopping" href="/Products/Summary">Continue shopping</a>
+
+	@(Html.Kendo().ListView<Models.ViewModels.FavoriteProductViewModel>()
+		.Name("favoritesListView")
+		.TagName("div")
+		.ClientTemplateId("favoriteProduct-template")
+		.DataSource(dataSource => dataSource
+		.Ajax()
+		.ServerOperation(true)
+		.Read(r => r.Action("GetFavoriteProducts", "Account").Type(HttpVerbs.Get))
+		)
+		)
+</div>
+
+<script id="favoriteProduct-template" type="text/html">
+	<div class="favorite-product-container">
+		<a href="/Products/Details?productId=#:Id#">
+			<img width="272" height="272" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image">
+		</a>
+
+		<div class="favorite-product-info-container">
+			<a href="/Products/Details?productId=#:Id#">
+				<h4 class="favorite-product-name">#:Name#</h4>
+			</a>
+			<div class="avg-rating">
+				<img width="16" height="16" style="align-self:center;" src="~/images/star.svg" alt="star icon"/>
+				<span class="rating-text">#:AverageRating#/5</span>
+			</div>
+			<p class="favorite-product-description">#:Description#</p>
+		</div>
+
+		<div class="favorite-product-controls">
+			<h4 class="price">#:kendo.toString(FinalPrice, "c")#</h4>
+			@(Html.Kendo().Button()
+					.Name("addToCartButton_#=Id#")
+					.HtmlAttributes(new { type = "button", @class = "cart-button" })
+					.ImageUrl(Url.Content("~/images/shopping_cart.svg"))
+					.Content("Add to cart")
+					.Events(e => e.Click("addProductToShoppingCart"))
+					.ToClientTemplate()
+				)
+			@(Html.Kendo().Button()
+					.Name("removeFromFavoritesButton_#=Id#")
+					.HtmlAttributes(new { type = "button", @class = "favorites-button" })
+					.ImageUrl(Url.Content("~/images/heart_full.svg"))
+					.Content("Added to Favorites")
+					.Events(e => e.Click("removeProductFromFavorites"))
+					.ToClientTemplate()
+				)
+		</div>
+	</div>
+</script>
+
+<style>
+	.favorites-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.favorites-heading {
+		margin-top: 56px;
+		font-weight: 500;
+		font-size: 40px;
+		line-height: 58px;
+		text-align: center;
+		letter-spacing: -0.9px;
+		color: #272727;
+	}
+
+	.continue-shopping {
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 24px;
+		text-align: center;
+		color: var(--voyago-green);
+		margin-top: 31px;
+		margin-bottom: 53px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+
+	#favoritesListView {
+		border: none;
+		background: none;
+	}
+
+	.k-listview-content {
+		justify-content: center;
+		width: 1118px;
+		margin-bottom: 48px;
+	}
+
+	.favorite-product-container {
+		margin-top: 24px;
+		margin-bottom: 24px;
+		margin-left: 24px;
+		margin-right: 24px;
+		padding: 24px;
+		width: 1070px;
+		height: 320px;
+		background: #FFFFFF;
+		box-shadow: 0px 4px 24px rgba(123, 123, 123, 0.15);
+		border-radius: 10px;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.favorite-product-info-container {
+		margin-left: 41px;
+		margin-right: 182px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.favorite-product-controls {
+		display: flex;
+		flex-direction: column;
+		justify-self: right;
+	}
+
+	.favorite-product-name {
+		font-weight: 500;
+		font-size: 26px;
+		line-height: 46px;
+		letter-spacing: -0.9px;
+		color: #1D252C;
+	}
+
+	.avg-rating {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.rating-text {
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 28px;
+		letter-spacing: -0.9px;
+		color: #1D252C;
+		margin-left: 5px;
+	}
+
+	.favorite-product-description {
+		text-align: left;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		color: #1D252C;
+	}
+
+	.price {
+		text-align: right;
+		font-weight: 500;
+		font-size: 26px;
+		line-height: 46px;
+		letter-spacing: -0.9px;
+		color: var(--voyago-green);
+		margin-bottom: 30px;
+	}
+
+	.cart-button {
+		width: 250px;
+		height: 40px;
+		background: var(--voyago-green);
+		border-radius: 4px;
+		margin-bottom: 16px;
+		color: #FFFFFF !important;
+	}
+
+		.cart-button:hover {
+			background: #6AA985;
+		}
+
+	.favorites-button {
+		width: 250px;
+		height: 40px;
+		background: #FFFFFF;
+		border: 1px solid #272727;
+		border-radius: 4px;
+	}
+
+
+	.k-button-text {
+		font-weight: 500 !important;
+		font-size: 16px !important;
+		line-height: 24px !important;
+		text-align: center !important;
+	}
+</style>
