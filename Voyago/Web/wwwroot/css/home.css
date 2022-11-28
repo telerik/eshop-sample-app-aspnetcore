@@ -79,6 +79,14 @@
     color: #000000;
 }
 
+.category-image {
+    width: 100%;
+}
+
+.components-header h5 {
+    margin-top: 18px;
+}
+
 #productCatalogBtn {
     height: 38px;
     align-self: center;
@@ -100,6 +108,12 @@
     font-weight: 600;
     font-size: 1.75em;
     line-height: 2.45em;
+    padding-left: 4%;
+}
+
+.category-heading-components {
+    font-weight: 600;
+    font-size: 1.75em;
     padding-left: 4%;
 }
 
