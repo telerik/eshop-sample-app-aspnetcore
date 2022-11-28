@@ -34,7 +34,7 @@
 	)
 	<div class="model-details">
 		<div class="model-image">
-			<img width="453" height="453" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=@Model.PhotoId">			
+			<img src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=@Model.PhotoId">			
 		</div>
 		<div class="model-info">
 			<div class="info-top">
@@ -42,11 +42,11 @@
 					@{
 						if (Model.Model == null)
 						{
-									@Model.Name
+																									@Model.Name
 						}
 						else
 						{
-									@Model.Model
+																									@Model.Model
 						}
 					}
 				</h1>
@@ -58,17 +58,16 @@
 					.Value(@Model.AverageRating)
 					.Readonly(true)
 					.Label(false)
-					.HtmlAttributes(new { style = "color: var(--voyago-green);" })
-					)
+				)
 				<hr class="splitter1">
 			</div>
 			<div class="info-bottom">
 				<div class="bottom-left">
-					<div class="info-row" style="gap:53px;">
+					<div class="info-row" style="gap:8%;">
 						<p class="info-title">Product Name</p>
 						<p class="info-value">@Model.Name</p>
 					</div>
-					<div class="info-row" style="gap:76px;">
+					<div class="info-row" style="gap:13%;">
 						<p class="info-title">Product No</p>
 						<p>@Model.ProductNumber</p>
 					</div>
@@ -76,50 +75,50 @@
 						@{
 							if (Model.Size != null)
 							{
-									<div class="info-row" style="gap:130px;">
-										<p class="info-title">Size</p>
-										@(Html.Kendo().DropDownList()
-									.Name("sizePicker")
-									.Value(@Model.Size)
-									.FillMode(FillMode.None)
-									.Rounded(Rounded.None)
-									.DataSource(source =>
-									{
-										source.Read(read =>
+																							<div class="info-row" style="gap:25%;">
+																								<p class="info-title">Size</p>
+																								@(Html.Kendo().DropDownList()
+										.Name("sizePicker")
+										.Value(@Model.Size)
+										.FillMode(FillMode.None)
+										.Rounded(Rounded.None)
+										.DataSource(source =>
 										{
-											read.Action("GetAvailableSizes", "Products", new { productId = @Model.Id });
-										});
-									})
-									.Events(e => e.Change(@<text>function () { selectAlternateProductVersion(@Model.ModelId); }</text>))
-										)
-									</div>
+											source.Read(read =>
+											{
+												read.Action("GetAvailableSizes", "Products", new { productId = @Model.Id });
+											});
+										})
+										.Events(e => e.Change(@<text>function () { selectAlternateProductVersion(@Model.ModelId); }</text>))
+																								)
+																						 	</div>
 							}
 						}
 					@{
 						if(Model.Weight != 0)
 						{
-								<div class="info-row" style="gap:109px;">
-									<p class="info-title">Weight</p>
-									<p>@Model.Weight</p>
-								</div>
+																	<div class="info-row" style="gap:20%;">
+																		<p class="info-title">Weight</p>
+																		<p>@Model.Weight</p>
+																	</div>
 						}
 					}
 					@{
 						if(Model.Color != null)
 						{
-								<div class="info-row" style="gap:121px;">
-									<p class="info-title">Color</p>
-									<ul id="colorPicker"></ul>
-								</div>
+																			<div class="info-row" style="gap:22%;">
+																				<p class="info-title">Color</p>
+																				<ul id="colorPicker"></ul>
+																			</div>
 						}
 					}
 					@{
 						if(Model.Description != null) 
 						{
-								<div class="info-row" style="gap:75px;">
-									<p class="info-title">Description</p>
-									<p style="width:400px;">@Model.Description</p>
-								</div>
+																			<div class="info-row" style="gap:11%;">
+																				<p class="info-title">Description</p>
+																				<p class="info-description">@Model.Description</p>
+																			</div>
 						}
 					}
 				</div>
@@ -127,13 +126,11 @@
 					@{
 						if (Model.DiscountPct != 0)
 						{
-									<label class="list-price">$@Model.ListPrice.ToString("N2")</label>
-									<label class="discount">@(string.Format("{0:C}", (Model.DiscountPct * 100)))% Off</label>
-									<label class="price"> @(string.Format("{0:C}", Model.FinalPrice))</label>
+																									<label class="price"> @(string.Format("{0:C}", Model.FinalPrice))</label>
 						}
 						else
 						{
-									<label class="price">$@Model.ListPrice.ToString("N2")</label>
+																									<label class="price">$@Model.ListPrice.ToString("N2")</label>
 						}
 					}
 					<div class="product-buttons">
@@ -164,21 +161,22 @@
 	@{
 		if (Model.ModelId != null)
 		{
-					<div>
-						<h4 class="similar-products">Similar Products</h4>
-						@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+								<div class="similar-products">
+									<h4 class="similar-products-title">Similar Products</h4>
+									@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 					.Name("similarProductsListView")
 					.TagName("div")
 					.ClientTemplateId("product-template")
 					.Navigatable()
+					.Bordered(false)
 					.DataSource(dataSource => dataSource
 						.Ajax()
 						.ServerOperation(true)
 						.Read(r => r.Action("ReadSimilarProducts", "Products", new { productId = Model.Id, subCategoryId = @Model.SubCategoryId, count = 4 }).Type(HttpVerbs.Get))
 					)
 					.Events(e => e.DataBound("distinguishFavorites"))
-						)
-					</div>
+									)
+								</div>
 		}
 	}
 </div>
@@ -208,185 +206,4 @@
 	});
 </script>
 
-<style>
-	.details-container {
-		width: 1440px;
-		margin: auto;
-	}
-
-	.splitter1 {
-		border-top: 2px solid #bbb;
-	}
-
-	.splitter2 {
-		margin-top: 80px;
-		margin-bottom: 80px;
-		border-top: 2px solid #bbb;
-	}
-
-	.model-details {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.model-info {
-		display: flex;
-		flex-direction: column;
-		margin-left: 40px;
-	}
-
-	.info-bottom {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.bottom-left {
-		width: 650px;
-		display: flex;
-		gap: 8px;
-		flex-direction: column;
-	}
-
-	.info-row {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.bottom-right {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.info-text {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.similar-products {
-		font-weight: 500;
-		font-size: 26px;
-		line-height: 46px;
-		letter-spacing: -0.9px;
-		color: #000000;
-		margin-left: 20px;
-	}
-
-	.k-listview-content {
-		display: flex;
-		flex-direction: row;
-		justify-content: left;
-		border: none;
-	}
-
-	.large-image {
-		width: 453px;
-		height: 453px;
-	}
-
-	#breadcrumb {
-		margin-top: 35px;
-		margin-bottom: 58px;
-	}
-
-	.details-heading {
-		font-weight: 500;
-		font-size: 40px;
-		line-height: 58px;
-		letter-spacing: -0.9px;
-	}
-
-	.splitter {
-		border: 1px solid #E5E5E5;
-	}
-
-	.info-text {
-		width: 300px;
-	}
-
-	.info-title {
-		font-weight: 600;
-		font-size: 16px;
-		line-height: 24px;
-	}
-
-	.info-value {
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-		color: #1D252C;
-	}
-
-	.k-picker {
-		width: 174px;
-	}
-
-	.k-input-value-text {
-		font-size: 16px;
-	}
-
-	.k-radio.k-checked, .k-radio:checked {
-		background-color: var(--voyago-green) !important;
-		border: 1px solid !important;
-		border-color: var(--voyago-green) !important;
-	}
-
-	.list-price {
-		font-weight: 500;
-		text-align: right;
-		font-size: 40px;
-		line-height: 58px;
-		letter-spacing: -0.9px;
-		color: indianred;
-		margin-bottom: 5px;
-		text-decoration: line-through;
-	}
-	.discount {
-		font-weight: 500;
-		text-align: right;
-		font-size: 22px;
-		letter-spacing: -0.9px;
-		margin-bottom: 5px;
-	}
-	.price {
-		font-weight: 500;
-		text-align: right;
-		font-size: 40px;
-		line-height: 58px;
-		letter-spacing: -0.9px;
-		color: var(--voyago-blue);
-		margin-bottom: 22px;
-	}
-
-	.product-buttons {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-	}
-
-	.cart-button {
-		width: 250px;
-		height: 40px;
-		border-radius: 4px;
-		background: var(--voyago-green);
-		color: #FFFFFF !important;
-	}
-
-		.cart-button:hover {
-			background: #6AA985;
-		}
-
-	.favorites-button {
-		width: 250px;
-		height: 40px;
-		background: #FFFFFF;
-		border: 1px solid #272727;
-		border-radius: 4px;
-	}
-
-	.k-button-text {
-		font-weight: 500 !important;
-		font-size: 16px !important;
-		line-height: 24px !important;
-		text-align: center !important;
-	}
-</style>
+<link rel="stylesheet" href="/css/product_details.css">

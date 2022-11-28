@@ -18,13 +18,31 @@
             margin: 2% auto !important;
         }
 
+        #backOrderBtn {
+            color: var(--voyago-blue);
+            margin-left: 5%;
+        }
+
        #reportViewer1, .trv-report-viewer{
             height: 100%;
             width: 100%;
         }  
     </style>
 
-    <div id="container">       
+    <div id="container">
+        @{
+            if(Model.Parameters != null)
+            {
+                    @(Html.Kendo().Button()
+                           .Name("backOrderBtn")
+                           .HtmlAttributes(new { type = "button" })
+                           .FillMode(ButtonFillMode.Flat)
+                           .Icon("chevron-left")
+                           .Content("Back to order")
+                           .Events(ev => ev.Click("backOrderBtnClick"))
+                    )
+            }
+        }
         <div id="reportViewer1">
             loading...
        </div>
@@ -75,4 +93,8 @@
                     }
                 });
         });
+
+        function backOrderBtnClick(e) {
+            history.back();
+        }
     </script>
