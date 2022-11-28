@@ -58,6 +58,7 @@
 
 <script>
 	$(document).ready(function () {
+        $(".toggle-view").hide();
 		var searchParam = '@ViewBag.SearchParam';
 		if (searchParam != null) {
 			$("#searchBar").data("kendoAutoComplete").value(searchParam);

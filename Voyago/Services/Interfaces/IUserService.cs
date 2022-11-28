@@ -1,4 +1,5 @@
-﻿using Models.InputModels;
+﻿using Data;
+using Models.InputModels;
 using Models.ViewModels;
 
 namespace Services.Interfaces
@@ -7,9 +8,17 @@ namespace Services.Interfaces
     {
         Task<UserViewModel?> GetUserByLoginCredentials(LoginUserInpuModel input);
 
+        Task<UserProfileViewModel?> GetUserPersonalDetails(string email);
+
         Task<bool> UserExists(string email);
 
         Task<bool> CreateNewUser(RegisterUserInpuModel input);
+
+        Task<bool> EditUserDetails(ProfileUserInputModel input, string email);
+
+        Task<bool> EditUserPassword(PasswordUserInputModel input, string email);
+
+        Task<bool> EditUserAddress(AddressUserInputModel input, string email);
 
         IQueryable<ShoppingCartItemViewModel> GetUserShoppingCartItems(string userEmail);
 

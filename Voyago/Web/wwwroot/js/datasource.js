@@ -250,86 +250,21 @@ function filterDataSource() {
 
 function sortDataSource(e) {
     var parameter = e.sender.value();
-    var direction = e.sender.dataItem().Direction;
-    if (parameter != null && direction != null) {
-        var ds = $("#allProductsListView").data("kendoListView").dataSource;
-        ds.sort({ field: parameter, dir: direction })
-    }
-}
-
-function exportDataSource() {
     var ds = $("#allProductsListView").data("kendoListView").dataSource;
-
-    var rows = [{
-        cells: [
-            { value: "Id" },
-            { value: "Name" },
-            { value: "Model" },
-            { value: "Color" },
-            { value: "Price" },
-            { value: "Size" },
-            { value: "Weight" },
-            { value: "SubCategory" },
-            { value: "AverageRating" }
-        ]
-    }];
-
-    ds.fetch(function () {
-        var data = this.data();
-        for (var i = 0; i < data.length; ++i) {
-            if (!data[i].items) {
-                rows.push({
-                    cells: [
-                        { value: data[i].Id },
-                        { value: data[i].Name },
-                        { value: data[i].Model },
-                        { value: data[i].Color },
-                        { value: data[i].Price },
-                        { value: data[i].Size },
-                        { value: data[i].Weight },
-                        { value: data[i].SubCategory },
-                        { value: data[i].AverageRating }
-                    ]
-                });
-            }
-            else {
-                for (var j = 0; j < data[i].items.length; ++j) {
-                    rows.push({
-                        cells: [
-                            { value: data[i].items[j].Id },
-                            { value: data[i].items[j].Name },
-                            { value: data[i].items[j].Model },
-                            { value: data[i].items[j].Color },
-                            { value: data[i].items[j].Price },
-                            { value: data[i].items[j].Size },
-                            { value: data[i].items[j].Weight },
-                            { value: data[i].items[j].SubCategory },
-                            { value: data[i].items[j].AverageRating }
-                        ]
-                    });
-                }
-            }
-        }
-        var workbook = new kendo.ooxml.Workbook({
-            sheets: [
-                {
-                    columns: [
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                        { autoWidth: true },
-                    ],
-                    title: "Products",
-                    rows: rows
-                }
-            ]
-        });
-
-        kendo.saveAs({ dataURI: workbook.toDataURL(), fileName: "PageExport.xlsx" });
-    });
+    switch (parameter) {
+        case '1':
+            ds.sort({ field: "FinalPrice", dir: "asc" })
+            break;
+        case '2':
+            ds.sort({ field: "FinalPrice", dir: "desc" })
+            break;
+        case '3':
+            ds.sort({ field: "Name", dir: "asc" })
+            break;
+        case '4':
+            ds.sort({ field: "Name", dir: "desc" })
+            break;
+        default:
+            break;
+    }
 }

@@ -18,16 +18,18 @@
 
         public decimal? Weight { get; set; }
 
-        public decimal DiscountPct { get; set; }
+        public decimal? DiscountPct { get; set; }
 
-        public decimal FinalPrice => Price * (1 - DiscountPct);
+        public decimal? FinalPrice { get; set; }
 
         public int? SubCategoryId { get; set; }
 
         public string? SubCategory { get; set; }
 
-        public double AverageRating { get; set; }
+        public double? AverageRating { get; set; }
 
         public int? PhotoId { get; set; }
+
+        public string? Description { get; set; }
     }
 }

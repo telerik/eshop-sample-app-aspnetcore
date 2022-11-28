@@ -1,0 +1,63 @@
+﻿
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 64px;
+    position: absolute;
+    width: 420px;
+    height: 477px;
+    left: calc(50% - 420px/2);
+    top: calc(50% - 477px/2 - 0.5px);
+}
+
+#loginForm {
+    width: 100%;
+}
+
+#loginForm .k-form-field {
+    height: 68px;
+}
+
+.logo {
+    width: 238px;
+    height: 58px;
+}
+
+.k-input-inner {
+    height: 38px;
+}
+
+.k-label.k-form-label {
+    height: 20px;
+}
+
+.k-button.k-form-submit {
+    padding: 14px 21px;
+    gap: 8px;
+    width: 100%;
+    height: 48px;
+    border-radius: 2px;
+    margin-top: 64px;
+}
+
+.k-button-text {
+    height: 20px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.register-prompt {
+    font-weight: 600;
+}
+
+@media (max-width: 500px) {
+    .login-container {
+        gap: 20px;
+        width: 200px;
+        height: 300px;
+        left: calc(50% - 200px/2);
+        top: 20%;
+    }
+}

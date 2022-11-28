@@ -1,0 +1,44 @@
+﻿<div class="favorite-product-container">
+        <a href="/Products/Details?productId=#:Id#" class="favorite-product-image">
+            <img src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image">
+        </a>
+
+       <div class="favorite-product-info-container">
+            <a href="/Products/Details?productId=#:Id#">
+                <h4 class="favorite-product-name">#:Name#</h4>
+            </a>
+			@{
+				if (!Context.Request.Path.ToString().Contains("Home"))
+				{
+					<div class="avg-rating">
+						<span class="k-icon k-i-star"></span>
+						<span class="rating-text">#:AverageRating#/5</span>
+					</div>
+				}
+			}
+            <p class="favorite-product-description">#:Description#</p>
+        </div>
+
+		<div class="favorite-product-controls">
+			<h4 class="price">#:kendo.toString(FinalPrice, "c")#</h4>
+			<div class="buttons-container">
+				@(Html.Kendo().Button()
+					.Name("addToCartButton_#=Id#")
+					.HtmlAttributes(new { type = "button" })
+					.Icon("cart")
+					.ThemeColor(ThemeColor.Primary)
+					.Content("Add to cart")
+					.Events(e => e.Click("addProductToShoppingCart"))
+					.ToClientTemplate()
+				)
+				@(Html.Kendo().Button()
+					.Name("addToFavoritesButton_#=Id#")
+					.HtmlAttributes(new { type = "button" })
+					.Icon("heart-outline")
+					.Content("Add to favorites")
+					.Events(e => e.Click("addProductToFavorites"))
+					.ToClientTemplate()
+				)
+			</div>
+		</div>
+</div>

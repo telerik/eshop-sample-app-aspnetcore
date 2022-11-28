@@ -21,9 +21,9 @@ builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp => new ReportSe
 		System.IO.Path.Combine(GetReportsDir(sp)))
 });
 
-builder.Services.AddDbContext<AdventureWorksContext>(options =>
+builder.Services.AddDbContext<VoyagoDatabaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("VoyagoDatabase"));
     options.UseLazyLoadingProxies();
 });
 builder.Services.AddControllersWithViews()
@@ -46,6 +46,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddKendo();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 
 var app = builder.Build();

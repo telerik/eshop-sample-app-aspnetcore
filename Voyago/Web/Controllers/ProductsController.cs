@@ -29,7 +29,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Category(string? searchParam, string? subCategory)
         {
-            if(subCategory == null)
+            if (subCategory == null)
             {
                 return Redirect("/Home/Index");
             }
@@ -46,8 +46,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAllProducts([DataSourceRequest] DataSourceRequest request)
         {
-            var result = productService.GetAllProducts().ToList();
-
+            var result = productService.GetAllProducts().Where(p => p.SubCategory != "Other").ToList();
             return Json(await result.ToDataSourceResultAsync(request));
         }
 
@@ -66,12 +65,12 @@ namespace Web.Controllers
 
             if (model == null)
             {
-                return Redirect("/Products/All");
+                return Redirect("/Home/Index");
             }
 
             addToRecentlyViewed(productId);
 
-            if(!string.IsNullOrEmpty(model.SubCategory))
+            if (!string.IsNullOrEmpty(model.SubCategory))
             {
                 ViewBag.SubCategory = model.SubCategory;
             }
@@ -115,12 +114,6 @@ namespace Web.Controllers
             var result = productService.GetSimilarProducts(productId, subCategoryId, count);
 
             return Json(await result.ToDataSourceResultAsync(request));
-        }
-
-        [HttpGet]
-        public IActionResult GetAllSortParameters()
-        {
-            return Json(productService.GetAllSortParameters());
         }
 
         [HttpGet]
@@ -176,7 +169,7 @@ namespace Web.Controllers
         {
             byte[]? thumbnailData = await productService.GetProductThumbnailById(photoId);
 
-            if(thumbnailData == null)
+            if (thumbnailData == null)
             {
                 return File("./images/generic_bike1.png", "image/png");
             }

@@ -2,122 +2,44 @@
 	ViewData["Title"] = "Register Page";
 }
 
-<div class="register-form">
-	<img class="logo" src="~/images/logo.svg" alt="Voyago">
+<div class="register-container">
+	<img class="logo" src="~/images/logo.png" alt="Voyago">
 
 	@(Html.Kendo().Form<Models.InputModels.RegisterUserInpuModel>()
-	.Name("registerForm")
-	.HtmlAttributes(new { controller="Account", action="Register", method="POST"})
-	.Validatable(v =>
-	{
-	v.ValidateOnBlur(true);
-	v.ValidationSummary(vs => vs.Enable(true));
-	})
-	.Items(items =>
-	{
-	items.Add()
-	.Field(f => f.FirstAndLastName)
-	.Label(l => l.Text("First and last name"));
-	items.Add()
-	.Field(f => f.Email)
-	.Label(l => l.Text("Email"));
-	items.Add()
-	.Field(f => f.Password)
-	.Label(l => l.Text("Password"))
-	.InputHtmlAttributes(new { type="password"})
-	.Hint("Your password must be at least 4 symbols long.");
-	})
-	.ButtonsTemplateId("formButtonsTmpl")
+		.Name("registerForm")
+		.HtmlAttributes(new { controller="Account", action="Register", method="POST"})
+		.Validatable(v =>
+		{
+			v.ValidateOnBlur(true);
+			v.ValidationSummary(vs => vs.Enable(false));
+		})
+		.Items(items =>
+		{
+			items.Add()
+			.Field(f => f.FirstAndLastName)
+			.Label(l => l.Text("First and last name"));
+			items.Add()
+			.Field(f => f.Email)
+			.Label(l => l.Text("Email"))
+			.InputHtmlAttributes(new {@type = "email"});
+			items.Add()
+			.Field(f => f.Password)
+			.Label(l => l.Text("Password"))
+			.InputHtmlAttributes(new { @type="password",  pattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", required = "required", validationmessage = "Please enter a valid password."})
+			.Hint("Your password must be at least 8 symbols and should include uppercase and lowercase letters and numbers");
+		})
+		.ButtonsTemplateId("formButtonsTmpl")
 	)
 
 	<div class="login-prompt">
-		<p>Already have an account?</p><a href="/Account/Login" style="text-decoration:none; color:var(--voyago-green);">Login</a>
+		<p>Already have an account? <a class="login-link" href="/Account/Login" style="color:var(--voyago-blue);">Login</a></p>
 	</div>
 </div>
 
 <script id="formButtonsTmpl" type="text/html">
-	<button class="k-button k-form-submit" type="submit">
+	<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary k-form-submit" type="submit">
 		<span class="k-button-text">Register</span>
 	</button>
 </script>
 
-<style>
-	.register-form {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 0px;
-		gap: 64px;
-		position: absolute;
-		width: 420px;
-		height: 570px;
-		left: calc(50% - 420px/2);
-		top: calc(50% - 570px/2 - 1px);
-	}
-
-	.k-form-field  {
-		margin-bottom: 32px;
-	}
-
-	.k-form-hint {
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-		display: flex;
-		align-items: center;
-	}
-
-	.logo {
-		width: 238px;
-		height: 58px;
-		flex: none;
-		order: 0;
-		flex-grow: 0;
-	}
-
-	.k-input-inner {
-		font-size: 18px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		padding: 10px;
-		width: 420px;
-		height: 48px;
-	}
-
-	.k-label.k-form-label {
-		width: 420px;
-		height: 48px;
-		font-style: normal;
-		font-weight: 500;
-		font-size: 18px;
-		line-height: 28px;
-		letter-spacing: 0.1px;
-		color: #424242;
-	}
-
-	.k-button.k-form-submit {
-		width: 420px;
-		height: 48px;
-		margin-top: 32px;
-		background: var(--voyago-green);
-		border: none;
-		border-radius: 4px;
-	}
-
-	.k-button-text {
-		width: 53px;
-		height: 24px;
-		font-style: normal;
-		font-weight: 500;
-		font-size: 20px;
-		line-height: 24px;
-		color: #FFFFFF;
-	}
-
-	.login-prompt {
-		display: flex;
-		gap: 10px;
-	}
-</style>
+<link rel="stylesheet" href="/css/register_form.css"/>

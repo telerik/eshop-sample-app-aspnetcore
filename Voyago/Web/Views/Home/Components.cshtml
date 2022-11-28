@@ -2,7 +2,8 @@
 	ViewData["Title"] = "Components";
 }
 
-<div class="sub-category-container">
+
+	<div class="sub-category-container">
 	@(Html.Kendo().Breadcrumb()
 	.Name("breadcrumb")
 	.Navigational(true)
@@ -21,12 +22,14 @@
 	.ShowText(true);
 	})
 	)
+
+
 	<h4 class="category-heading-large">Components</h4>
 	<div class="sub-category-images">
 		<div>
 			<a href="/Products/Category?subCategory=Chains">
 				<h5 class="category-heading">Chains</h5>
-				<img src="~/images/chains.png" width="457" height="484" class="category-image" />
+				<img src="~/images/chains.png" class="category-image category-large-image" />
 			</a>
 		</div>
 		<div class="inner-1">
@@ -34,116 +37,58 @@
 				<div>
 					<a href="/Products/Category?subCategory=Derailleurs">
 						<h5 class="category-heading">Derailleurs</h5>
-						<img src="~/images/derailleurs.png" width="211" height="200" class="category-image" style="margin-bottom: 52px" />
+						<img src="~/images/derailleurs.png" class="category-image category-small-image" />
 					</a>
 				</div>
 				<div>
 					<a href="/Products/Category?subCategory=Forks">
 						<h5 class="category-heading">Forks</h5>
-						<img src="~/images/forks.png" width="211" height="200" class="category-image" style="margin-bottom: 52px" />
+						<img src="~/images/forks.png" class="category-image category-small-image" />
 					</a>
 				</div>
 			</div>
 			<div>
 				<a href="/Products/Category?subCategory=Mountain Frames">
-					<h5 class="category-heading">Mountain Frames</h5>
-					<img src="~/images/mountain_frames.png" width="458" height="200" class="category-image" style="margin-bottom: 52px" />
+					<h5 class="category-heading heading-double">Mountain Frames</h5>
+					<img src="~/images/mountain_frames.png" class="category-image category-small-image" />
 				</a>
 			</div>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Handlebars">
 				<h5 class="category-heading">Handlebars</h5>
-				<img src="~/images/handlebars.png" width="457" height="484" class="category-image" />
+				<img src="~/images/handlebars.png" class="category-image category-large-image" />
 			</a>
 		</div>
 	</div>
 
 	<div class="sub-category-images">
-		<div>
+		<div class="edge-image-container">
 			<a href="/Products/Category?subCategory=Pedals">
 				<h5 class="category-heading">Pedals</h5>
-				<img src="~/images/pedals.png" width="209" height="196" class="category-image" />
+				<img src="~/images/pedals.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Saddles">
 				<h5 class="category-heading">Saddles</h5>
-				<img src="~/images/saddles.png" width="451" height="196" class="category-image" />
+				<img src="~/images/saddles.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Touring Frames">
 				<h5 class="category-heading">Touring Frames</h5>
-				<img src="~/images/touring_frames.png" width="451" height="196" class="category-image" />
+				<img src="~/images/touring_frames.png" class="category-image category-small-image" />
 			</a>
 		</div>
-		<div>
+		<div class="edge-image-container">
 			<a href="/Products/Category?subCategory=Wheels">
 				<h5 class="category-heading">Wheels</h5>
-				<img src="~/images/wheels.png" width="209" height="196" class="category-image" />
+				<img src="~/images/wheels.png" class="category-image category-small-image" />
 			</a>
 		</div>
 	</div>
 </div>
 
-<style>
-	a {
-		text-decoration: none;
-		color: black;
-	}
+<link rel="stylesheet" href="/css/category_components.css">
 
-	.inner-1 {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.inner-2 {
-		display: flex;
-		flex-direction: row;
-		gap: 40px
-	}
-
-	.sub-category-container {
-		width: 1440px;
-		margin: auto;
-		margin-bottom: 80px;
-	}
-
-	#breadcrumb {
-		margin-top: 70px;
-		margin-bottom: 58px;
-	}
-
-	.k-breadcrumb-link {
-		color: var(--voyago-green);
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-	}
-
-	.sub-category-images {
-		display: flex;
-		flex-direction: row;
-		gap: 38px;
-	}
-
-	.category-image {
-		border-radius: 0px 0px 10px 10px
-	}
-
-	.category-heading-large {
-		color: black;
-		font-weight: 500;
-		font-size: 40px;
-		line-height: 58px;
-		letter-spacing: -0.9px;
-		margin-bottom: 24px;
-	}
-
-	.category-heading {
-		color: black;
-		margin-left: 16px;
-		margin-bottom: 12px;
-	}
-</style>

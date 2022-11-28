@@ -28,7 +28,7 @@ namespace Services.Interfaces
 
         Task<byte[]?> GetProductLargePhotoById(int photoId);
 
-        IEnumerable<SortParmeterViewModel> GetAllSortParameters();
+        //IEnumerable<SortParmeterViewModel> GetAllSortParameters();
 
         IQueryable<string> GetAllCategoryNames();
 
@@ -46,7 +46,7 @@ namespace Services.Interfaces
 
         IQueryable<string> GetAllColorsInSubCategory(string subCategory);
 
-        Task<IEnumerable<SubCategoryViewModel>> GetTopSellingSubCategories(int count);
+        IEnumerable<SubCategoryViewModel?> GetTopSellingSubCategories(int count);
 
         Task<string> GetParentCategory(string subCategory);
     }

@@ -10,9 +10,9 @@ namespace Services
 {
     public class UserService : IUserService
     {
-        private readonly AdventureWorksContext dbContext;
+        private readonly VoyagoDatabaseContext dbContext;
 
-        public UserService(AdventureWorksContext dbContext)
+        public UserService(VoyagoDatabaseContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -33,21 +33,38 @@ namespace Services
                 var userViewModel = new UserViewModel()
                 {
                     Id = attemptedUser.ContactId,
-                    NameStyle = attemptedUser.NameStyle,
                     EmailAddress = attemptedUser.EmailAddress,
                     FirstName = attemptedUser.FirstName,
                     LastName = attemptedUser.LastName,
-                    MiddleName = attemptedUser.MiddleName,
-                    Suffix = attemptedUser.Suffix,
-                    Title = attemptedUser.Title,
-                    EmailPromotion = attemptedUser.EmailPromotion,
-                    Phone = attemptedUser.Phone,
-                    AdditionalContactInfo = attemptedUser.AdditionalContactInfo
+                    Phone = attemptedUser.Phone
                 };
 
                 return userViewModel;
             }
 
+            return null;
+        }
+
+        public async Task<UserProfileViewModel?> GetUserPersonalDetails(string email)
+        {
+            if (await dbContext.Contacts.AnyAsync(user => user.EmailAddress == email))
+            {
+                var currentUser = await dbContext.Contacts.FirstAsync(user => user.EmailAddress == email);
+                var userViewModel = new UserProfileViewModel()
+                {
+                    FirstName = currentUser.FirstName,
+                    LastName = currentUser.LastName,
+                    Phone = currentUser.Phone,
+                    Password = currentUser.PasswordHash,
+                    ConfimPassword = currentUser.PasswordHash,
+                    City = currentUser.City,
+                    Zipcode = currentUser.ZipCode,
+                    Street = currentUser.Street,
+                    State = currentUser.State,
+                    Country = currentUser.Country
+                };
+                return userViewModel;
+            }
             return null;
         }
 
@@ -71,14 +88,13 @@ namespace Services
             {
                 return false;
             }
-            if (input.Password.Length < 4 || input.Password.Length > 24)
+            if (input.Password.Length < 8)
             {
                 return false;
             }
 
             var passwordSalt = GenerateSalt(8);
             var passwordWithSalt = input.Password + passwordSalt;
-
             var hashedPassword = HashPassword(passwordWithSalt);
 
             var userForDb = new Contact
@@ -87,34 +103,81 @@ namespace Services
                 LastName = lastName,
                 EmailAddress = input.Email,
                 PasswordHash = hashedPassword,
-                PasswordSalt = passwordSalt,
-                NameStyle = false,
-                EmailPromotion = 0,
-                Phone = "123-456-7890"
+                PasswordSalt = passwordSalt
             };
 
             await dbContext.Contacts.AddAsync(userForDb);
+            return await dbContext.SaveChangesAsync() > 0 ? true : false;
+        }
+
+        public async Task<bool> EditUserDetails(ProfileUserInputModel input, string email)
+        {
+            if (!await UserExists(email))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(input.FirstName) || string.IsNullOrEmpty(input.LastName))
+            {
+                return false;
+            }
+
+            var userDetailsFromDb = await dbContext.Contacts.FirstAsync(sci => sci.EmailAddress == email);
+            userDetailsFromDb.FirstName = input.FirstName;
+            userDetailsFromDb.LastName = input.LastName;
+            userDetailsFromDb.Phone = input.Phone;
+
+            dbContext.Update(userDetailsFromDb);
+
+            return await dbContext.SaveChangesAsync() > 0 ? true : false;
+        }
+
+        public async Task<bool> EditUserPassword(PasswordUserInputModel input, string email)
+        {
+            var passwordSalt = GenerateSalt(8);
+            var passwordWithSalt = input.Password + passwordSalt;
+            var hashedPassword = HashPassword(passwordWithSalt);
+
+            var userDetailsFromDb = await dbContext.Contacts.FirstAsync(sci => sci.EmailAddress == email);
+            userDetailsFromDb.PasswordHash = hashedPassword;
+            userDetailsFromDb.PasswordSalt = passwordSalt;
+
+            dbContext.Update(userDetailsFromDb);
+
+            return await dbContext.SaveChangesAsync() > 0 ? true : false;
+        }
+
+        public async Task<bool> EditUserAddress(AddressUserInputModel input, string email)
+        {
+            var userAddressFromDb = await dbContext.Contacts.FirstAsync(sci => sci.EmailAddress == email);
+            userAddressFromDb.Street = input.Street;
+            userAddressFromDb.City = input.City;
+            userAddressFromDb.ZipCode = input.Zipcode;
+            userAddressFromDb.Country = input.Country;
+            userAddressFromDb.State = input.State;
+
+            dbContext.Contacts.Update(userAddressFromDb);
 
             return await dbContext.SaveChangesAsync() > 0 ? true : false;
         }
 
         public IQueryable<ShoppingCartItemViewModel> GetUserShoppingCartItems(string userEmail)
         {
-            var items = dbContext.ShoppingCartItems.Where(sci => sci.ShoppingCartId == userEmail).Select(sci => new ShoppingCartItemViewModel
-            {
-                ShoppingCartItemId = sci.ShoppingCartItemId,
-                ShoppingCartId = userEmail,
-                ProductId = sci.ProductId,
-                ProductName = sci.Product.Name,
-                ProductPrice = sci.Product.ListPrice,
-                DiscountPcnt = sci.Product.SpecialOfferProducts.Any(sop => sop.ProductId == sci.ProductId) ?
-                                sci.Product.SpecialOfferProducts.Max(sop => sop.SpecialOffer.DiscountPct) :
-                                0,
-                Quantity = sci.Quantity,
-                ProductPhotoId = sci.Product.ProductProductPhotos.First(pp => pp.ProductId == sci.ProductId).ProductPhotoId,
-            });
-
-            return items;
+            var shoppingCartitems = (from item in dbContext.ShoppingCartItems
+                where item.ShoppingCartId == userEmail
+                join product in dbContext.Products on item.ProductId equals product.ProductId
+                select new ShoppingCartItemViewModel
+                {
+                    ShoppingCartItemId = item.ShoppingCartItemId,
+                    ShoppingCartId = userEmail,
+                    ProductId = item.ProductId,
+                    ProductName = product.ProductName,
+                    ProductPrice = product.ListPrice,
+                    DiscountPcnt = product.DiscountPct != null ? product.DiscountPct : 0,
+                    Quantity = item.Quantity,
+                    ProductPhotoId = product.PhotoId
+                });
+            return shoppingCartitems;
         }
 
         public async Task<int> GetUserShoppingCartItemsCount(string userEmail)
@@ -200,17 +263,13 @@ namespace Services
             var products = dbContext.Products.Where(p => productIds.Contains(p.ProductId)).Select(p => new FavoriteProductViewModel
             {
                 Id = p.ProductId,
-                Name = p.Name,
+                Name = p.ProductName,
                 Price = p.ListPrice,
-                DiscountPct = p.SpecialOfferProducts.Any(sop => sop.ProductId == p.ProductId) ?
-                            p.SpecialOfferProducts.Max(sop => sop.SpecialOffer.DiscountPct) :
-                            0,
-                Description = p.ProductModel != null ?
-                    p.ProductModel.ProductModelProductDescriptionCultures.First(pmd => pmd.ProductModelId == p.ProductModelId).ProductDescription.Description :
-                    "...",
+                DiscountPct = p.DiscountPct != null ? p.DiscountPct : 0 ,
+                Description = p.Description != null ? p.Description : "...",
                 ModelId = p.ProductModelId,
-                AverageRating = p.ProductReviews.Any() ? p.ProductReviews.Average(pr => pr.Rating) : 0,
-                PhotoId = p.ProductProductPhotos.First(pp => pp.ProductId == p.ProductId).ProductPhotoId,
+                AverageRating = p.Rating != null ? p.Rating : 0,
+                PhotoId = p.PhotoId
             });
 
             return products;

@@ -3,6 +3,7 @@
 }
 
 <div class="sub-category-container">
+
 	@(Html.Kendo().Breadcrumb()
 	.Name("breadcrumb")
 	.Navigational(true)
@@ -21,12 +22,13 @@
 	.ShowText(true);
 	})
 	)
+
 	<h4 class="category-heading-large">Accessories</h4>
 	<div class="sub-category-images">
 		<div>
 			<a href="/Products/Category?subCategory=Bottles and Cages">
 				<h5 class="category-heading">Botttles & Cages</h5>
-				<img src="~/images/bottles_cages.png" width="453" height="484" class="category-image" />
+				<img src="~/images/bottles_cages.png" class="category-image category-large-image" />
 			</a>
 		</div>
 		<div class="inner-1">
@@ -34,89 +36,30 @@
 				<div>
 					<a href="/Products/Category?subCategory=Lights">
 						<h5 class="category-heading">Lights</h5>
-						<img src="~/images/lights.png" width="207" height="200" class="category-image" style="margin-bottom: 52px" />
+						<img src="~/images/lights.png" class="category-image category-small-image" />
 					</a>
 				</div>
 				<div>
 					<a href="/Products/Category?subCategory=Locks">
 						<h5 class="category-heading">Locks</h5>
-						<img src="~/images/locks.png" width="207" height="200" class="category-image" style="margin-bottom: 52px" />
+						<img src="~/images/locks.png" class="category-image category-small-image" />
 					</a>
 				</div>
 			</div>
 			<div>
 				<a href="/Products/Category?subCategory=Tires and Tubes">
-					<h5 class="category-heading">Tires and Tubes</h5>
-					<img src="~/images/tires_tubes2.png" width="454" height="200" class="category-image" style="margin-bottom: 52px" />
+					<h5 class="category-heading heading-double">Tires and Tubes</h5>
+					<img src="~/images/tires_tubes2.png" class="category-image category-bottom-image" />
 				</a>
 			</div>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Pumps">
 				<h5 class="category-heading">Pumps</h5>
-				<img src="~/images/pumps.png" width="453" height="484" class="category-image" />
+				<img src="~/images/pumps.png" class="category-large-image" class="category-image" />
 			</a>
 		</div>
 	</div>
 </div>
 
-<style>
-	a {
-		text-decoration: none;
-		color: black;
-	}
-
-	.inner-1 {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.inner-2 {
-		display: flex;
-		flex-direction: row;
-		gap: 40px
-	}
-
-	.sub-category-container {
-		width: 1440px;
-		margin: auto;
-		margin-bottom: 80px;
-	}
-
-	#breadcrumb {
-		margin-top: 70px;
-		margin-bottom: 58px;
-	}
-
-	.k-breadcrumb-link {
-		color: var(--voyago-green);
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-	}
-
-	.sub-category-images {
-		display: flex;
-		flex-direction: row;
-		gap: 38px;
-	}
-
-	.category-image {
-		border-radius: 0px 0px 10px 10px
-	}
-
-	.category-heading-large {
-		color: black;
-		font-weight: 500;
-		font-size: 40px;
-		line-height: 58px;
-		letter-spacing: -0.9px;
-		margin-bottom: 24px;
-	}
-
-	.category-heading {
-		color: black;
-		margin-left: 16px;
-		margin-bottom: 12px;
-	}
-</style>
+<link rel="stylesheet" href="/css/categories.css">

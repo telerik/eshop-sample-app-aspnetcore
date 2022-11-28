@@ -15,15 +15,16 @@
 			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
 		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 	</environment>
-	<link href="https://cdn.kendostatic.com/2022.2.802/styles/kendo.default-turquoise.min.css" rel="stylesheet" type="text/css" />
-	<script src="https://cdn.kendostatic.com/2022.2.802/js/jquery.min.js"></script>
-	<script src="https://cdn.kendostatic.com/2022.2.802/js/jszip.min.js"></script>
-	<script src="https://cdn.kendostatic.com/2022.2.802/js/kendo.all.min.js"></script>
-	<script src="https://cdn.kendostatic.com/2022.2.802/js/kendo.aspnetmvc.min.js"></script>
+	<link href="https://cdn.kendostatic.com/2022.3.1109/styles/kendo.fluent-main.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.kendostatic.com/2022.3.1109/js/jquery.min.js"></script>
+	<script src="https://cdn.kendostatic.com/2022.3.1109/js/jszip.min.js"></script>
+	<script src="https://cdn.kendostatic.com/2022.3.1109/js/kendo.all.min.js"></script>
+	<script src="https://cdn.kendostatic.com/2022.3.1109/js/kendo.aspnetmvc.min.js"></script>
 	<script src="~/js/product_details.js"></script>
 	<script src="~/js/shopping_cart.js"></script>
 	<script src="~/js/datasource.js"></script>
 	<script src="~/js/favorites.js"></script>
+	<script src="~/js/orders.js"></script>
 	<script src="~/js/other.js"></script>
 </head>
 <body class="k-content">
@@ -42,6 +43,13 @@
 		@await Html.PartialAsync("~/Views/Shared/_Footer.cshtml")
 	}
 
+	<script>
+		$(document).ready(function () { 
+			$(".search-bar-container").css("visibility", "visible");
+			$(".header-menu .k-dropdownlist").css("visibility", "visible");
+		});
+	</script>
+
 	<environment names="Development">
 		<script src="~/lib/bootstrap/js/bootstrap.js"></script>
 	</environment>
@@ -53,79 +61,3 @@
 	@RenderSection("scripts", required: false)
 </body>
 </html>
-
-<style>
-	body {
-		padding-top: 114px;
-		margin-bottom: 0px;
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-	}
-
-	main {
-		margin-bottom: 80px;
-	}
-	
-	.k-breadcrumb-link {
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-		color: var(--voyago-green);
-	}
-
-	.k-i-star {
-		color: var(--voyago-green);
-		font-size: 14px;
-	}
-
-	.k-rating-precision-complement {
-		color: var(--voyago-green);
-		font-size: 14px;
-	}
-
-	.k-pager-numbers .k-link.k-selected, .k-pager-numbers .k-link.k-state-selected {
-		color: var(--voyago-green);
-	}
-
-	.k-badge-solid.k-badge-primary {
-		border-color: var(--voyago-green);
-		color: #fff;
-		background-color: var(--voyago-green);
-	}
-
-	.k-slider .k-slider-selection {
-		background-color: var(--voyago-green);
-	}
-
-	.k-slider .k-draghandle {
-		border-color: var(--voyago-green);
-		color: #fff;
-		background-color: var(--voyago-green);
-		border-radius: 50%;
-	}
-
-		.k-slider .k-draghandle.k-pressed, .k-slider .k-draghandle:active {
-			border-color: var(--voyago-green);
-			background-color: var(--voyago-green);
-		}
-
-	.k-checkbox.k-checked, .k-checkbox:checked {
-		border-color: var(--voyago-green);
-		color: #fff;
-		background-color: var(--voyago-green);
-	}
-
-	.k-pager-numbers {
-		color: var(--voyago-green);
-	}
-
-	.k-tick {
-		display: none;
-	}
-
-	.k-tick-large {
-		display: inherit;
-	}
-
-</style>

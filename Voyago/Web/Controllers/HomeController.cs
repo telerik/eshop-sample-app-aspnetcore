@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Kendo.Mvc.Extensions;
 using Services.Interfaces;
 using Web.Extensions;
-using Kendo.Mvc.UI;
+using Models.ViewModels;
 
 namespace Web.Controllers
 {
@@ -54,6 +55,14 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult ProductCatalog()
+        {
+            ReportSourceModel report = new ReportSourceModel() { ReportId = "ProductCatalogNew.trdp" };
+
+            return View("~/Views/Shared/ReportViewer.cshtml", report);
+        }
+
+        [HttpGet]
         public IActionResult Error()
         {
             return View();
@@ -66,10 +75,10 @@ namespace Web.Controllers
             return Json(products);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GetTopSellingSubCategories([DataSourceRequest] DataSourceRequest request, int count)
         {
-            var topSellingCategories = await productService.GetTopSellingSubCategories(count);
+            var topSellingCategories = productService.GetTopSellingSubCategories(count);
 
             return Json(await topSellingCategories.ToDataSourceResultAsync(request));
         }
