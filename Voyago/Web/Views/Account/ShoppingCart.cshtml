@@ -3,23 +3,25 @@
 }
 
 <div class="shopping-cart-container">
-	<h3 class="shopping-cart-heading">Your cart items</h3>
+	<h4 class="shopping-cart-title">Your cart items</h4>
 
 	@{
 		if (ViewBag.ItemsCount == 0)
 		{
-			<img class="empty-cart-image" src="~/images/shopping_cart_empty.svg" alt="Your shopping cart is empty">
-			<h4 class="empty-cart-heading">Unfortunately, your cart is empty...</h4>
-			<div class="emtpy-cart-text">
-				<p>Looks like you have not added anything to your cart. Go ahead and</p>
-				<a style="color: var(--voyago-green);" href="/Home/Index#top-picks">explore our top-picks.</a>
+			<div class="empty-shopping-cart-container">
+				<img class="empty-cart-image" src="~/images/shopping_cart_empty.svg" alt="Your shopping cart is empty">
+				<p class="empty-cart-heading">Unfortunately, your cart is empty...</p>
+				<div class="empty-cart-description">
+					<p>Looks like you have not added anything to your cart. Go ahead and <a style="color: var(--voyago-blue);" href="/Home/Index#top-picks">explore our top-picks.</a>
+					</p>
+				</div>
 			</div>
 		}
 		else
 		{
-			<a class="continue-shopping" href="/Products/Summary">Continue shopping</a>
+				<a class="continue-shopping" href="/Products/Summary">Continue shopping</a>
 
-			@(Html.Kendo().Grid<Models.ViewModels.ShoppingCartItemViewModel>()
+				@(Html.Kendo().Grid<Models.ViewModels.ShoppingCartItemViewModel>()
 				.Name("shoppingCartGrid")
 				.Columns(columns =>
 				{
@@ -29,7 +31,8 @@
 					.Editable("function() { return false; }")
 					.HtmlAttributes(new { @class = "templateCell" })
 					.ClientTemplateId("quantityEditor-template");
-					columns.Bound(p => p.Total).HtmlAttributes(new { @class = "currency" });
+					columns.Bound(p => p.Total).HtmlAttributes(new { @class = "currency" }).Title("Total").HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
+            .HtmlAttributes(new { style = "text-align: right" });
 				})
 				.Editable(editable => editable.Mode(GridEditMode.InCell).DisplayDeleteConfirmation(false))
 				.DataSource(dataSource => dataSource
@@ -48,21 +51,22 @@
 					.Destroy(destroy => destroy.Action("RemoverUserShoppingCartItem", "Account").Type(HttpVerbs.Delete))
 				)
 				.Events(e => e.DataBound("shoppingCartGridOnDataBound"))
-			)
-			<div class="shopping-cart-bottom">
-				<div>
-					<div class="sub-total">
-						<h5 class="sub-total-val">Sub-total:</h5>
-						<h5 class="sub-total-val" id="subTotalValue"></h5>
+				)
+				<div class="shopping-cart-bottom">
+					<div>
+						<div class="sub-total">
+							<h5 class="sub-total-val">Sub-total:</h5>
+							<h5 class="sub-total-val" id="subTotalValue"></h5>
+						</div>
+						<span class="tax-and-shipping">Tax and shipping cost will be calculated later</span>
 					</div>
-					<span class="tax-and-shipping">Tax and shipping cost will be calculated later</span>
-				</div>
-				@(Html.Kendo().Button()
+					@(Html.Kendo().Button()
 					.Name("checkoutButton")
 					.Content("Check-out")
+					.ThemeColor(ThemeColor.Primary)
 					.Events(e => e.Click("checkoutShoppingCart"))
-				)
-			</div>
+					)
+				</div>
 		}
 	}
 </div>
@@ -73,11 +77,11 @@
 			<img width="160" height="120" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:ProductPhotoId#" alt="#:ProductName# image">
 		</a>
 
-		<div style="margin-left: 30px;">
+		<div class="product-info">
 			<a href="/Products/Details?productId=#:ProductId#">
 				<p class="product-name">#:ProductName#</p>
 			</a>
-			<p id="remove_#:ShoppingCartItemId#" onclick="removeItemFromShoppingCart(#:ShoppingCartItemId#)" style="cursor:pointer">Remove</p>
+			<p class="remove-product" id="remove_#:ShoppingCartItemId#" onclick="removeItemFromShoppingCart(#:ShoppingCartItemId#)" style="cursor:pointer">Remove</p>
 		</div>
 	</div>
 </script>
@@ -96,177 +100,5 @@
 		)
 </script>
 
-<style>
-	.empty-cart-image {
-		margin-top: 60px;
-		margin-bottom: 40px;
-	}
+<link rel="stylesheet" href="/css/shopping_cart.css">
 
-	.emtpy-cart-text {
-		margin-bottom: 250px;
-		display: flex;
-		flex-direction: row;
-		gap: 3px;
-	}
-
-	.shopping-cart-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.shopping-cart-heading {
-		margin-top: 56px;
-		font-weight: 500;
-		font-size: 40px;
-		line-height: 58px;
-		text-align: center;
-		letter-spacing: -0.9px;
-		color: #272727;
-	}
-
-	.continue-shopping {
-		font-weight: 500;
-		font-size: 20px;
-		line-height: 24px;
-		text-align: center;
-		color: var(--voyago-green);
-		margin-top: 31px;
-		margin-bottom: 77px;
-	}
-
-	a {
-		text-decoration: none;
-	}
-
-	#shoppingCartGrid {
-		width: 1194px;
-		margin-bottom: 48px;
-	}
-
-	.k-master-row {
-		height: 170px;
-	}
-
-	.product-col {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.k-header {
-		font-weight: 500;
-		font-size: 16px;
-		line-height: 28px;
-		letter-spacing: -0.9px;
-		color: #1D252C;
-	}
-
-	.k-grid-header {
-		background: transparent;
-	}
-
-	.k-alt {
-		background: transparent !important;
-	}
-
-	.k-master-row {
-		background: transparent !important;
-	}
-
-	.shopping-cart-bottom {
-		width: 1194px;
-		justify-content: right;
-		display: flex;
-		flex-direction: row;
-		gap: 60px;
-	}
-
-	.sub-total {
-		width: 227px;
-		justify-content: space-between;
-		display: flex;
-		flex-direction: row;
-	}
-
-	.k-grid {
-		border: none;
-	}
-
-		.k-grid th {
-			border-left: none !important;
-			border-bottom-width: 2px !important;
-		}
-
-		.k-grid td {
-			border-left: none !important;
-			border-bottom-width: 2px !important;
-		}
-
-	.product-name {
-		margin-top: 38px;
-		margin-bottom: 46px;
-		font-size: 22px;
-		line-height: 29px;
-		color: #1D252C;
-	}
-
-	.currency {
-		font-size: 18px;
-		line-height: 28px;
-		letter-spacing: 0.1px;
-		color: #1D252C;
-	}
-
-	.quantity-editor {
-		width: 120px;
-	}
-
-	.k-spinner-increase {
-		background: none;
-		border: none;
-	}
-
-	.k-spinner-decrease {
-		background: none;
-		border: none;
-	}
-
-	.sub-total-val {
-		font-weight: 500;
-		font-size: 18px;
-		line-height: 28px;
-		letter-spacing: 0.1px;
-		color: #1D252C;
-	}
-
-	.tax-and-shipping {
-		width: 227px;
-		height: 17px;
-		font-style: italic;
-		font-weight: 400;
-		font-size: 12px;
-		line-height: 17px;
-		text-align: right;
-		color: #818181;
-	}
-
-	#checkoutButton {
-		padding: 12px;
-		gap: 8px;
-		width: 185px;
-		height: 48px;
-		background: var(--voyago-green);
-		border-radius: 4px;
-	}
-
-		#checkoutButton:hover {
-			background: #6AA985;
-		}
-
-	.k-button-text {
-		font-weight: 500;
-		font-size: 20px;
-		line-height: 24px;
-		color: #FFFFFF;
-	}
-</style>

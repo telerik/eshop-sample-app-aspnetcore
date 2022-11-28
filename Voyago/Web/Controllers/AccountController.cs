@@ -15,10 +15,74 @@ namespace Web.Controllers
     public class AccountController : Controller
     {
         private readonly IUserService userService;
+        private readonly IOrderService orderService;
+        private readonly IProductService productService;
+        public static UserProfileViewModel userProfile;
+        public static List<StateViewModel> states = new List<StateViewModel> {
+          new StateViewModel("AL", "Alabama"),
+          new StateViewModel("AK", "Alaska"),
+          new StateViewModel("AZ", "Arizona"),
+          new StateViewModel("AR", "Arkansas"),
+          new StateViewModel("CA", "California"),
+          new StateViewModel("CO", "Colorado"),
+          new StateViewModel("CT", "Connecticut"),
+          new StateViewModel("DE", "Delaware"),
+          new StateViewModel("DC", "District Of Columbia"),
+          new StateViewModel("FL", "Florida"),
+          new StateViewModel("GA", "Georgia"),
+          new StateViewModel("HI", "Hawaii"),
+          new StateViewModel("ID", "Idaho"),
+          new StateViewModel("IL", "Illinois"),
+          new StateViewModel("IN", "Indiana"),
+          new StateViewModel("IA", "Iowa"),
+          new StateViewModel("KS", "Kansas"),
+          new StateViewModel("KY", "Kentucky"),
+          new StateViewModel("LA", "Louisiana"),
+          new StateViewModel("ME", "Maine"),
+          new StateViewModel("MD", "Maryland"),
+          new StateViewModel("MA", "Massachusetts"),
+          new StateViewModel("MI", "Michigan"),
+          new StateViewModel("MN", "Minnesota"),
+          new StateViewModel("MS", "Mississippi"),
+          new StateViewModel("MO", "Missouri"),
+          new StateViewModel("MT", "Montana"),
+          new StateViewModel("NE", "Nebraska"),
+          new StateViewModel("NV", "Nevada"),
+          new StateViewModel("NH", "New Hampshire"),
+          new StateViewModel("NJ", "New Jersey"),
+          new StateViewModel("NM", "New Mexico"),
+          new StateViewModel("NY", "New York"),
+          new StateViewModel("NC", "North Carolina"),
+          new StateViewModel("ND", "North Dakota"),
+          new StateViewModel("OH", "Ohio"),
+          new StateViewModel("OK", "Oklahoma"),
+          new StateViewModel("OR", "Oregon"),
+          new StateViewModel("PA", "Pennsylvania"),
+          new StateViewModel("RI", "Rhode Island"),
+          new StateViewModel("SC", "South Carolina"),
+          new StateViewModel("SD", "South Dakota"),
+          new StateViewModel("TN", "Tennessee"),
+          new StateViewModel("TX", "Texas"),
+          new StateViewModel("UT", "Utah"),
+          new StateViewModel("VT", "Vermont"),
+          new StateViewModel("VA", "Virginia"),
+          new StateViewModel("WA", "Washington"),
+          new StateViewModel("WV", "West Virginia"),
+          new StateViewModel("WI", "Wisconsin"),
+          new StateViewModel("WY", "Wyoming")
+        };
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, IOrderService orderService, IProductService productService)
         {
             this.userService = userService;
+            this.orderService = orderService;
+            this.productService = productService;
+            if (userProfile == null)
+            {
+                userProfile = new UserProfileViewModel();
+            }
+
+            this.productService = productService;
         }
 
         [HttpGet]
@@ -134,6 +198,89 @@ namespace Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                var userEmail = User.FindFirstValue(ClaimTypes.Email);
+                var userDetails = await userService.GetUserPersonalDetails(userEmail);
+
+                if (userDetails != null)
+                {
+                    userProfile = userDetails;
+                }
+                return View(userProfile);
+            }
+            else
+            {
+                return Redirect("/Account/Login");
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SaveUserPersonalDetails(ProfileUserInputModel personalDetails)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            if (personalDetails != null && ModelState.IsValid)
+            {
+                if (!await userService.EditUserDetails(personalDetails, userEmail))
+                {
+                    return Redirect("/Home/Error");
+                }
+
+                userProfile.FirstName = personalDetails.FirstName;
+                userProfile.LastName = personalDetails.LastName;
+                userProfile.Phone = personalDetails.Phone;
+            }
+
+            return View("Profile", userProfile);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SaveUserPassword(PasswordUserInputModel input)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            if (input != null)
+            {
+                if (!await userService.EditUserPassword(input, userEmail))
+                {
+                    return Redirect("/Home/Error");
+                }
+                userProfile.Password = input.Password;
+                userProfile.ConfimPassword = input.ConfimPassword;
+            }
+
+            return View("Profile", userProfile);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> SaveUserShippingDetails(AddressUserInputModel input)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            if (input != null)
+            {
+                if (!await userService.EditUserAddress(input, userEmail))
+                {
+                    return Redirect("/Home/Error");
+                }
+                userProfile.Street = input.Street;
+                userProfile.State = input.State;
+                userProfile.Country = input.Country;
+                userProfile.City = input.City;
+                userProfile.Zipcode = input.Zipcode;
+            }
+
+            return View("Profile", userProfile);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddProductToShoppingCart(int productId)
@@ -193,14 +340,23 @@ namespace Web.Controllers
 
             return Json(itemsCount);
         }
-        
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> CheckoutShoppingCart()
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var shoppingCartItems = userService.GetUserShoppingCartItems(userEmail).ToList();
 
-            await userService.ClearUserShoppingCart(userEmail);
+            if(!await orderService.AddSalesOrder(shoppingCartItems, userEmail))
+            {
+                return Redirect("/Home/Error");
+            }
+
+            if(!await userService.ClearUserShoppingCart(userEmail))
+            {
+                return Redirect("/Home/Error");
+            }
 
             return Redirect("/Account/ShoppingCart");
         }
@@ -290,6 +446,58 @@ namespace Web.Controllers
             }
 
             return Json(favoriteProductIds.Contains(productId));
+        }
+
+        [HttpGet]
+        public JsonResult GetStates()
+        {
+            return Json(states);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> FavouritesReport()
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var userDetails = await userService.GetUserPersonalDetails(userEmail);
+            var userName = userDetails.FirstName + " " + userDetails.LastName;
+
+            var reportData = new FavoriteUserProductViewModel()
+            {
+                UserName = userName,
+                FavoriteReportProducts = new List<FavoriteReportProductViewModel>()
+            };
+
+            var favoriteProductIds = HttpContext.Session.Get<List<int>>("_Favorites");
+            if (favoriteProductIds == default)
+            {
+                return NotFound();
+            }
+            var favoriteProducts = userService.GetFavoriteProductsById(favoriteProductIds);
+
+            foreach (var favoriteProduct in favoriteProducts)
+            {
+                byte[]? largePhotoData = await productService.GetProductLargePhotoById((int)favoriteProduct.PhotoId);
+                reportData.FavoriteReportProducts.Add(new FavoriteReportProductViewModel
+                {
+                    Id = favoriteProduct.Id,
+                    ProductName = favoriteProduct.Name,
+                    Price =(decimal)favoriteProduct.FinalPrice,
+                    LargePhoto = largePhotoData
+                });
+            }
+
+            var reportProcessor = new Telerik.Reporting.Processing.ReportProcessor();
+            var reportSource = new Telerik.Reporting.UriReportSource();
+            reportSource.Uri = "./Reports/FavouritesNew.trdp";
+            string parameterValue = Newtonsoft.Json.JsonConvert.SerializeObject(reportData);
+            reportSource.Parameters.Add("JSONData", parameterValue);
+            Telerik.Reporting.Processing.RenderingResult result = reportProcessor.RenderReport("PDF", reportSource, null);
+            if (!result.HasErrors)
+            {
+                return File(result.DocumentBytes, "application/pdf", "favourites.pdf");
+            }
+
+            return NotFound();
         }
     }
 }

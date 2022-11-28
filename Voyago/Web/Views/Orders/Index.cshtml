@@ -1,0 +1,34 @@
+﻿@{
+	ViewData["Title"] = "Orders Home Page";
+}
+
+
+<div class="orders-container">
+	<h4 class="orders-title">Orders</h4>
+	    @(Html.Kendo().Grid<Models.ViewModels.OrderViewModel>()    
+        .Name("grid_orders")
+        .Columns(columns => {
+            columns.Bound(p => p.OrderNumber).Title("Order ID").ClientTemplate("\\##=OrderNumber#");
+            columns.Bound(p => p.OrderDate).Title("Ordered on").Format("{0:MM/dd/yyyy HH:mm:ss tt}").Media("(min-width: 650px)");
+            columns.Bound(p => p.Total).Title("Total price").Format("{0:c}");
+            columns.Bound(p => p.Status).ClientTemplate("#if(Status == 1){# In progress  #}else{# Completed #}#");
+            columns.Template("<a href='/Orders/Details?orderNumber=#:OrderNumber#' class='order-details-link'>View Order</a>");
+        })
+        .NoRecords()
+        .Pageable(p => p
+            .Numeric(false)
+            .PreviousNext(false)
+            .Input(true)
+            .Info(false)
+            .Messages(msg => msg.Page("").Of("orders per page")))
+        .Sortable()
+        .Scrollable(s => s.Height("auto"))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Read(read => read.Action("Orders_Read", "Orders"))
+         )
+    )
+</div>
+
+<link rel="stylesheet" href="/css/orders.css">

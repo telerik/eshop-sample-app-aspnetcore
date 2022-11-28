@@ -8,7 +8,7 @@
 
         public string ProductNumber { get; set; } = null!;
 
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         public int? ModelId { get; set; }
 
@@ -18,9 +18,9 @@
 
         public decimal ListPrice { get; set; }
 
-        public decimal DiscountPct { get; set; }
+        public decimal? DiscountPct { get; set; }
 
-        public decimal FinalPrice => ListPrice * (1 - DiscountPct);
+        public decimal? FinalPrice => ListPrice * (1 - DiscountPct);
 
         public string? Size { get; set; }
 
@@ -34,9 +34,9 @@
 
         public string? SubCategory { get; set; }
 
-        public double AverageRating { get; set; }
+        public double? AverageRating { get; set; }
 
-        public int InStock { get; set; }
+        public short? InStock { get; set; }
 
         public int? PhotoId { get; set; }
     }

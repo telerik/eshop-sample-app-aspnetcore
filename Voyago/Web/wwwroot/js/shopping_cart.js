@@ -61,6 +61,6 @@ function addProductToShoppingCart(e) {
 
 function getShoppingCartItemsCount() {
 	$.get("/Account/GetShoppingCartItemsCount", function (data) {
-		$("#shoppingCartBadge").html(data);
+		$("#shoppingCartBadge").data("kendoBadge").text(data);
 	});
 }

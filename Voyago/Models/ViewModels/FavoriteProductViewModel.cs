@@ -8,13 +8,13 @@
 
         public decimal Price { get; set; }
 
-        public decimal DiscountPct { get; set; }
+        public decimal? DiscountPct { get; set; }
 
-        public decimal FinalPrice => Price * (1 - DiscountPct);
+        public decimal? FinalPrice => Price * (1 - (decimal)DiscountPct);
 
-        public double AverageRating { get; set; }
+        public double? AverageRating { get; set; }
 
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         public int? PhotoId { get; set; }
 

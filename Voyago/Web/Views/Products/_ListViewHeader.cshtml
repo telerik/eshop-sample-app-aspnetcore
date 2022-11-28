@@ -5,25 +5,43 @@
 	</div>
 
 	<div class="list-view-header-controls">
-		@(Html.Kendo().Button()
-			.Name("excelExport")
-			.Content("Export to Excel")
-			.IconClass("k-icon k-i-file-excel k-button-icon")
-			.HtmlAttributes(new { style = "width: 130px; height:30px;" })
-			.Events(e => e.Click("exportDataSource"))
-			)
-
 		@(Html.Kendo().DropDownList()
 			.Name("sortBy")
 			.OptionLabel("Sort by")
 			.DataTextField("Text")
 			.DataValueField("Value")
 			.HtmlAttributes(new { style = "width: 200px; height:30px;" })
-			.DataSource(dataSource => dataSource
-			.Read(r => r.Action("GetAllSortParameters", "Products").Type(HttpVerbs.Get))
-			)
+			.BindTo(new List<SelectListItem>() {
+                  new SelectListItem() {
+                      Text = "Price \u2011 Low to High",
+                      Value = "1",
+					  
+                  },
+                  new SelectListItem() {
+                      Text = "Price \u2011 High to Low",
+                      Value = "2"
+                  },
+                  new SelectListItem() {
+                      Text = "Name \u2011 A to Z",
+                      Value = "3"
+                  },
+					new SelectListItem() {
+                      Text = "Name \u2011 Z to A",
+                      Value = "4"
+                  }
+              })
 			.Events(e => e.Change("sortDataSource"))
-			)
+		)
+
+		@(Html.Kendo().ButtonGroup()
+			.Name("toggle-view")
+			.Items(i =>
+			{
+				i.Add().Icon("group").Selected(true);
+				i.Add().Icon("list-bulleted");
+			})
+			.HtmlAttributes(new { @class="toggle-view" })
+		)
 	</div>
 </div>
 

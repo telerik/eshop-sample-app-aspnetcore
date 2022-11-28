@@ -37,6 +37,10 @@
 	@await Html.PartialAsync("_TileProductCard.cshtml")	
 </script>
 
+<script type="text/html" id="product-template-list">
+	@await Html.PartialAsync("_TileProductCartList.cshtml")	
+</script>
+
 <span hidden id="subCategory">@ViewBag.SubCategory</span>
 
 <script>
@@ -47,6 +51,7 @@
 		}
 
 		$.get("/Products/GetAllModelsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
+
 			if (data.length == 0) {
 				$("#modelPicker").parent().hide();
 			}
@@ -81,6 +86,45 @@
 				});
 			}			
 		});
+
+		let toggleButton = $('.toggle-view').data("kendoButtonGroup");
+
+        toggleButton.bind("select", function(e) {
+            let index = this.current().index();
+           if(index === 0){
+                let productsListView = $("#allProductsListView").data("kendoListView");
+               productsListView.setOptions({
+                    dataSource: {
+                        pageSize: 12
+                    },
+                    template: kendo.template($("#product-template").html()),
+                    layout: "grid",
+                    grid: {
+                        rows: 4,
+                        cols: 3
+                    },
+                });
+               productsListView.dataSource.pageSize(12);
+            } else {
+                let productsListView = $("#allProductsListView").data("kendoListView");
+                productsListView.setOptions({
+                    template: kendo.template($("#product-template-list").html()),
+                    layout: "grid",
+                    dataSource: {
+                        pageSize: 10,
+						schema: {
+							data: "Data",
+							total: "Total"
+						}
+                    },
+                    grid: {
+                        rows: 5,
+                        cols: 1
+                    }
+                });
+                productsListView.dataSource.pageSize(5);
+            }
+        });
 	});
 </script>
 
@@ -89,14 +133,19 @@
 		margin-left: 30px;
 	}
 
-	.category-page-container {
-		margin-top: 35px;
-		margin: auto;
-		width: 1500px;
-	}
-
 	.category-content-container {
 		display: flex;
 		flex-direction: row;
 	}
+
+	#allProductsListView .k-listview-content {
+		margin-top: 2%;
+	}
+
+	.no-product-msg {
+		text-align: center;
+		padding: 2%;
+	}
 </style>
+
+<link rel="stylesheet" href="/css/favorites.css">

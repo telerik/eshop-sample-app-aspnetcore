@@ -14,7 +14,7 @@ namespace Models.InputModels
         public string Email { get; set; } = null!;
 
         [Required]
-        [StringLength(24, MinimumLength = 4)]
+        [StringLength(24,MinimumLength = 8)]
         public string Password { get; set; } = null!;
     }
 }

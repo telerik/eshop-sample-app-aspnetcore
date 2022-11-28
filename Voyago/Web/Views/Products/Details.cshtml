@@ -42,11 +42,11 @@
 					@{
 						if (Model.Model == null)
 						{
-							@Model.Name
+									@Model.Name
 						}
 						else
 						{
-							@Model.Model
+									@Model.Model
 						}
 					}
 				</h1>
@@ -72,12 +72,13 @@
 						<p class="info-title">Product No</p>
 						<p>@Model.ProductNumber</p>
 					</div>
-					<div class="info-row" style="gap:130px;">
-						<p class="info-title">Size</p>
+					
 						@{
 							if (Model.Size != null)
 							{
-								@(Html.Kendo().DropDownList()
+									<div class="info-row" style="gap:130px;">
+										<p class="info-title">Size</p>
+										@(Html.Kendo().DropDownList()
 									.Name("sizePicker")
 									.Value(@Model.Size)
 									.FillMode(FillMode.None)
@@ -90,50 +91,66 @@
 										});
 									})
 									.Events(e => e.Change(@<text>function () { selectAlternateProductVersion(@Model.ModelId); }</text>))
-								)
+										)
+									</div>
 							}
 						}
-					</div>
-					<div class="info-row" style="gap:109px;">
-						<p class="info-title">Weight</p>
-						<p>@Model.Weight</p>
-					</div>
-					<div class="info-row" style="gap:121px;">
-						<p class="info-title">Color</p>
-						<ul id="colorPicker"></ul>
-					</div>
-					<div class="info-row" style="gap:75px;">
-						<p class="info-title">Description</p>
-						<p style="width:400px;">@Model.Description</p>
-					</div>
+					@{
+						if(Model.Weight != 0)
+						{
+								<div class="info-row" style="gap:109px;">
+									<p class="info-title">Weight</p>
+									<p>@Model.Weight</p>
+								</div>
+						}
+					}
+					@{
+						if(Model.Color != null)
+						{
+								<div class="info-row" style="gap:121px;">
+									<p class="info-title">Color</p>
+									<ul id="colorPicker"></ul>
+								</div>
+						}
+					}
+					@{
+						if(Model.Description != null) 
+						{
+								<div class="info-row" style="gap:75px;">
+									<p class="info-title">Description</p>
+									<p style="width:400px;">@Model.Description</p>
+								</div>
+						}
+					}
 				</div>
 				<div class="bottom-right">
 					@{
 						if (Model.DiscountPct != 0)
 						{
-							<label class="list-price">$@Model.ListPrice.ToString("N2")</label>
-							<label class="discount">@((Model.DiscountPct * 100).ToString("N0"))% Off</label>
-							<label class="price"> $@Model.FinalPrice.ToString("N2")</label>
+									<label class="list-price">$@Model.ListPrice.ToString("N2")</label>
+									<label class="discount">@(string.Format("{0:C}", (Model.DiscountPct * 100)))% Off</label>
+									<label class="price"> @(string.Format("{0:C}", Model.FinalPrice))</label>
 						}
 						else
 						{
-							<label class="price">$@Model.ListPrice.ToString("N2")</label>
+									<label class="price">$@Model.ListPrice.ToString("N2")</label>
 						}
 					}
 					<div class="product-buttons">
 						@(Html.Kendo().Button()
 							.Name("addToCartButton_" + @Model.Id)
 							.Content("Add to cart")
-							.ImageUrl(Url.Content("~/images/shopping_cart.svg"))
-							.HtmlAttributes(new { type = "button", @class = "cart-button" })
+							.ThemeColor(ThemeColor.Primary)
+							.Icon("cart")
+							.HtmlAttributes(new { type = "button" })
 							.Events(e => e.Click("addProductToShoppingCart"))
 							.Enable(Model.InStock > 0)
 						)
 						@(Html.Kendo().Button()
 							.Name("addToFavoritesButton_" + @Model.Id)
 							.Content("Add to Favorites")
-							.ImageUrl(Url.Content("~/images/heart.svg"))
-							.HtmlAttributes(new { type = "button", @class = "favorites-button" })
+							.Icon("heart-outline")
+							.HtmlAttributes(new { type = "button"  })
 							.Events(e => e.Click("addProductToFavorites"))
 						)
 					</div>
@@ -147,9 +164,9 @@
 	@{
 		if (Model.ModelId != null)
 		{
-			<div>
-				<h4 class="similar-products">Similar Products</h4>
-				@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+					<div>
+						<h4 class="similar-products">Similar Products</h4>
+						@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 					.Name("similarProductsListView")
 					.TagName("div")
 					.ClientTemplateId("product-template")
@@ -160,8 +177,8 @@
 						.Read(r => r.Action("ReadSimilarProducts", "Products", new { productId = Model.Id, subCategoryId = @Model.SubCategoryId, count = 4 }).Type(HttpVerbs.Get))
 					)
 					.Events(e => e.DataBound("distinguishFavorites"))
-				)
-			</div>
+						)
+					</div>
 		}
 	}
 </div>
@@ -176,13 +193,15 @@
 		var modelId = "@Model.ModelId";
 
 		$.get("/Products/GetAvailableColors?productId=" + productId, function (data) {
-			$("#colorPicker").kendoRadioGroup({
-				items: data,
+			if(data.length > 0) {
+				$("#colorPicker").kendoRadioGroup({
+					items: data,
 
-				layout: "horizontal",
-				value: "@Model.Color",
-				change: function () { selectAlternateProductVersion(modelId); }
-			});
+					layout: "horizontal",
+					value: "@Model.Color",
+					change: function () { selectAlternateProductVersion(modelId); }
+				});
+			}
 		});
 
 		distinguishFavorites();
@@ -334,7 +353,7 @@
 		font-size: 40px;
 		line-height: 58px;
 		letter-spacing: -0.9px;
-		color: var(--voyago-green);
+		color: var(--voyago-blue);
 		margin-bottom: 22px;
 	}
 

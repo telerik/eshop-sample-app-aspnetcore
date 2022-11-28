@@ -5,71 +5,44 @@
 
 :root {
     --voyago-green: #4AA675;
+    --voyago-blue: #0078D4;
 }
 
 body {
-    margin-bottom: 80px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #323130;
+    margin-bottom: 372px;
 }
 
-/* #region Footer styles */
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    font-size: 0.85em;
+a, a:hover {
+    text-decoration: none;
+    color: #323130;
 }
-/* #endregion */
 
-/* #region custom Kendo UI styles */
-#configure {
+.k-popup .k-item, .k-list-item, .k-list-optionlabel {
+    outline: none!important;
+}
+
+
+.k-breadcrumb-link {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25.2px;
+    color: #605E5C;
+}
+
+.k-breadcrumb-last-item {
+    color: #323130;
+}
+
+.k-tick {
     display: none;
 }
 
-.k-panelbar .k-content {
-    padding: 20px;
-}
-
-p .k-button {
-    margin: 0 15px 0 0;
-}
-
-.k-state-active .label {
-    font-size: 1em;
-}
-/* #endregion */
-
-@media (max-width: 767px) {
-    #responsive-panel {
-        transition: all linear .2s;
-    }
-
-    #configure {
-        display: block;
-        float: right;
-    }
-
-    .k-rpanel {
-        width: 100%;
-    }
-
-    .k-rpanel-expanded {
-        margin-top: 1rem;
-    }
-
-    .navbar-header {
-        width: 100%;
-    }
-
-    .footer {
-        height: 60px;
-    }
-
-    .k-menu .k-item,
-    .k-menu .k-link {
-        width: 100%;
-    }
-
-    .k-menu .k-link {
-        box-sizing: border-box;
-    }
+.k-tick-large {
+    display: inherit;
 }

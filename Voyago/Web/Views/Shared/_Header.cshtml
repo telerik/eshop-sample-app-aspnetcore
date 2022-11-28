@@ -1,65 +1,211 @@
-﻿<div class="header">
-	<a href="/Home/Index">
-		<img class="logo" src="~/images/logo.svg" alt="Voyago">
-	</a>
-	<div class="search-bar-container">
-		@(Html.Kendo().AutoComplete()
-			.Name("searchBar")
-			.DataTextField("ProductName")
-			.Placeholder("Search")
-			.ClearButton(false)
-			.Filter("contains")
-			.MinLength(2)
-			.DataSource(source => source
-			.ServerFiltering(true)
-			.Read(read => read.Action("GetSearchSuggestions", "Home").Data("onAdditionalData"))
-			)
-			.TemplateId("searchBar-template")
-			.Events(e => e.Select("onSearchSelect").Change("searchProducts"))
-			)
-	</div>
-	<div class="header-menu">
-		@(Html.Kendo().DropDownList()
-			.Name("headerCategoriesDDL")
-			.OptionLabel("Categories")
-			.Value((string)ViewBag.SubCategory)
-			.DataSource(ds => ds
-				.Read(r => r.Action("GetAllSubCategories", "Products"))
-			)			
-			.Events(e => e.Change("goToCategoryPage"))
-		)
-		<a href="/Products/Summary">
-			<h6 style="color: black; white-space:nowrap;">All Products</h6>
-		</a>
-		<a href="/Account/Favorites" style="display: flex; flex-direction:row;">
-			<h6 style="color: black;">Favorites</h6>
-			@(Html.Kendo().Badge()
-				.Name("favoritesBadge")
-				.Text(0)
-				.Position(BadgePosition.Inside)
-				.Shape(BadgeShape.Circle)
-				.ThemeColor(BadgeColor.Primary)
-				)
-		</a>
-		<div class="profile">
-			<a href="/Account/LogOut" style="display: flex; flex-direction:row; background-color: none !important;">
-				<img src="~/images/profile_icon.svg" alt="Profile">
-			</a>
-		</div>
-		<div class="shopping-cart">
-			<a href="/Account/ShoppingCart" style="display: flex; flex-direction:row;">
-				<img src="~/images/shopping_cart_header.svg" alt="Shopping Cart">
-				@(Html.Kendo().Badge()
-					.Name("shoppingCartBadge")
-					.Text(0)
-					.Position(BadgePosition.Inside)
-					.Shape(BadgeShape.Circle)
-					.ThemeColor(BadgeColor.Primary)
-					)
-			</a>
-		</div>
-	</div>
-</div>
+﻿<style>
+    .navbar {
+        padding-bottom: 0; 
+    }
+
+    .navbar-brand {
+        margin: 1.75rem auto 1.75rem 15rem;
+    }
+
+    .logo-image{
+        width: 238px;
+        height: 58px;
+	}
+
+    .search-bar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        width: 33.02vw;
+        margin: 2.313rem auto 2.438rem 2.382rem;
+    }
+
+    #navbarTogglerMenu {
+        justify-content: center;
+    }
+
+    .header-items-container {
+        align-items: baseline;
+        gap: 5%;
+        margin-right: 5rem;
+        margin-left: 2rem;
+    }
+
+    .navbar-light .navbar-toggler {
+        color: transparent;
+        border-color: transparent;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        font-family: 'Segoe UI';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: #323130;
+    }
+
+    .k-picker.k-focus::after,
+    .k-picker:focus-within::after,
+    .k-picker:focus::after {
+        border: unset;
+    }
+
+    .nav-item .k-dropdownlist, #headerCategoriesDDL-list .k-list-optionlabel  {
+        border-color: #FFFFFF;
+        background-color: #FFFFFF;
+    }
+
+    @@media (max-width: 1400px) {
+        .navbar-brand {
+            margin: 1.75rem auto 1.75rem 8rem;
+        }
+
+        .header-items-container {
+            padding: 0;
+            margin: 0rem 1rem 0rem 1rem;
+            gap: 15px;
+        }
+	}
+
+    @@media (max-width: 1200px) {
+
+        .navbar > .container-fluid {
+            justify-content: flex-start;
+        }
+
+        .navbar-brand {
+            margin: 1.75rem 1rem 1.75rem 2rem;
+        }
+
+        .search-bar-container {
+            margin: 2.313rem 1rem 2.438rem 1rem;
+        }
+
+        .k-input-inner, #headerCategoriesDDL-list .k-list-optionlabel {
+            padding-inline: unset;
+        }
+	}
+
+    @@media (max-width: 600px) {
+        .navbar-brand {
+            margin: 1rem 1rem 0.5rem 1rem;
+        }
+
+        .search-bar-container {
+            margin: 1rem 1rem;
+            flex: 1 1 100%;
+        }
+	}
+</style>
+
+<nav class="navbar navbar-expand-xl navbar-light bg-white">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerMenu" aria-controls="navbarTogglerMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/Home/Index" class="navbar-brand">
+      <img class="logo-image" src="~/images/logo.png" alt="Voyago">
+    </a>
+    <div class="d-flex search-bar-container">
+        @(Html.Kendo().AutoComplete()
+          .Name("searchBar")
+          .DataTextField("ProductName")
+          .Placeholder("Search")
+          .ClearButton(false)
+          .Suggest(false)
+          .Filter("contains")
+          .MinLength(2)
+          .DataSource(source => source
+          .ServerFiltering(true)
+          .Read(read => read.Action("GetSearchSuggestions", "Home").Data("onAdditionalData")))
+          .TemplateId("searchBar-template")
+          .Events(e => e.Select("onSearchSelect").Change("searchProducts"))
+        )
+        <script>
+          $(".search-bar-container").css("visibility", "hidden");
+        </script>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarTogglerMenu">
+        <ul class="navbar-nav mb-2 mb-xl-0 header-items-container">
+            <li class="nav-item">
+                @(Html.Kendo().DropDownList()
+                  .Name("headerCategoriesDDL")
+                  .OptionLabel("Categories")
+                  .HtmlAttributes(new { @class="nav-link"})
+                  .Size(ComponentSize.Small)
+                  .FillMode(FillMode.Flat)
+                  .BindTo(new List<SelectListItem>() {
+                    new SelectListItem() {
+                      Text = "Accessories",
+                      Value = "1"
+                    },
+                    new SelectListItem() {
+                      Text = "Bikes",
+                      Value = "2"
+                    },
+                    new SelectListItem() {
+                      Text = "Clothes",
+                      Value = "3"
+                    },
+                    new SelectListItem() {
+                      Text = "Components",
+                      Value = "4"
+                    }
+                        })  
+                  .Events(e => e.Change("goToCategoryPage"))
+                )
+            </li>
+            <li class="nav-item">
+                <a href="/Account/Favorites" class="nav-link k-button k-button-rectangle k-button-flat-base k-button-flat k-button-sm k-rounded-md">
+                  @(Html.Kendo().Badge()
+                        .Name("favoritesBadge")
+                        .Text(0)
+                        .Position(BadgePosition.Edge)
+                        .Rounded(Rounded.Full)
+                        .Align(BadgeAlign.TopEnd)
+                        .ThemeColor(BadgeColor.Primary)
+                    )
+                    <span class="header-item-text">Favorites</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Contacts/Index" class="nav-link k-button k-button-rectangle k-button-flat-base k-button-flat k-button-md k-rounded-md">
+                    <span class="header-item-text">Contacts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link profile">
+                    @(Html.Kendo().DropDownButton()
+                        .Name("profileBtn")
+                        .FillMode(FillMode.Flat)
+                        .Icon("user")
+                        .Items(items=>{
+                            items.Add().Id("user-account").Text("Profile").Click(@<text>function() { location.href = '/Account/Profile'; }</text>);
+                            items.Add().Id("user-orders").Text("Orders").Click(@<text>function() { location.href = '/Orders/Index'; }</text>);
+                            items.Add().Id("user-logout").Text("Log out").Click(@<text>function() { location.href = '/Account/LogOut'; }</text>);
+                        })
+                    )
+                </div>
+            </l>
+            <li class="nav-item">
+                <a href="/Account/ShoppingCart" class="nav-link k-button k-button-rectangle k-button-flat-base k-button-flat k-button-md k-rounded-md">
+                    <span class="k-icon k-i-cart">
+                        @(Html.Kendo().Badge()
+                            .Name("shoppingCartBadge")
+                            .Text(0)
+                            .Position(BadgePosition.Outside)
+                            .Rounded(Rounded.Full)
+                            .ThemeColor(BadgeColor.Primary)
+                            .Align(BadgeAlign.TopEnd)
+                        )
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>
 
 <script id="searchBar-template" type="text/html">
 	<span class="k-state-default" style="font-weight: 400; font-size: 16px; line-height: 24px;">
@@ -74,101 +220,8 @@
 
 <script>
 	$(document).ready(function () {
+		$(".k-autocomplete").prepend("<span class='k-icon k-i-search' style='width:36px;height:36px;'></span>");
 		getFavoritesCount();
 		getShoppingCartItemsCount();
 	})
 </script>
-
-<style>
-	.header {
-		position: absolute;
-		top: 0;
-		height: 114px;
-		width: 100%;
-		justify-content: center;
-		display: flex;
-		flex-direction: row;
-	}
-
-	.logo {
-		margin-top: 28px;
-	}
-
-	.search-bar-container {
-		display: flex;
-		flex-direction: row;
-		margin-top: 37px;
-		margin-left: 38px;
-		width: 634px;
-		height: 40px;
-	}
-
-	#searchBar {
-		width: 634px;
-		height: 40px;
-		font-style: normal;
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-		color: #616161;
-	}
-
-	#searchSubmit {
-		border: none;
-		border-radius: 0px 5px 5px 0px;
-		padding: 6px 4px;
-		gap: 10px;
-		width: 40px;
-		height: 40px;
-	}
-
-	.header-menu {
-		align-self: center;
-		height: 40px;
-		margin-left: 123px;
-		display: flex;
-		flex-direction: row;
-		align-items: baseline;
-		gap: 24px;
-	}
-
-	#favoritesBadge {
-		margin-top: -15px;
-		margin-left: 55px;
-	}
-
-	#shoppingCartBadge {
-		margin-top: -15px;
-		margin-left: 18px;
-	}
-
-	[aria-controls="headerCategoriesDDL_listbox"] {
-		box-shadow: none !important;
-		background: none !important;
-		border: none !important;
-		font-weight: 500 !important;
-		font-size: 16px !important;
-		line-height: 24px !important;
-		text-align: center !important;
-		color: #1D252C !important;
-	}
-
-	.k-list-item.k-selected, .k-selected.k-list-optionlabel {
-		color: #fff;
-		background-color: var(--voyago-green);
-	}
-
-	.profile {
-		width: 24px;
-		height: 24px;
-	}
-
-	.shopping-cart {
-		width: 24px;
-		height: 24px;
-	}
-
-	a {
-		text-decoration: none;
-	}
-</style>

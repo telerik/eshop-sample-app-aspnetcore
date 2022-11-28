@@ -11,7 +11,10 @@ function hideRecentlyViewedIfEmpty(e) {
 }
 
 function onCategoryDataBound(e) {
-	showResultCount(e);
+	if (this.dataSource.total() == 0) {
+		$("#allProductsListView").append("<h4 class='no-product-msg'>This category is out of stock at the moment.</h4>");
+	}
+	//showResultCount(e);
 	distinguishFavorites();
 }
 
@@ -19,10 +22,15 @@ function distinguishFavorites() {
 	var favButtons = $("[id^=addToFavoritesButton_]");
 	favButtons.each(function () {
 		var currentButton = $(this);
+		var icon = currentButton.find(".k-icon");
 		var productId = this.id.split("_")[1];
 		$.get("/Account/ProductIsInFavorites?productId=" + productId, function (data) {
 			if (data) {
-				currentButton.css("background-color", "#ffdf73");
+				if (currentButton.find(".k-button-text")) {
+					currentButton.find(".k-button-text").text("Added to favorites");
+				}
+				icon.removeClass("k-i-heart-outline");
+				icon.addClass("k-i-heart");
 			}
 		});
 	});
@@ -48,9 +56,11 @@ function addRatingVisual() {
 }
 
 function goToCategoryPage(e) {
-	var category = e.sender.value();
+	let category = e.sender.text();
 	if (category != "") {
-		location.href = "/Products/Category?subCategory=" + category;
+		if (category == "Clothes") {
+			location.href = "/Home/Clothing";
+		} else location.href = "/Home/" + category;
 	}
 }
 
@@ -125,4 +135,27 @@ function searchByName(name) {
 	else {
 		location.href = "/Products/Summary?searchParam=" + name;
 	}
+}
+
+function changeUserCountry(e) {
+	let stateDDL = $("#State").data("kendoDropDownList");
+	if (this.value() == "US") {
+		stateDDL.enable(true);
+	} else {
+		stateDDL.value("");
+		stateDDL.enable(false);
+    }
+}
+
+function productCatalogClick() {
+	location.href="/Home/ProductCatalog";
+}
+
+function onContactsFormSubmit(e) {
+	e.preventDefault();
+	$("#contacts-submit-success").html("<div class='k-messagebox k-messagebox-success'>Your message is sent.</div>");
+}
+
+function onContactsFormValidate() {
+	$("#contacts-submit-success").html("");
 }
