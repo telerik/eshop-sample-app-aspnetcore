@@ -4,6 +4,7 @@
 	@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 		.Name("allProductsListView")
 		.TagName("div")
+		.Bordered(false)
 		.ClientTemplateId("product-template")
 		.Pageable(pageable => pageable
 			.ButtonCount(10)

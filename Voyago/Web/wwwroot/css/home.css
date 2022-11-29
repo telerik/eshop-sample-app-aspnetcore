@@ -63,7 +63,7 @@
 }
 
 .categories-container {
-    margin: 5em 15em 5em 15em;
+    margin: 5em 14em 5em 14em;
 }
 
 .categories-header {
@@ -123,7 +123,7 @@
 }
 
 .recently-viewed {
-    margin: 0em 15em 5em 15em;
+    margin: 0em 14em 5em 14em;
 }
 
     .recently-viewed-title {
@@ -144,11 +144,18 @@
 
     #recentlyViewedListView .k-card {
         height: 36em;
+        width: 270px;
+        margin-left: 10px;
+        margin-right: 0;
     }
 
-        #recentlyViewedListView .k-card-header {
-            padding-block: var(--kendo-card-header-padding-y,.10rem);
-        }
+    #recentlyViewedListView .k-card-header {
+        padding-block: var(--kendo-card-header-padding-y,.75rem);
+    }
+
+    #recentlyViewedListView .k-card-header h5 {
+        line-height: 1em;
+    }
 
 .splitter {
     border: 1px solid #E5E5E5;
