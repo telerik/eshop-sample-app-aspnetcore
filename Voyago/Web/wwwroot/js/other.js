@@ -12,7 +12,7 @@ function hideRecentlyViewedIfEmpty(e) {
 
 function onCategoryDataBound(e) {
 	if (this.dataSource.total() == 0) {
-		$("#allProductsListView").append("<h4 class='no-product-msg'>This category is out of stock at the moment.</h4>");
+		$("#allProductsListView").append("<div class='no-product-msg'>This category is out of stock at the moment.</div>");
 	}
 	//showResultCount(e);
 	distinguishFavorites();
@@ -49,8 +49,8 @@ function addRatingVisual() {
 			label: false,
 			min: 1,
 			max: 5,
-			precision: "half",
-			value: Number(i) - 0.5
+			precision: "item",
+			value: Number(i)
 		});
 	}
 }

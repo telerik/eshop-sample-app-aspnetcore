@@ -1,10 +1,12 @@
 ﻿.profile-container {
     display: flex;
     flex-direction: column;
-    margin: 95px 240px 80px 240px;
+    margin: 6.3% auto 5.3% auto;
+    width: 40%;
+    min-width: 400px;
 }
 
-.profile-header {
+    .profile-header {
     font-weight: 600;
     font-size: calc(42px + 0.390625vw);
     line-height: calc(59px + 0.390625vw);
@@ -68,31 +70,18 @@
     height: 20px;
 }
 
-@media (max-width: 1500px) {
-    .profile-container {
-        margin: 5rem 5rem 5rem 5rem;
-    }
-}
-
-@media (max-width: 900px) {
-    .k-form-layout > .k-colspan-1,
-    .k-form-layout > .k-colspan-2 {
-        grid-column: span 4/span 4 !important;
-    }
-
-    #personal_details .k-form-layout .k-colspan-1:nth-child(1),
-    #personal_details .k-form-layout .k-colspan-1,
-    #personal_details .k-form-layout .k-colspan-2 {
-        margin-right: 0px !important;
-    }
-}
-
 @media (max-width: 650px) {
-    .profile-container {
-        margin: 3rem 2rem 3rem 2rem;
-    }
-
     #password_details .k-form-field {
         height: 80px;
+    }
+
+    .k-tabstrip-items .k-item {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    .profile-container {
+        min-width: 300px;
     }
 }

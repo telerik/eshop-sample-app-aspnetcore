@@ -10,7 +10,7 @@
 	<div class="k-card-body">
 		<div class="k-card-header">
 			<a style="text-decoration: none;" href="/Products/Details?productId=#:Id#">
-				<h5>#:Name#</h5>
+				<div class="card-title">#:Name#</div>
 			</a>
 			@{
 				if (!Context.Request.Path.ToString().Contains("Home"))
@@ -23,10 +23,7 @@
 			}
 		</div>
 		<div class="price-container">
-@*			#if (FinalPrice != Price) { #
-				<h5 class="card-old-price">#:kendo.toString(Price, "c")#</h5>
-			#}#*@
-			<h5 class="card-price">#:kendo.toString(FinalPrice, "c")#</h5>
+			<div class="card-price">#:kendo.toString(FinalPrice, "c")#</div>
 		</div>
 		<div class="card-buttons">
 			@(Html.Kendo().Button()

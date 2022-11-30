@@ -1,31 +1,4 @@
-﻿.edge-image-container {
-    width: 13%;
-}
-
-.edge-image-container {
-    min-width: 200px;
-}
-
-.category-large-image {
-    width: 100%;
-}
-
-.category-small-image {
-    width: 100%;
-    margin-bottom: 20%;
-}
-
-.category-bottom-image {
-    width: auto;
-    margin-bottom: 20%;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.inner-1 {
+﻿.inner-1 {
     display: flex;
     flex-direction: column;
 }
@@ -38,8 +11,7 @@ a {
 
 .sub-category-container {
     width: 80%;
-    margin-left: 15%;
-    margin-bottom: 4%;
+    margin: 4% 15% 4% 15%;
 }
 
 .sub-category-images {
@@ -63,9 +35,13 @@ a {
     margin-bottom: 5vh;
 }
 
-    .category-heading.heading-double {
-        margin-bottom: 2vh !important;
+    .category-heading.heading-tires {
+        margin-bottom: 3vh !important;
     }
+
+img.category-large-image {
+    width: 100%;
+}
 
 @media (max-width: 1300px) {
 
@@ -87,7 +63,7 @@ a {
         align-self: center;
     }
 
-    .sub-category-images img {
+    img {
         width: 100%;
     }
 }

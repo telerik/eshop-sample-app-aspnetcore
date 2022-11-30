@@ -26,7 +26,7 @@ namespace Models.ViewModels
         [DataType("float")]
         public decimal? DiscountPcnt { get; set; }
 
-        [Display(Name = "Total + discount")]
+        [Display(Name = "Final Price")]
         [DataType(DataType.Currency)]
         public decimal Total => Math.Round(ProductPrice * (1 - (decimal)DiscountPcnt) * Quantity, 2);
 

@@ -55,6 +55,20 @@
         background-color: #FFFFFF;
     }
 
+    .nav-item .cart {
+        height: 50px;
+    }
+
+    .nav-item .cart a{
+        height: 34px;
+        width: 34px;
+    }
+
+     .cart a.nav-link span.k-icon{
+        width: 20px;
+        height: 20px;
+    }
+
     @@media (max-width: 1400px) {
         .navbar-brand {
             margin: 1.75rem auto 1.75rem 8rem;
@@ -81,7 +95,7 @@
             margin: 2.313rem 1rem 2.438rem 1rem;
         }
 
-        .k-input-inner, #headerCategoriesDDL-list .k-list-optionlabel {
+        .nav-link .k-input-inner, #headerCategoriesDDL-list .k-list-optionlabel {
             padding-inline: unset;
         }
 	}
@@ -182,24 +196,27 @@
                         .Items(items=>{
                             items.Add().Id("user-account").Text("Profile").Click(@<text>function() { location.href = '/Account/Profile'; }</text>);
                             items.Add().Id("user-orders").Text("Orders").Click(@<text>function() { location.href = '/Orders/Index'; }</text>);
+                            items.Add().Id("about-page").Text("About us").Click(@<text>function() { location.href = '/Account/About'; }</text>);
                             items.Add().Id("user-logout").Text("Log out").Click(@<text>function() { location.href = '/Account/LogOut'; }</text>);
                         })
                     )
                 </div>
             </l>
-            <li class="nav-item">
-                <a href="/Account/ShoppingCart" class="nav-link k-button k-button-rectangle k-button-flat-base k-button-flat k-button-md k-rounded-md">
-                    <span class="k-icon k-i-cart">
-                        @(Html.Kendo().Badge()
-                            .Name("shoppingCartBadge")
-                            .Text(0)
-                            .Position(BadgePosition.Outside)
-                            .Rounded(Rounded.Full)
-                            .ThemeColor(BadgeColor.Primary)
-                            .Align(BadgeAlign.TopEnd)
-                        )
-                    </span>
-                </a>
+            <li class="nav-item cart">
+                <div class="nav-link cart">
+                    <a href="/Account/ShoppingCart" class="nav-link k-button k-button-rectangle k-button-flat-base k-button-flat k-button-md k-rounded-md">
+                        <span class="k-icon k-i-cart">
+                            @(Html.Kendo().Badge()
+                                .Name("shoppingCartBadge")
+                                .Text(0)
+                                .Position(BadgePosition.Outside)
+                                .Rounded(Rounded.Full)
+                                .ThemeColor(BadgeColor.Primary)
+                                .Align(BadgeAlign.TopEnd)
+                            )
+                        </span>
+                    </a>
+                </div>
             </li>
         </ul>
     </div>

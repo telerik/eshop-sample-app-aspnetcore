@@ -7,7 +7,7 @@
 		}
 	}
 
-	<h6>Filters</h6>
+	<div>Filters</div>
 
 	@{
 		if (Context.Request.Path.ToString().Contains("Category"))
@@ -15,7 +15,7 @@
 			<div class="control">
 				<a href="/Products/Category?subCategory=@ViewBag.SubCategory">
 					<div class="clear-all">
-						<h6 style="color: black;">Clear All</h6>
+						<div style="color: black;">Clear All</div>
 						<img class="close-button" src="~/images/close_button.svg" alt="Clear All">
 					</div>
 				</a>
@@ -26,7 +26,7 @@
 			<div class="control">
 				<a href="/Products/Summary">
 					<div class="clear-all">
-						<h6 style="color: black;">Clear All</h6>
+						<div style="color: black;">Clear All</div>
 						<img class="close-button" src="~/images/close_button.svg" alt="Clear All">
 					</div>
 				</a>
@@ -35,15 +35,15 @@
 	}
 
 	<div class="control">
-		<h6>Show</h6>
-		@(Html.Kendo().CheckBoxGroup()
+		<div>Show</div>
+		@(Html.Kendo().RadioGroup()
 			.Name("discountPicker")
 			.Items(i =>
 			{
 				i.Add().Label("All").Value("1");
 				i.Add().Label("Discounted items only").Value("2");
 			})
-			.Value(new string[] { "1" })
+			.Value("1")
 			.Events(e => e.Change("toggleDiscountPicker"))
 			)
 	</div>
@@ -56,7 +56,7 @@
 	}
 
 	<div class="control">
-		<h6 class="control-label">Rating</h6>
+		<div class="control-label">Rating</div>
 		@(Html.Kendo().CheckBoxGroup()
 			.Name("ratingPicker")
 			.Items(i =>
@@ -72,7 +72,7 @@
 	</div>
 
 	<div class="control">
-		<h6 class="control-label">Price</h6>
+		<div class="control-label">Price</div>
 		@(Html.Kendo().RangeSlider()
 			.Name("priceSlider")
 			.Min(0)
@@ -87,7 +87,7 @@
 	</div>
 
 	<div class="control">
-		<h6 class="control-label">Weight</h6>
+		<div class="control-label">Weight</div>
 		@(Html.Kendo().RangeSlider()
 			.Name("weightSlider")
 			.Min(0)

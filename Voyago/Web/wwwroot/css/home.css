@@ -83,7 +83,7 @@
     width: 100%;
 }
 
-.components-header h5 {
+.category-heading-components {
     margin-top: 18px;
 }
 
@@ -153,9 +153,9 @@
         padding-block: var(--kendo-card-header-padding-y,.75rem);
     }
 
-    #recentlyViewedListView .k-card-header h5 {
-        line-height: 1em;
-    }
+        #recentlyViewedListView .k-card-header .card-title {
+            line-height: 1em;
+        }
 
 .splitter {
     border: 1px solid #E5E5E5;

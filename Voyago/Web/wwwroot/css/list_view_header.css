@@ -17,13 +17,20 @@
     color: #000000;
 }
 
-.list-view-header-controls {
-    align-self: end;
-    display: flex;
-    flex-direction: row;
-    margin-right: 30px;
-    gap: 20px;
-}
+    .result-count p.category-title {
+        font-weight: 600;
+        font-size: calc(42px + 0.390625vw);
+        line-height: calc(59px + 0.390625vw);
+        color: #000000;
+    }
+
+    .list-view-header-controls {
+        align-self: end;
+        display: flex;
+        flex-direction: row;
+        margin-right: 30px;
+        gap: 36px;
+    }
 
 #excelExport {
     background: none;
@@ -32,5 +39,6 @@
 
 [aria-controls="sortBy_listbox"] {
     background: none;
-    border-radius: 0;
+    border: 1px solid #605E5C;
+    border-radius: 2px;
 }

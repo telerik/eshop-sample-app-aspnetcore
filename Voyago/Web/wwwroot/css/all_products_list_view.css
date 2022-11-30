@@ -1,4 +1,12 @@
-﻿.k-listview-content {
+﻿.list-view {
+    width: 100%;
+}
+
+#allProductsListView {
+    margin-top: 24px;
+}
+
+.k-listview-content {
     display: flex;
     flex-direction: row;
     justify-content: left;

@@ -6,13 +6,13 @@
 
 
 <div class="order-details-container">
-	<h4 class="order-details-title">Order #@Model.OrderNumber</h4>
+	<div class="order-details-title">Order #@Model.OrderNumber</div>
 	<div class="order-details-header">
         <div class="order-details-information">
             <p>Order detials</p>
             <div><span class="order-information-title">Number:</span> #@Model.OrderNumber</div>
             <div><span class="order-information-title">Date:</span> @Model.OrderDate</div>
-            <div><span class="order-information-title">Amount:</span> $@Model.Total</div>
+            <div><span class="order-information-title">Amount:</span> @(string.Format("{0:C}", Model.Total))</div>
         </div>
         <div class="ordered-by-container">
             <p>Ordered by:</p>
