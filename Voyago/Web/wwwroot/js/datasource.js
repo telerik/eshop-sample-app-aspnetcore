@@ -5,7 +5,6 @@ function toggleDiscountPicker(e) {
     var targetBox = e.target;
     var clickedValue = targetBox[0].defaultValue;
 
-    checkBoxGroup.checkAll(false);
     if (discountToggle == clickedValue) {
         checkBoxGroup.value([discountToggle]);
         checkBoxGroup.trigger("select");
@@ -14,12 +13,12 @@ function toggleDiscountPicker(e) {
 
     if (discountToggle == "1") {
         discountToggle = "2";
-        checkBoxGroup.value([discountToggle]);
+        checkBoxGroup.value(discountToggle);
         checkBoxGroup.trigger("select")
     }
     else {
         discountToggle = "1";
-        checkBoxGroup.value([discountToggle]);
+        checkBoxGroup.value(discountToggle);
         checkBoxGroup.trigger("select")
     }
 
@@ -44,11 +43,11 @@ function getSearchFilter() {
 }
 
 function getDiscountFilter() {
-    var values = $("#discountPicker").data("kendoCheckBoxGroup").value();
+    var values = $("#discountPicker").data("kendoRadioGroup").value();
     if (!values.length || values.length > 1) {
         return null;
     }
-    if (values[0] == "1") {
+    if (values == "1") {
         return {
             logic: "and",
             filters: [

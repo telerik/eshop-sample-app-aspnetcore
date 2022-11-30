@@ -2,6 +2,8 @@
     ViewData["Title"] = "Login Page";
 }
 
+@model Models.InputModels.LoginUserInpuModel
+
 <div class="login-container">
     <img class="logo" src="~/images/logo.png" alt="Voyago">
 
@@ -13,6 +15,9 @@
             v.ValidateOnBlur(true);
             v.ValidationSummary(vs => vs.Enable(false));
         })
+        .FormData(Model)
+        .Layout("grid")
+        .Grid(g => g.Cols(1).Gutter(14))
         .Items(items => 
         {
             items.Add()

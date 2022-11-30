@@ -5,7 +5,7 @@
 @model Models.ViewModels.UserProfileViewModel
 
 <div class="profile-container">
-    <h4 class="profile-header">Profile</h4>
+    <div class="profile-header">Profile</div>
 	@(Html.Kendo().TabStrip()
 		.Name("tabstrip_profile")
 		.Navigatable(true)
@@ -29,20 +29,17 @@
                         v.ValidationSummary(vs => vs.Enable(false));
                     })
                     .Layout("grid")
-                    .Grid(g => g.Cols(2))
+                    .Grid(g => g.Cols(1).Gutter(12))
                     .Items(i =>
                     {
                         i.Add()
                             .Field(f => f.FirstName)
-                            .ColSpan(1)
                             .Label(l => l.Text("First Name"));
                         i.Add()
                             .Field(f => f.LastName)
-                            .ColSpan(1)
                             .Label(l => l.Text("Last Name"));
                         i.Add()
                             .Field(f => f.Phone)
-                            .ColSpan(2)
                             .Label(l => l.Text("Phone"))
                             .Editor(editor => editor
                                 .MaskedTextBox()
@@ -69,8 +66,8 @@
                     {
                         i.Add()
                             .Field(f => f.Password)
-                            .InputHtmlAttributes(new { @type="password",  pattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", required = "required", validationmessage = "Please enter a valid password."})
-                            .Hint("Must contain a minimum of 8 characters included with at least 1 upper case letter, 1 number, and 1 special character.")
+                            .InputHtmlAttributes(new { @type="password",  pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", required = "required", validationmessage = "Please enter a valid password."})
+                            .Hint("Your password must be at least 8 symbols and should include uppercase and lowercase letters and numbers.")
                             .Label(l => l.Text("Change Password"));
                         i.Add()
                             .Field(f => f.ConfimPassword)

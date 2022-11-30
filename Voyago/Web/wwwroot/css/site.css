@@ -4,7 +4,6 @@
 }
 
 :root {
-    --voyago-green: #4AA675;
     --voyago-blue: #0078D4;
 }
 
@@ -23,10 +22,13 @@ a, a:hover {
     color: #323130;
 }
 
-.k-popup .k-item, .k-list-item, .k-list-optionlabel {
-    outline: none!important;
+.k-i-arrow-n::before {
+    content: "\e013" !important;
 }
 
+.k-i-arrow-s::before {
+    content: "\e015" !important;
+}
 
 .k-breadcrumb-link {
     font-weight: 600;

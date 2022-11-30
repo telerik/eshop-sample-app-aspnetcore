@@ -3,7 +3,8 @@
 }
 
 
-	<div class="sub-category-container">
+<div class="sub-category-container">
+
 	@(Html.Kendo().Breadcrumb()
 	.Name("breadcrumb")
 	.Navigational(true)
@@ -24,11 +25,12 @@
 	)
 
 
-	<h4 class="category-heading-large">Components</h4>
+
+	<div class="category-heading-large">Components</div>
 	<div class="sub-category-images">
 		<div>
 			<a href="/Products/Category?subCategory=Chains">
-				<h5 class="category-heading">Chains</h5>
+				<div class="category-heading">Chains</div>
 				<img src="~/images/chains.png" class="category-image category-large-image" />
 			</a>
 		</div>
@@ -36,59 +38,59 @@
 			<div class="inner-2">
 				<div>
 					<a href="/Products/Category?subCategory=Derailleurs">
-						<h5 class="category-heading">Derailleurs</h5>
+						<div class="category-heading">Derailleurs</div>
 						<img src="~/images/derailleurs.png" class="category-image category-small-image" />
 					</a>
 				</div>
 				<div>
 					<a href="/Products/Category?subCategory=Forks">
-						<h5 class="category-heading">Forks</h5>
+						<div class="category-heading">Forks</div>
 						<img src="~/images/forks.png" class="category-image category-small-image" />
 					</a>
 				</div>
 			</div>
 			<div>
 				<a href="/Products/Category?subCategory=Mountain Frames">
-					<h5 class="category-heading heading-double">Mountain Frames</h5>
+					<div class="category-heading heading-double">Mountain Frames</div>
 					<img src="~/images/mountain_frames.png" class="category-image category-small-image" />
 				</a>
 			</div>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Handlebars">
-				<h5 class="category-heading">Handlebars</h5>
+				<div class="category-heading">Handlebars</div>
 				<img src="~/images/handlebars.png" class="category-image category-large-image" />
 			</a>
 		</div>
 	</div>
 
-	<div class="sub-category-images">
+	<div class="sub-category-images-bottom">
 		<div class="edge-image-container">
 			<a href="/Products/Category?subCategory=Pedals">
-				<h5 class="category-heading">Pedals</h5>
+				<div class="category-heading">Pedals</div>
 				<img src="~/images/pedals.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Saddles">
-				<h5 class="category-heading">Saddles</h5>
+				<div class="category-heading">Saddles</div>
 				<img src="~/images/saddles.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div>
 			<a href="/Products/Category?subCategory=Touring Frames">
-				<h5 class="category-heading">Touring Frames</h5>
+				<div class="category-heading">Touring Frames</div>
 				<img src="~/images/touring_frames.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div class="edge-image-container">
 			<a href="/Products/Category?subCategory=Wheels">
-				<h5 class="category-heading">Wheels</h5>
+				<div class="category-heading">Wheels</div>
 				<img src="~/images/wheels.png" class="category-image category-small-image" />
 			</a>
 		</div>
 	</div>
 </div>
 
-<link rel="stylesheet" href="/css/category_components.css">
+<link rel="stylesheet" href="/css/components.css">
 

@@ -3,7 +3,7 @@
 }
 
 <div class="favorites-container">
-	<h4 class="favorites-title">Favorites</h4>
+	<div class="favorites-title">Favorites</div>
 	<div class="favorites-header">
 		<a class="continue-shopping" href="/Home/Index">Continue shopping</a>
 		@(Html.Kendo().Button()
@@ -36,7 +36,7 @@
 
 		<div class="favorite-product-info-container">
 			<a href="/Products/Details?productId=#:Id#">
-				<h4 class="favorite-product-name">#:Name#</h4>
+				<div class="favorite-product-name">#:Name#</div>
 			</a>
 			<div class="avg-rating">
 				<span class="k-icon k-i-star"></span>
@@ -46,7 +46,7 @@
 		</div>
 
 		<div class="favorite-product-controls">
-			<h4 class="price">#:kendo.toString(FinalPrice, "c")#</h4>
+			<div class="price">#:kendo.toString(FinalPrice, "c")#</div>
 			<div class="buttons-container">
 			@(Html.Kendo().Button()
 					.Name("addToCartButton_#=Id#")

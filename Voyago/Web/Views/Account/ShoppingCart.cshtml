@@ -3,7 +3,7 @@
 }
 
 <div class="shopping-cart-container">
-	<h4 class="shopping-cart-title">Your cart items</h4>
+	<div class="shopping-cart-title">Your cart items</div>
 
 	@{
 		if (ViewBag.ItemsCount == 0)
@@ -27,12 +27,13 @@
 				{
 					columns.Bound(p => p.ProductName).ClientTemplateId("shoppingCartProduct-template");
 					columns.Bound(p => p.ProductPrice).HtmlAttributes(new { @class = "currency" });
-					columns.Bound(p => p.Quantity)
-					.Editable("function() { return false; }")
-					.HtmlAttributes(new { @class = "templateCell" })
-					.ClientTemplateId("quantityEditor-template");
-					columns.Bound(p => p.Total).HtmlAttributes(new { @class = "currency" }).Title("Total").HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
-            .HtmlAttributes(new { style = "text-align: right" });
+					columns.Bound(p => p.Quantity).Editable("function() { return false; }")
+						.HtmlAttributes(new { @class = "templateCell" })
+						.ClientTemplateId("quantityEditor-template");
+					columns.Bound(p => p.Total)
+						.HtmlAttributes(new { @class = "currency" })
+						.HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
+						.HtmlAttributes(new { style = "text-align: right" });
 				})
 				.Editable(editable => editable.Mode(GridEditMode.InCell).DisplayDeleteConfirmation(false))
 				.DataSource(dataSource => dataSource
@@ -55,8 +56,8 @@
 				<div class="shopping-cart-bottom">
 					<div>
 						<div class="sub-total">
-							<h5 class="sub-total-val">Sub-total:</h5>
-							<h5 class="sub-total-val" id="subTotalValue"></h5>
+							<div class="sub-total-val">Sub-total:</div>
+							<div class="sub-total-val" id="subTotalValue"></div>
 						</div>
 						<span class="tax-and-shipping">Tax and shipping cost will be calculated later</span>
 					</div>

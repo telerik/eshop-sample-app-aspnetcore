@@ -95,7 +95,7 @@ namespace Web.Controllers
 
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
-                return View();
+                return View(new LoginUserInpuModel() { Email = "jaxons.danniels@company.com",  Password = "User*123" });
             }
             else
             {
@@ -115,8 +115,8 @@ namespace Web.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View();
+                ModelState.AddModelError("Email", "Account does not exists.");
+                return View(new LoginUserInpuModel() { Email = "jaxons.danniels@company.com", Password = "User*123" });
             }
 
             var claims = new List<Claim>
@@ -143,6 +143,10 @@ namespace Web.Controllers
         [Authorize]
         public async Task<IActionResult> LogOut()
         {
+            var valueFavs = new List<int>();
+            var valueRecently = new Queue<int>(4);
+            HttpContext.Session.Set<List<int>>("_Favorites", valueFavs);
+            HttpContext.Session.Set<Queue<int>>("_RecentlyViewed", valueRecently);
             await HttpContext.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
@@ -498,6 +502,12 @@ namespace Web.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult About()
+        {
+            return View();
         }
     }
 }

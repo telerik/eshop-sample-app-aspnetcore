@@ -4,7 +4,7 @@
 
 
 <div class="orders-container">
-	<h4 class="orders-title">Orders</h4>
+	<div class="orders-title">Orders</div>
 	    @(Html.Kendo().Grid<Models.ViewModels.OrderViewModel>()    
         .Name("grid_orders")
         .Columns(columns => {
@@ -15,17 +15,13 @@
             columns.Template("<a href='/Orders/Details?orderNumber=#:OrderNumber#' class='order-details-link'>View Order</a>");
         })
         .NoRecords()
-        .Pageable(p => p
-            .Numeric(false)
-            .PreviousNext(false)
-            .Input(true)
-            .Info(false)
-            .Messages(msg => msg.Page("").Of("orders per page")))
+        .Pageable()
         .Sortable()
         .Scrollable(s => s.Height("auto"))
         .DataSource(dataSource => dataSource
             .Ajax()
             .PageSize(10)
+            .Sort(s => s.Add(od => od.OrderDate).Descending())
             .Read(read => read.Action("Orders_Read", "Orders"))
          )
     )

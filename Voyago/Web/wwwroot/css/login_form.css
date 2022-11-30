@@ -16,9 +16,13 @@
     width: 100%;
 }
 
-#loginForm .k-form-field {
-    height: 68px;
-}
+    #loginForm .k-form-field:nth-child(1) {
+        height: 68px;
+    }
+
+    #loginForm .k-form-field:nth-child(2) {
+        height: 89px;
+    }
 
 .logo {
     width: 238px;

@@ -27,12 +27,12 @@
     padding-block: var(--kendo-card-header-padding-y,.10rem);
 }
 
-.k-card-header h5 {
-    font-weight: 600;
-    font-size: 1em;
-    line-height: 2.4em;
-    color: #000000;
-}
+    .k-card-header .card-title {
+        font-weight: 600;
+        font-size: 1em;
+        line-height: 2.4em;
+        color: #000000;
+    }
 
 .k-card-header .avg-rating {
     display: flex;
