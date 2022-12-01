@@ -322,7 +322,7 @@ namespace Web.Controllers
             return Json(new[] { item }.ToDataSourceResult(request, ModelState));
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Authorize]
         public async Task<IActionResult> RemoverUserShoppingCartItem([DataSourceRequest] DataSourceRequest request, ShoppingCartItemViewModel item)
         {

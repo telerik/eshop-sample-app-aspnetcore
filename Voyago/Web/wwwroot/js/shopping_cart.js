@@ -26,7 +26,7 @@ function removeItemFromShoppingCart(itemId) {
 	grid.dataSource.sync();
 
 	if (refresh) {
-		location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/ShoppingCart" : "/Account/ShoppingCart";
+		location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/ShoppingCart" : "/Account/ShoppingCart";
     }
 }
 
@@ -36,7 +36,7 @@ function updateShoppingCartChanges() {
 
 function checkoutShoppingCart() {
 	kendo.ui.progress($("#checkoutButton"), true);
-	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/CheckoutShoppingCart" : "/Account/CheckoutShoppingCart";
+	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ?  "/fluent-eshop-voyago/Account/CheckoutShoppingCart" : "/Account/CheckoutShoppingCart";
 }
 
 function calculateShoppingCartTotal() {
@@ -53,14 +53,14 @@ function calculateShoppingCartTotal() {
 
 function addProductToShoppingCart(e) {
 	var productId = e.sender.element[0].id.split('_')[1];
-	let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/AddProductToShoppingCart?productId=" : "/Account/AddProductToShoppingCart?productId=";
+	let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/AddProductToShoppingCart?productId=" : "/Account/AddProductToShoppingCart?productId=";
 	$.post(getUrl + productId, function () {
 		getShoppingCartItemsCount();
 	});
 }
 
 function getShoppingCartItemsCount() {
-	let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/GetShoppingCartItemsCount" : "/Account/GetShoppingCartItemsCount";
+	let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/GetShoppingCartItemsCount" : "/Account/GetShoppingCartItemsCount";
 	$.get(getUrl, function (data) {
 		$("#shoppingCartBadge").data("kendoBadge").text(data);
 	});

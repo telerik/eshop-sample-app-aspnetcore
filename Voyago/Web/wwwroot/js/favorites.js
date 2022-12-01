@@ -2,9 +2,9 @@ function addProductToFavorites(e) {
 	var element = e.sender.element;
 	var productId = element[0].id.split('_')[1];
 	var icon = $(element[0]).find(".k-icon");
-	var getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/ProductIsInFavorites?productId=" : "/Account/ProductIsInFavorites?productId=";
-	var addUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/AddProductToFavorites?productId=" : "/Account/AddProductToFavorites?productId=";
-	var removeUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/RemoveProductFromFavorites?productId=" : "/Account/RemoveProductFromFavorites?productId=";
+	var getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/ProductIsInFavorites?productId=" : "/Account/ProductIsInFavorites?productId=";
+	var addUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/AddProductToFavorites?productId=" : "/Account/AddProductToFavorites?productId=";
+	var removeUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/RemoveProductFromFavorites?productId=" : "/Account/RemoveProductFromFavorites?productId=";
 
 	$.get(getUrl + productId, function (data) {
 		if (!data) {
@@ -32,7 +32,7 @@ function addProductToFavorites(e) {
 
 function removeProductFromFavorites(e) {
 	var productId = e.sender.element[0].id.split('_')[1];
-	var removeUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/RemoveProductFromFavorites?productId=" : "/Account/RemoveProductFromFavorites?productId=";
+	var removeUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/RemoveProductFromFavorites?productId=" : "/Account/RemoveProductFromFavorites?productId=";
 	$.post(removeUrl + productId, function () {
 		$("#favoritesListView").data("kendoListView").dataSource.read();
 		getFavoritesCount();
@@ -40,14 +40,14 @@ function removeProductFromFavorites(e) {
 }
 
 function getFavoritesCount() {
-	var getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/GetFavoritesCount" : "/Account/GetFavoritesCount";
+	var getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/GetFavoritesCount" : "/Account/GetFavoritesCount";
 	$.get(getUrl, function (data) {
 		$("#favoritesBadge").data("kendoBadge").text(data);
 	});
 }
 
 function favouritesReportClick() {
-	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/FavouritesReport" : "/Account/FavouritesReport";
+	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/FavouritesReport" : "/Account/FavouritesReport";
 }
 
 function onListViewDataBound(e) {

@@ -49,7 +49,7 @@
 					})
 					.Read(read => read.Action("GetUserShoppingCartItems", "Account").Type(HttpVerbs.Get))
 					.Update(update => update.Action("UpdateUserShoppingCartItem", "Account").Type(HttpVerbs.Post))
-					.Destroy(destroy => destroy.Action("RemoverUserShoppingCartItem", "Account").Type(HttpVerbs.Delete))
+					.Destroy(destroy => destroy.Action("RemoverUserShoppingCartItem", "Account").Type(HttpVerbs.Post))
 				)
 				.Events(e => e.DataBound("shoppingCartGridOnDataBound"))
 				)
