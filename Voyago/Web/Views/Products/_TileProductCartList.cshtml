@@ -1,14 +1,14 @@
 ﻿<div class="favorite-product-container">
-        <a href="/Products/Details?productId=#:Id#" class="favorite-product-image">
+        <a href="@Url.Action("Details", "Products")?productId=#:Id#" class="favorite-product-image">
             <img src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image">
         </a>
 
        <div class="favorite-product-info-container">
-            <a href="/Products/Details?productId=#:Id#">
+            <a href="@Url.Action("Details", "Products")?productId=#:Id#">
                 <div class="favorite-product-name">#:Name#</div>
             </a>
 			@{
-				if (!Context.Request.Path.ToString().Contains("Home"))
+				if (Context.Request.Path.ToString().Contains("Products"))
 				{
 					<div class="avg-rating">
 						<span class="k-icon k-i-star"></span>

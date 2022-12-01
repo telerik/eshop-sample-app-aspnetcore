@@ -5,7 +5,7 @@
 <div class="favorites-container">
 	<div class="favorites-title">Favorites</div>
 	<div class="favorites-header">
-		<a class="continue-shopping" href="/Home/Index">Continue shopping</a>
+		<a class="continue-shopping" href="@Url.Action("Index","Home")">Continue shopping</a>
 		@(Html.Kendo().Button()
 			.Name("favouritesReportBtn")
 			.Icon("download")
@@ -30,12 +30,12 @@
 
 <script id="favoriteProduct-template" type="text/html">
 	<div class="favorite-product-container">
-		<a href="/Products/Details?productId=#:Id#" class="favorite-product-image">
+		<a href="@Url.Action("Details","Products")?productId=#:Id#" class="favorite-product-image">
 			<img src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image">
 		</a>
 
 		<div class="favorite-product-info-container">
-			<a href="/Products/Details?productId=#:Id#">
+			<a href="@Url.Action("Details","Products")?productId=#:Id#">
 				<div class="favorite-product-name">#:Name#</div>
 			</a>
 			<div class="avg-rating">
@@ -70,4 +70,4 @@
 	</div>
 </script>
 
-<link rel="stylesheet" href="/css/favorites.css">
+<link rel="stylesheet" href="~/css/favorites.css">

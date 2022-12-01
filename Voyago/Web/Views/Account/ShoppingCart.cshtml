@@ -12,14 +12,14 @@
 				<img class="empty-cart-image" src="~/images/shopping_cart_empty.svg" alt="Your shopping cart is empty">
 				<p class="empty-cart-heading">Unfortunately, your cart is empty...</p>
 				<div class="empty-cart-description">
-					<p>Looks like you have not added anything to your cart. Go ahead and <a style="color: var(--voyago-blue);" href="/Home/Index#top-picks">explore our top-picks.</a>
+					<p>Looks like you have not added anything to your cart. Go ahead and <a style="color: var(--voyago-blue);"  href="@Url.Action("Index", "Home")#top-picks">explore our top-picks.</a>
 					</p>
 				</div>
 			</div>
 		}
 		else
 		{
-				<a class="continue-shopping" href="/Products/Summary">Continue shopping</a>
+				<a class="continue-shopping" href="@Url.Action("Summary","Products")">Continue shopping</a>
 
 				@(Html.Kendo().Grid<Models.ViewModels.ShoppingCartItemViewModel>()
 				.Name("shoppingCartGrid")
@@ -74,12 +74,12 @@
 
 <script id="shoppingCartProduct-template" type="text/html">
 	<div class="product-col">
-		<a href="/Products/Details?productId=#:ProductId#">
+		<a href="@Url.Action("Details", "Products")?productId=#:ProductId#">
 			<img width="160" height="120" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:ProductPhotoId#" alt="#:ProductName# image">
 		</a>
 
 		<div class="product-info">
-			<a href="/Products/Details?productId=#:ProductId#">
+			<a href="@Url.Action("Details", "Products")?productId=#:ProductId#">
 				<p class="product-name">#:ProductName#</p>
 			</a>
 			<p class="remove-product" id="remove_#:ShoppingCartItemId#" onclick="removeItemFromShoppingCart(#:ShoppingCartItemId#)" style="cursor:pointer">Remove</p>
@@ -101,5 +101,5 @@
 		)
 </script>
 
-<link rel="stylesheet" href="/css/shopping_cart.css">
+<link rel="stylesheet" href="~/css/shopping_cart.css">
 

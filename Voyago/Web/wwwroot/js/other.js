@@ -11,10 +11,10 @@ function hideRecentlyViewedIfEmpty(e) {
 }
 
 function onCategoryDataBound(e) {
+	console.log(this.dataSource.total());
 	if (this.dataSource.total() == 0) {
-		$("#allProductsListView").append("<div class='no-product-msg'>This category is out of stock at the moment.</div>");
-	}
-	//showResultCount(e);
+		$(".no-product-msg").show();
+	} else $(".no-product-msg").hide();
 	distinguishFavorites();
 }
 
@@ -24,7 +24,8 @@ function distinguishFavorites() {
 		var currentButton = $(this);
 		var icon = currentButton.find(".k-icon");
 		var productId = this.id.split("_")[1];
-		$.get("/Account/ProductIsInFavorites?productId=" + productId, function (data) {
+		var getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/ProductIsInFavorites?productId=" : "/Account/ProductIsInFavorites?productId=";
+		$.get(getUrl + productId, function (data) {
 			if (data) {
 				if (currentButton.find(".k-button-text")) {
 					currentButton.find(".k-button-text").text("Added to favorites");
@@ -59,8 +60,8 @@ function goToCategoryPage(e) {
 	let category = e.sender.text();
 	if (category != "") {
 		if (category == "Clothes") {
-			location.href = "/Home/Clothing";
-		} else location.href = "/Home/" + category;
+			location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Home/Clothing" : "/Home/Clothing";
+		} else location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Home/" + category : "/Home/" + category;
 	}
 }
 
@@ -89,7 +90,8 @@ function showCategories(e) {
 		var value = data[i].value;
 		var count = data[i].items.length;
 		var categoriesElement = $("#availableCategories");
-		categoriesElement.append("<a href='/Products/Category?subCategory=" + value + "&searchParam=" + searchParam + "' ><p style='color: black;' ><strong>" + value + "</strong> (" + count + " results)</p></a>");
+		let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Products/Category?subCategory=" : "/Products/Category?subCategory=";
+		categoriesElement.append("<a href=' " + getUrl + value + "&searchParam=" + searchParam + "' ><p style='color: black;' ><strong>" + value + "</strong> (" + count + " results)</p></a>");
 	}
 }
 
@@ -125,7 +127,7 @@ function searchProducts(e) {
 }
 
 function searchByNameAndCategory(name, subCategory) {
-	location.href = "/Products/Category?searchParam=" + name + "&subCategory=" + subCategory;
+	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Products/Category?searchParam=" + name + "&subCategory=" + subCategory : "/Products/Category?searchParam=" + name + "&subCategory=" + subCategory;
 }
 
 function searchByName(name) {
@@ -133,7 +135,7 @@ function searchByName(name) {
 		filterDataSource();
 	}
 	else {
-		location.href = "/Products/Summary?searchParam=" + name;
+		location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Products/Summary?searchParam=" + name : "/Products/Summary?searchParam=" + name;
 	}
 }
 
@@ -148,7 +150,7 @@ function changeUserCountry(e) {
 }
 
 function productCatalogClick() {
-	location.href="/Home/ProductCatalog";
+	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Home/ProductCatalog" : "/Home/ProductCatalog";
 }
 
 function onContactsFormSubmit(e) {

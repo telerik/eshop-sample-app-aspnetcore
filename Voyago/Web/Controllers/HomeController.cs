@@ -27,7 +27,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Other()
         {
-            return Redirect("/Home/Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

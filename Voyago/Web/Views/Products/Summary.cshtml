@@ -16,6 +16,7 @@
 		@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 			.Name("allProductsListView")
 			.TagName("div")
+			.Bordered(false)
 			.DataSource(dataSource => dataSource
 				.Ajax()
 				.ServerOperation(true)
@@ -34,7 +35,7 @@
 <script type="text/html" id="product-template">
 	# var searchParam = $("\\#searchBar").data("kendoAutoComplete").value(); #
 
-	<a href="/Products/Category?subCategory=#=data.value#&searchParam=#=searchParam#">
+	<a href="@Url.Action("Category", "Products")?subCategory=#=data.value#&searchParam=#=searchParam#">
 		<div class="k-group-title">#= data.value # (#=data.items.length#)</div>
 	</a>
 	<div class="sub-category-cards">
@@ -50,7 +51,7 @@
 		# } #
 	</div>
 	# if(data.items.length > 3) { #		
-		<a href="/Products/Category?subCategory=#=data.value#&searchParam=#=searchParam#">
+		<a href="@Url.Action("Category", "Products")?subCategory=#=data.value#&searchParam=#=searchParam#">
 			<p class="show-all">Show all results from <strong>#=data.value#</strong> subcategory</p>
 		</a>
 	# } #
@@ -114,5 +115,13 @@
 		font-size: 20px;
 		line-height: 24px;
 		color: #272727;
+	}
+
+	.list-view {
+		width: 100%;
+	}
+
+	#allProductsListView {
+		margin-top: 24px;
 	}
 </style>

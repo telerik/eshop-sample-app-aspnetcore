@@ -28,7 +28,7 @@ namespace Web.Controllers
             }
             else
             {
-                return Redirect("/Account/Login");
+                return RedirectToAction("Login", "Account");
             }
         }
 
@@ -48,7 +48,7 @@ namespace Web.Controllers
 
             if (orderDetails == null)
             {
-                return Redirect("/Home/Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View("Details", orderDetails);

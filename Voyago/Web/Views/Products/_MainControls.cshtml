@@ -13,7 +13,7 @@
 		if (Context.Request.Path.ToString().Contains("Category"))
 		{
 			<div class="control">
-				<a href="/Products/Category?subCategory=@ViewBag.SubCategory">
+				<a href="@Url.Action("Category", "Products")?subCategory=@ViewBag.SubCategory">
 					<div class="clear-all">
 						<div style="color: black;">Clear All</div>
 						<img class="close-button" src="~/images/close_button.svg" alt="Clear All">
@@ -24,7 +24,7 @@
 		else if (Context.Request.Path.ToString().Contains("Summary"))
 		{
 			<div class="control">
-				<a href="/Products/Summary">
+				<a href="@Url.Action("Summary", "Products")">
 					<div class="clear-all">
 						<div style="color: black;">Clear All</div>
 						<img class="close-button" src="~/images/close_button.svg" alt="Clear All">
@@ -108,4 +108,4 @@
 	});
 </script>
 
-<link rel="stylesheet" href="/css/main_controls.css">
+<link rel="stylesheet" href="~/css/main_controls.css">

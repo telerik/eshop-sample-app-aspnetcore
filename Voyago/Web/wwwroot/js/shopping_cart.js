@@ -26,7 +26,7 @@ function removeItemFromShoppingCart(itemId) {
 	grid.dataSource.sync();
 
 	if (refresh) {
-		location.href = "/Account/ShoppingCart";
+		location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/ShoppingCart" : "/Account/ShoppingCart";
     }
 }
 
@@ -36,7 +36,7 @@ function updateShoppingCartChanges() {
 
 function checkoutShoppingCart() {
 	kendo.ui.progress($("#checkoutButton"), true);
-	location.href = "/Account/CheckoutShoppingCart";
+	location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/CheckoutShoppingCart" : "/Account/CheckoutShoppingCart";
 }
 
 function calculateShoppingCartTotal() {
@@ -53,14 +53,15 @@ function calculateShoppingCartTotal() {
 
 function addProductToShoppingCart(e) {
 	var productId = e.sender.element[0].id.split('_')[1];
-
-	$.post("/Account/AddProductToShoppingCart?productId=" + productId, function () {
+	let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/AddProductToShoppingCart?productId=" : "/Account/AddProductToShoppingCart?productId=";
+	$.post(getUrl + productId, function () {
 		getShoppingCartItemsCount();
 	});
 }
 
 function getShoppingCartItemsCount() {
-	$.get("/Account/GetShoppingCartItemsCount", function (data) {
+	let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? window.location.host + "/fluent-eshop-voyago/Account/GetShoppingCartItemsCount" : "/Account/GetShoppingCartItemsCount";
+	$.get(getUrl, function (data) {
 		$("#shoppingCartBadge").data("kendoBadge").text(data);
 	});
 }

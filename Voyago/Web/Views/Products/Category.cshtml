@@ -10,7 +10,7 @@
 		{
 			items.Add()
 				.Type(BreadcrumbItemType.RootItem)
-				.Href("/Home/Index")
+				.Href(@Url.Action("Index", "Home"))
 				.ShowText(false)
 				.Icon("home")
 				.ShowIcon(true);
@@ -50,7 +50,8 @@
 			$("#searchBar").data("kendoAutoComplete").value(searchParam);
 		}
 
-		$.get("/Products/GetAllModelsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
+		$.get('@Url.Action("GetAllModelsInSubCategory","Products")?subCategory=@ViewBag.SubCategory', function (data) {
+		//$.get("/Products/GetAllModelsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
 
 			if (data.length == 0) {
 				$("#modelPicker").parent().hide();
@@ -63,7 +64,8 @@
 			}
 		});
 
-		$.get("/Products/GetAllSizesInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
+		$.get('@Url.Action("GetAllSizesInSubCategory","Products")?subCategory=@ViewBag.SubCategory', function (data) {
+		//$.get("/Products/GetAllSizesInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
 			if(data.length == 0) {
 				$("#sizePicker").parent().hide();
 			}
@@ -75,7 +77,8 @@
 			}			
 		});
 
-		$.get("/Products/GetAllColorsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
+		$.get('@Url.Action("GetAllColorsInSubCategory","Products")?subCategory=@ViewBag.SubCategory', function (data) {
+		//$.get("/Products/GetAllColorsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
 			if (data.length == 0) {
 				$("#colorPicker").parent().hide();
 			}
@@ -149,4 +152,4 @@
 	}
 </style>
 
-<link rel="stylesheet" href="/css/favorites.css">
+<link rel="stylesheet" href="~/css/favorites.css">

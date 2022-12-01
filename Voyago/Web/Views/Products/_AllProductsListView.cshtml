@@ -1,5 +1,8 @@
-﻿<div class="list-view">
+﻿
+<div class="list-view">
 	@await Html.PartialAsync("_ListViewHeader.cshtml")
+
+	<div class='no-product-msg' style="display: none">This category is out of stock at the moment.</div>
 
 	@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 		.Name("allProductsListView")
@@ -25,4 +28,4 @@
 	)
 </div>
 
-<link rel="stylesheet" href="/css/all_products_list_view.css">
+<link rel="stylesheet" href="~/css/all_products_list_view.css">

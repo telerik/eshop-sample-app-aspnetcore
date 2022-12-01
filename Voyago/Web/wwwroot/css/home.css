@@ -7,7 +7,7 @@
     width: inherit !important;
 }
 
-#scrollView .k-scrollview-wrap img {
+#scrollView .k-scrollview-wrap .image {
     display: inline-block;
     background-size: cover;
     background-repeat: no-repeat;
@@ -84,7 +84,7 @@
 }
 
 .category-heading-components {
-    margin-top: 18px;
+    margin-top: 1.5em;
 }
 
 #productCatalogBtn {
@@ -142,25 +142,33 @@
         flex-wrap: wrap;
     }
 
-    #recentlyViewedListView .k-card {
-        height: 36em;
-        width: 270px;
-        margin-left: 10px;
-        margin-right: 0;
+#recentlyViewedListView .k-card {
+    /*        height: 36em;
+        width: 270px;*/
+    height: 27em;
+    width: 260px;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+    #recentlyViewedListView .k-card-image {
+        height: auto;
     }
 
     #recentlyViewedListView .k-card-header {
         padding-block: var(--kendo-card-header-padding-y,.75rem);
+        padding-inline: 0;
+        max-height: 50px;
     }
 
         #recentlyViewedListView .k-card-header .card-title {
             line-height: 1em;
         }
 
-.splitter {
-    border: 1px solid #E5E5E5;
-    height: 0px;
-}
+    .splitter {
+        border: 1px solid #E5E5E5;
+        height: 0px;
+    }
 
 .download-app {
     display: flex;
