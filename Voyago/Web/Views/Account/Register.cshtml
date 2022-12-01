@@ -13,6 +13,8 @@
 			v.ValidateOnBlur(true);
 			v.ValidationSummary(vs => vs.Enable(false));
 		})
+		.Layout("grid")
+        .Grid(g => g.Cols(1).Gutter(17))
 		.Items(items =>
 		{
 			items.Add()
@@ -32,7 +34,7 @@
 	)
 
 	<div class="login-prompt">
-		<p>Already have an account? <a class="login-link" href="/Account/Login" style="color:var(--voyago-blue);">Login</a></p>
+		<p>Already have an account? <a class="login-link" href="@Url.Action("Login","Account")" style="color:var(--voyago-blue);">Login</a></p>
 	</div>
 </div>
 
@@ -42,4 +44,4 @@
 	</button>
 </script>
 
-<link rel="stylesheet" href="/css/register_form.css"/>
+<link rel="stylesheet" href="~/css/register_form.css"/>

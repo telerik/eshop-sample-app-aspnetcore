@@ -45,7 +45,8 @@
 }
 
 .category-heading {
-    color: black;
+    font-weight: 600;
+    font-size: 28px;
     margin-bottom: 5vh;
 }
 

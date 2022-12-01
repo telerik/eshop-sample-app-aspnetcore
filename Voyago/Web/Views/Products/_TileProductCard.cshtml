@@ -1,5 +1,5 @@
 ﻿<div class="k-card">
-	<a style="position: relative;" href="/Products/Details?productId=#:Id#">
+	<a style="position: relative;" href="@Url.Action("Details", "Products")?productId=#:Id#">
 		<img class="k-card-image" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image" />
 		# if(DiscountPct != 0) { #
 			
@@ -9,11 +9,11 @@
 	</a>
 	<div class="k-card-body">
 		<div class="k-card-header">
-			<a style="text-decoration: none;" href="/Products/Details?productId=#:Id#">
+			<a style="text-decoration: none;" href="@Url.Action("Details", "Products")?productId=#:Id#">
 				<div class="card-title">#:Name#</div>
 			</a>
 			@{
-				if (!Context.Request.Path.ToString().Contains("Home"))
+				if (Context.Request.Path.ToString().Contains("Products"))
 				{
 					<div class="avg-rating">
 						<span class="k-icon k-i-star"></span>
@@ -46,4 +46,4 @@
 	</div>
 </div>
 
-<link rel="stylesheet" href="/css/tile_product_card.css">
+<link rel="stylesheet" href="~/css/tile_product_card.css">

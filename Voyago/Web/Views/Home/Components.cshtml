@@ -12,13 +12,13 @@
 	{
 	items.Add()
 	.Type(BreadcrumbItemType.RootItem)
-	.Href("Index")
+	.Href(@Url.Action("Index", "Home"))
 	.ShowText(false)
 	.Icon("home")
 	.ShowIcon(true);
 	items.Add()
 	.Type(BreadcrumbItemType.Item)
-	.Href("Components")
+	.Href(@Url.Action("Components", "Home"))
 	.Text("Components")
 	.ShowText(true);
 	})
@@ -29,7 +29,7 @@
 	<div class="category-heading-large">Components</div>
 	<div class="sub-category-images">
 		<div>
-			<a href="/Products/Category?subCategory=Chains">
+			<a href="@Url.Action("Category", "Products")?subCategory=Chains">
 				<div class="category-heading">Chains</div>
 				<img src="~/images/chains.png" class="category-image category-large-image" />
 			</a>
@@ -37,27 +37,27 @@
 		<div class="inner-1">
 			<div class="inner-2">
 				<div>
-					<a href="/Products/Category?subCategory=Derailleurs">
+					<a href="@Url.Action("Category", "Products")?subCategory=Derailleurs">
 						<div class="category-heading">Derailleurs</div>
 						<img src="~/images/derailleurs.png" class="category-image category-small-image" />
 					</a>
 				</div>
 				<div>
-					<a href="/Products/Category?subCategory=Forks">
+					<a href="@Url.Action("Category", "Products")?subCategory=Forks">
 						<div class="category-heading">Forks</div>
 						<img src="~/images/forks.png" class="category-image category-small-image" />
 					</a>
 				</div>
 			</div>
 			<div>
-				<a href="/Products/Category?subCategory=Mountain Frames">
+				<a href="@Url.Action("Category", "Products")?subCategory=Mountain Frames">
 					<div class="category-heading heading-double">Mountain Frames</div>
 					<img src="~/images/mountain_frames.png" class="category-image category-small-image" />
 				</a>
 			</div>
 		</div>
 		<div>
-			<a href="/Products/Category?subCategory=Handlebars">
+			<a href="@Url.Action("Category", "Products")?subCategory=Handlebars">
 				<div class="category-heading">Handlebars</div>
 				<img src="~/images/handlebars.png" class="category-image category-large-image" />
 			</a>
@@ -66,25 +66,25 @@
 
 	<div class="sub-category-images-bottom">
 		<div class="edge-image-container">
-			<a href="/Products/Category?subCategory=Pedals">
+			<a href="@Url.Action("Category", "Products")?subCategory=Pedals">
 				<div class="category-heading">Pedals</div>
 				<img src="~/images/pedals.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div>
-			<a href="/Products/Category?subCategory=Saddles">
+			<a href="@Url.Action("Category", "Products")?subCategory=Saddles">
 				<div class="category-heading">Saddles</div>
 				<img src="~/images/saddles.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div>
-			<a href="/Products/Category?subCategory=Touring Frames">
+			<a href="@Url.Action("Category", "Products")?subCategory=Touring Frames">
 				<div class="category-heading">Touring Frames</div>
 				<img src="~/images/touring_frames.png" class="category-image category-small-image" />
 			</a>
 		</div>
 		<div class="edge-image-container">
-			<a href="/Products/Category?subCategory=Wheels">
+			<a href="@Url.Action("Category", "Products")?subCategory=Wheels">
 				<div class="category-heading">Wheels</div>
 				<img src="~/images/wheels.png" class="category-image category-small-image" />
 			</a>
@@ -92,5 +92,5 @@
 	</div>
 </div>
 
-<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="~/css/components.css">
 

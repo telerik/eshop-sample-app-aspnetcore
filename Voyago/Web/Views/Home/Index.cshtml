@@ -9,11 +9,11 @@
 			.ContentHeight("100%")
 			.Items(x =>
 			{
-				x.Add().Content("<img src='/images/home_main_1.png'>");
-				x.Add().Content("<img src='/images/home_main_2.png'>");
-				x.Add().Content("<img src='/images/home_main_3.png'>");
-				x.Add().Content("<img src='/images/home_main_4.png'>");
-				x.Add().Content("<img src='/images/home_main_5.png'/>");
+				x.Add().Content("<div class='image image1'></div>");
+				x.Add().Content("<div class='image image2'></div>");
+				x.Add().Content("<div class='image image3'></div>");
+				x.Add().Content("<div class='image image4'></div>");
+				x.Add().Content("<div class='image image5'></div>");
 			})
 			.HtmlAttributes(new { style = "width:100vw; max-width: 100%; margin: auto; height: 64.14vh;" })
 		)
@@ -52,23 +52,23 @@
 
 		<div class="categories-inner"> 
 			<div class="column">
-				<a href="/Home/Accessories">
+				<a href="@Url.Action("Accessories","Home")">
 					<div class="category-heading">Accessories</div>
 					<img src="~/images/accessories.png" class="category-image" />
 				</a>
 			</div>
 		    <div class="column">
-				<a href="/Home/Bikes">
+				<a href="@Url.Action("Bikes","Home")">
 					<div class="category-heading">Bikes</div>
 					<img src="~/images/bikes.png" class="category-image" />
 				</a>
-				<a href="/Home/Components" class="components-header">
+				<a href="@Url.Action("Components","Home")" class="components-header">
 					<div class="category-heading-components">Components</div>
 					<img src="~/images/components.png" class="category-image" />
 				</a>
 		  </div> 
 		  <div class="column">
-				<a href="/Home/Clothing">
+				<a href="@Url.Action("Clothing","Home")">
 					<div class="category-heading">Clothes</div>
 					<img src="~/images/clothes.png" class="category-image" />
 				</a>
@@ -106,7 +106,7 @@
 	<div class="top-picks">
 		# for (var i = 0; i < data.length; i++) { #
 		<div class="top-pick-card">
-			<a href="/Products/Category?subCategory=#=data[i].Name#">
+			<a href="@Url.Action("Category", "Products")?subCategory=#=data[i].Name#">
 				<div class="top-pick-heading">#= data[i].Name #</div>
 				<img src="~/images/#=data[i].ImageName#" class="top-pick-image"/>
 			</a>
@@ -116,7 +116,7 @@
 </script>
 
 <script type="text/html" id="product-template">
-	@await Html.PartialAsync("/Views/Products/_TileProductCard.cshtml")
+	@await Html.PartialAsync("~/Views/Products/_TileProductCard.cshtml")
 </script>
 
 <script>
@@ -133,7 +133,7 @@ $(document).ready(function () {
 					new kendo.data.DataSource({
 						type:"aspnetmvc-ajax",
 						transport:{
-							read:{url:"/Home/GetTopSellingSubCategories?count=12"}
+							read:{url: '@Url.Action("GetTopSellingSubCategories","Home")?count=12'}
 						},
 						pageSize: 2,
 						schema:{data:"Data",total:"Total"}
@@ -144,7 +144,7 @@ $(document).ready(function () {
                     new kendo.data.DataSource({
                         type: "aspnetmvc-ajax",
                         transport: {
-                            read: { url: "/Home/GetTopSellingSubCategories?count=12" }
+                            read:{url: '@Url.Action("GetTopSellingSubCategories","Home")?count=12'}
                         },
                         pageSize: 3,
                         schema: { data: "Data", total: "Total" }
@@ -155,7 +155,7 @@ $(document).ready(function () {
                     new kendo.data.DataSource({
                         type: "aspnetmvc-ajax",
                         transport: {
-                            read: { url: "/Home/GetTopSellingSubCategories?count=12" }
+                            read:{url: '@Url.Action("GetTopSellingSubCategories","Home")?count=12'}
                         },
                         pageSize: 4,
                         schema: { data: "Data", total: "Total" }
@@ -166,4 +166,22 @@ $(document).ready(function () {
 });
 </script>
 
-<link rel="stylesheet" href="/css/home.css">
+<style>
+	.image1 {
+		background-image: url('@Url.Content("~/images/home_main_1.png")');
+	}
+	.image2 {
+		background-image: url('@Url.Content("~/images/home_main_2.png")');
+	}
+	.image3 {
+		background-image: url('@Url.Content("~/images/home_main_3.png")');
+	}
+	.image4 {
+		background-image: url('@Url.Content("~/images/home_main_4.png")');
+	}
+	.image5 {
+		background-image: url('@Url.Content("~/images/home_main_5.png")');
+	}
+</style>
+
+<link rel="stylesheet" href="~/css/home.css">
