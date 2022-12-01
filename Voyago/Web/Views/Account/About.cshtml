@@ -3,19 +3,19 @@
 }
 
 <div class="about-container">
-    <div class="about-title">Telerik E-shop</div>
+    <div class="about-title">Voyago E-Shop</div>
     <p>
-        Telerik E-shop showcases some of the most popular <a href="https://www.telerik.com/aspnet-core-ui">Telerik UI for ASP.NET Core</a> components, such as Grid, ScrollView, ListView, AutoComplete, etc. in a real world scenario.
+        Voyago is an e-shop app built with <a href="https://www.telerik.com/aspnet-core-ui" target="_blank">Telerik UI for ASP.NET Core</a> components within ASP.NET Core application. The sample app demonstrates the most common use cases related to online stores – product categories, product lists and details, shopping cart, similar and recently viewed products, user profile, sophisticated product filters, and so on. Besides that, the demo includes integration with <a href="https://www.telerik.com/products/reporting.aspx" target="_blank">Telerik Reporting</a> to showcase how to generate order invoice, print product catalogue, or export favorite products in PDF. The styling is powered by the new built-in <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/sass-themes/overview" target="_blank">Fluent theme</a>, which is available for all Telerik and Kendo UI components.
     </p>
     <p>
         <div class="section-components">
             <h3 class="section-title">Telerik UI for ASP.NET Core components</h3>
                 <ul class="col-xs-4">
                     <li>
-                        <a href="https://demos.telerik.com/aspnet-core/grid">Grid</a>
+                        <a href="https://demos.telerik.com/aspnet-core/grid">Data Grid</a>
                     </li>
                     <li>
-                        <a href="https://demos.telerik.com/aspnet-core/scrollview">ScrollView</a>
+                        <a href="https://demos.telerik.com/aspnet-core/scrollview">ScrollView (also known as Carrousel)</a>
                     </li>
                     <li>
                         <a href="https://demos.telerik.com/aspnet-core/listview">ListView</a>
@@ -31,6 +31,12 @@
                     </li>
                     <li>
                         <a href="https://demos.telerik.com/aspnet-core/slider">Slider</a>
+                    </li>
+                     <li>
+                        <a href="https://demos.telerik.com/aspnet-core/rating">Rating</a>
+                    </li>
+                    <li>
+                        <a href="https://demos.telerik.com/aspnet-core/checkboxgroup">CheckBoxGroup</a> and <a href="https://demos.telerik.com/aspnet-core/radiogroup">RadioGroup</a>
                     </li>
                     <li>
                         <a href="https://demos.telerik.com/aspnet-core/map">Map</a>
@@ -51,6 +57,12 @@
         flex-direction: column;
         margin: 5% 10% 5% 10%;
         align-items: start;
+        gap: 2em;
+    }
+
+    .about-container .source-link {
+        color: #000000;
+        text-decoration: none;
     }
 
     .about-title {
@@ -60,7 +72,13 @@
         color: #000000;
     }
 
-    .section-components a{
+    .section-components {
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+    }
+
+    .about-container a, .section-components a{
         text-decoration: underline;
         color: var(--voyago-blue);
     }
