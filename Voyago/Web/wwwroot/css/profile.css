@@ -42,6 +42,10 @@
     height: 64px;
 }
 
+#password_details .k-form-field:nth-child(1) {
+    height: 85px;
+}
+
 .k-input-inner {
     height: 34px;
 }

@@ -107,6 +107,7 @@
     font-size: calc(32px + 0.390625vw);
     line-height: calc(45px + 0.390625vw);
     color: #000000;
+    margin-bottom: 1.5rem;
 }
 
 #similarProductsListView .k-listview-content {
@@ -119,8 +120,19 @@
 
 #similarProductsListView .k-card {
     margin-right: 0;
-    width: 290px;
-    margin-left: 10px;
+    height: 31em;
+    width: 260px;
+    margin-left: 20px;
+}
+
+#similarProductsListView .k-card-image {
+    height: auto;
+    max-height: 160px;
+}
+
+#similarProductsListView .k-card-header {
+    padding-block: var(--kendo-card-header-padding-y,.75rem);
+    padding-inline: 0;
 }
 
 #similarProductsListView .k-card-header .card-title {
