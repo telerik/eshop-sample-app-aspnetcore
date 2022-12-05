@@ -31,6 +31,16 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetCategory(string categoryName)
+        {
+            if(categoryName != null)
+            {
+                return View(categoryName);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         public IActionResult Clothing()
         {
             return View();

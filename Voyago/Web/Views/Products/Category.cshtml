@@ -16,7 +16,7 @@
 				.ShowIcon(true);
 			items.Add()
 				.Type(BreadcrumbItemType.Item)
-				.Href("/Home/" + ViewBag.Category)
+				.Href(@Url.Action("GetCategory", "Home", new { categoryName = ViewBag.Category }))
 				.Text(ViewBag.Category)
 				.ShowText(true);
 			items.Add()
@@ -51,7 +51,6 @@
 		}
 
 		$.get('@Url.Action("GetAllModelsInSubCategory","Products")?subCategory=@ViewBag.SubCategory', function (data) {
-		//$.get("/Products/GetAllModelsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
 
 			if (data.length == 0) {
 				$("#modelPicker").parent().hide();
@@ -65,7 +64,6 @@
 		});
 
 		$.get('@Url.Action("GetAllSizesInSubCategory","Products")?subCategory=@ViewBag.SubCategory', function (data) {
-		//$.get("/Products/GetAllSizesInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
 			if(data.length == 0) {
 				$("#sizePicker").parent().hide();
 			}
@@ -78,7 +76,6 @@
 		});
 
 		$.get('@Url.Action("GetAllColorsInSubCategory","Products")?subCategory=@ViewBag.SubCategory', function (data) {
-		//$.get("/Products/GetAllColorsInSubCategory?subCategory=@ViewBag.SubCategory", function (data) {
 			if (data.length == 0) {
 				$("#colorPicker").parent().hide();
 			}

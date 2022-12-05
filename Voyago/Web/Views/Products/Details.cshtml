@@ -17,7 +17,7 @@
 			.ShowIcon(true);
 			items.Add()
 			.Type(BreadcrumbItemType.Item)
-			.Href("/Home/" + Model.Category)
+			.Href(@Url.Action("GetCategory", "Home", new { categoryName = Model.Category }))
 			.Text(Model.Category)
 			.ShowText(true);
 			items.Add()
@@ -191,7 +191,6 @@
 		var modelId = "@Model.ModelId";
 
 		$.get('@Url.Action("GetAvailableColors","Products")?productId=' + productId, function (data) {
-		//$.get("/Products/GetAvailableColors?productId=" + productId, function (data) {
 			if(data.length > 0) {
 				$("#colorPicker").kendoRadioGroup({
 					items: data,
