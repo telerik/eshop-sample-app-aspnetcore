@@ -256,8 +256,6 @@ namespace Web.Controllers
                 {
                     return RedirectToAction("Error", "Home");
                 }
-                userProfile.Password = input.Password;
-                userProfile.ConfimPassword = input.ConfimPassword;
             }
 
             return View("Profile", userProfile);

@@ -19,7 +19,7 @@
             .ImageUrl("~/images/tab-user.png")
             .Selected(true)
 			.Content(@<text>
-                        @(Html.Kendo().Form<Models.InputModels.ProfileUserInputModel>()
+                            @(Html.Kendo().Form<Models.InputModels.ProfileUserInputModel>()
                     .Name("personal_details")
                     .HtmlAttributes(new { action = "SaveUserPersonalDetails", controller = "Account", method = "POST" })
                     .ButtonsTemplateId("profileFormsButtons")
@@ -46,12 +46,12 @@
                                 .Mask("999-000-0000")
                                 .HtmlAttributes(new { data_validmask_msg = "Phone number is incomplete"}));
                     })
-                        )
-                     </text>);
+                            )
+                         </text>);
             tabstrip.Add().Text("Password")
             .ImageUrl("~/images/tab-password.png")
             .Content(@<text>
-                        @(Html.Kendo().Form<Models.InputModels.PasswordUserInputModel>()
+                            @(Html.Kendo().Form<Models.InputModels.PasswordUserInputModel>()
                     .Name("password_details")
                     .HtmlAttributes(new { action = "SaveUserPassword", controller = "Account", method = "POST" })
                     .ButtonsTemplateId("profileFormsButtons")
@@ -74,13 +74,13 @@
                             .InputHtmlAttributes(new {@type = "password"})
                             .Label(l => l.Text("Confim Password"));
                     })
-                        )
-                    </text>);
+                            )
+                        </text>);
 			tabstrip.Add()
             .Text("Shipping address")
             .ImageUrl("~/images/tab-address.png")
             .Content(@<text>
-                        @(Html.Kendo().Form<Models.InputModels.AddressUserInputModel>()
+                            @(Html.Kendo().Form<Models.InputModels.AddressUserInputModel>()
                     .Name("shipping_details")
                     .HtmlAttributes(new { action = "SaveUserShippingDetails", controller = "Account", method = "POST" })
                     .ButtonsTemplateId("profileFormsButtons")
@@ -155,11 +155,13 @@
                                     })
                             );
                     })
-                        )
-                    </text>);
+                            )
+                        </text>);
 		})
 	)
 </div>
+
+<input type="hidden" id="loggedUserEmail" value="@Model.EmailAddress" />
 
 <script type="text/x-kendo-template" id="profileFormsButtons">
     <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary k-form-submit" type="submit">
@@ -172,6 +174,13 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        if($("#loggedUserEmail").val() == "jaxons.danniels@company.com") {
+            $("#Password").data("kendoTextBox").enable(false);
+            $("#ConfimPassword").data("kendoTextBox").enable(false);
+            $("#password_details .k-button[type='submit']").prop('disabled', true);
+            $("#password_details .k-form-clear").prop('disabled', true);
+        }
+
         let countryDDL = $("#Country").data("kendoDropDownList");
         if(countryDDL.value() != "US") {
             $("#State").data("kendoDropDownList").enable(false);
