@@ -12,7 +12,6 @@ body {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 20px;
     color: #323130;
     margin-bottom: 372px;
 }
@@ -48,3 +47,202 @@ a, a:hover {
 .k-tick-large {
     display: inherit;
 }
+
+/* Header */
+
+.navbar {
+    padding-bottom: 0;
+}
+
+.navbar-brand {
+    margin: 1.75rem auto 1.75rem 15rem;
+}
+
+.logo-image {
+    width: 238px;
+    height: 58px;
+}
+
+.search-bar-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 33.02vw;
+    margin: 2.313rem auto 2.438rem 2.382rem;
+}
+
+#navbarTogglerMenu {
+    justify-content: center;
+}
+
+.header-items-container {
+    align-items: baseline;
+    margin-right: 13rem;
+    margin-left: 5rem;
+}
+
+.navbar-light .navbar-toggler {
+    color: transparent;
+    border-color: transparent;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #323130;
+}
+
+.nav-item .k-dropdownlist, #headerCategoriesDDL-list .k-list-optionlabel {
+    border-color: #FFFFFF;
+    background-color: #FFFFFF;
+}
+
+.nav-item .cart {
+    height: 50px;
+}
+
+    .nav-item .cart a {
+        height: 34px;
+        width: 34px;
+    }
+
+.cart a.nav-link span.k-icon {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1400px) {
+    .navbar-brand {
+        margin: 1.75rem auto 1.75rem 8rem;
+    }
+
+    .header-items-container {
+        padding: 0;
+        margin: 0rem 1rem 0rem 1rem;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    .navbar > .container-fluid {
+        justify-content: flex-start;
+    }
+
+    .navbar-brand {
+        margin: 1.75rem 1rem 1.75rem 2rem;
+    }
+
+    .search-bar-container {
+        margin: 2.313rem 1rem 2.438rem 1rem;
+    }
+
+    .nav-link .k-input-inner, #headerCategoriesDDL-list .k-list-optionlabel {
+        padding-inline: unset;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar-brand {
+        margin: 1rem 1rem 0.5rem 1rem;
+    }
+
+    .search-bar-container {
+        margin: 1rem 1rem;
+        flex: 1 1 100%;
+    }
+}
+
+/* Footer */
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    height: 292px;
+    color: #FFFFFF;
+    background-color: var(--voyago-blue);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.footer-categories,
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.footer-payment-methods, .footer-socials {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.footer-heading {
+    height: 20px;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.footer-categories-item {
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.footer-payment-methods .footer-heading, .footer-socials .footer-heading {
+    margin-top: 32px;
+}
+
+.footer-payment-methods img {
+    background: white;
+    min-height: 43.03px;
+    margin-top: 28px;
+}
+
+.footer-socials-icons {
+    margin-top: 28px;
+}
+
+    .footer-socials-icons .social-icon-1 {
+        width: 24px;
+        height: 24px;
+    }
+
+    .footer-socials-icons .social-icon-2 {
+        margin-left: 31.5px;
+    }
+
+.footer-logo {
+    margin-top: 120px;
+}
+
+    .footer-logo span {
+        font-family: 'Red Hat Text';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #FFFFFF;
+    }
+
+@media (max-width: 1000px) {
+    .footer-payment-methods {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-socials-icons, .footer-socials .footer-heading, .footer-categories {
+        display: none;
+    }
+
+    .footer-logo span {
+        display: flex;
+    }
+}	

@@ -1,102 +1,4 @@
-﻿<style>
-	footer {
-	  position: absolute;
-	  bottom: 0;
-	  left: 0px;
-	  width: 100%;
-	  height: 292px;
-	  color: #FFFFFF;
-	  background-color: var(--voyago-blue);
-	  display: flex;
-	  flex-direction: row;
-	  justify-content: space-evenly;
-	}
-
-	.footer-categories, 
-	.footer-contacts {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-	}
-
-	.footer-payment-methods, .footer-socials {
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
-	}
-
-	.footer-heading {
-		height: 20px;
-		color: #FFFFFF;
-		font-weight: 600;
-		margin-top: 40px;
-	}
-
-	.footer-categories-item {
-		color: #FFFFFF;
-		font-weight: 400;
-	}
-
-	.footer-payment-methods img{
-		width: 10vw;
-		height: 2.5vh;
-		background: white;
-		min-height: 43.03px;
-		margin-top: 28px;
-	}	
-
-	.footer-socials-icons {
-		margin-top: 28px;
-	}
-
-	.footer-socials-icons .social-icon-1 {
-		 width: 24px;
-		height: 24px;
-	}
-
-	.footer-socials-icons .social-icon-2 {
-		margin-left: 31.5px;
-	}
-
-	.footer-logo{
-		margin-top: 120px;
-	}
-
-	.footer-logo span {
-		font-family: 'Red Hat Text';
-		font-style: normal;
-		font-weight: 400;
-		font-size: 16px;
-		line-height: 24px;
-		color: #FFFFFF;
-	}
-
-	@@media (max-width: 1000px) {
-		.footer-payment-methods {
-			display: none;
-		}
-
-		.footer-socials {
-			justify-content: center;
-		}
-	}	
-
-	@@media (max-width: 560px) {
-		.footer-socials-icons, .footer-socials .footer-heading, .footer-categories{
-			display: none;
-		}
-
-		.footer-logo {
-			margin-top: 0;
-		}
-
-		.footer-logo span {
-			display: flex;
-		}
-	}	
-</style>
-
-<footer class="footer-container">
+﻿<footer class="footer-container">
 	<div class="footer-categories">
 		<div class="footer-heading">Categories</div>
 		<a class="footer-categories-item" href="@Url.Action("Components","Home")">
@@ -125,7 +27,7 @@
 	</div>
 	<div class="footer-payment-methods">
 		<div class="footer-heading">Payment Methods</div>
-		<img src="~/images/payments.png" />
+		<img src="~/images/payments.svg" />
 	</div>	
 	<div class="footer-socials">
 		<div class="footer-heading">Socials</div>

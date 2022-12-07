@@ -501,11 +501,5 @@ namespace Web.Controllers
 
             return NotFound();
         }
-
-        [HttpGet]
-        public IActionResult About()
-        {
-            return View();
-        }
     }
 }

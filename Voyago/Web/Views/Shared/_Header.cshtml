@@ -1,124 +1,10 @@
-﻿<style>
-    .navbar {
-        padding-bottom: 0; 
-    }
-
-    .navbar-brand {
-        margin: 1.75rem auto 1.75rem 15rem;
-    }
-
-    .logo-image{
-        width: 238px;
-        height: 58px;
-	}
-
-    .search-bar-container {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0px;
-        width: 33.02vw;
-        margin: 2.313rem auto 2.438rem 2.382rem;
-    }
-
-    #navbarTogglerMenu {
-        justify-content: center;
-    }
-
-    .header-items-container {
-        align-items: baseline;
-        margin-right: 13rem;
-        margin-left: 5rem;
-    }
-
-    .navbar-light .navbar-toggler {
-        color: transparent;
-        border-color: transparent;
-    }
-
-    .navbar-light .navbar-nav .nav-link {
-        font-family: 'Segoe UI';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        color: #323130;
-    }
-
-    .k-picker.k-focus::after,
-    .k-picker:focus-within::after,
-    .k-picker:focus::after {
-        border: unset;
-    }
-
-    .nav-item .k-dropdownlist, #headerCategoriesDDL-list .k-list-optionlabel  {
-        border-color: #FFFFFF;
-        background-color: #FFFFFF;
-    }
-
-    .nav-item .cart {
-        height: 50px;
-    }
-
-    .nav-item .cart a{
-        height: 34px;
-        width: 34px;
-    }
-
-     .cart a.nav-link span.k-icon{
-        width: 20px;
-        height: 20px;
-    }
-
-    @@media (max-width: 1400px) {
-        .navbar-brand {
-            margin: 1.75rem auto 1.75rem 8rem;
-        }
-
-        .header-items-container {
-            padding: 0;
-            margin: 0rem 1rem 0rem 1rem;
-            gap: 15px;
-        }
-	}
-
-    @@media (max-width: 1200px) {
-
-        .navbar > .container-fluid {
-            justify-content: flex-start;
-        }
-
-        .navbar-brand {
-            margin: 1.75rem 1rem 1.75rem 2rem;
-        }
-
-        .search-bar-container {
-            margin: 2.313rem 1rem 2.438rem 1rem;
-        }
-
-        .nav-link .k-input-inner, #headerCategoriesDDL-list .k-list-optionlabel {
-            padding-inline: unset;
-        }
-	}
-
-    @@media (max-width: 600px) {
-        .navbar-brand {
-            margin: 1rem 1rem 0.5rem 1rem;
-        }
-
-        .search-bar-container {
-            margin: 1rem 1rem;
-            flex: 1 1 100%;
-        }
-	}
-</style>
-
-<nav class="navbar navbar-expand-xl navbar-light bg-white">
+﻿<nav class="navbar navbar-expand-xl navbar-light bg-white">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerMenu" aria-controls="navbarTogglerMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <a href="@Url.Action("Index","Home")" class="navbar-brand">
-      <img class="logo-image" src="~/images/logo.png" alt="Voyago">
+      <img class="logo-image" src="~/images/logo.svg" alt="Voyago">
     </a>
     <div class="d-flex search-bar-container">
         @(Html.Kendo().AutoComplete()
@@ -187,6 +73,11 @@
                     <span class="header-item-text">Contacts</span>
                 </a>
             </li>
+           <li class="nav-item">
+                    <a href="@Url.Action("About","Home")" class="nav-link k-button k-button-rectangle k-button-flat-base k-button-flat k-button-md k-rounded-md">
+                    <span class="header-item-text">About</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <div class="nav-link profile">
                     @(Html.Kendo().DropDownButton()
@@ -196,7 +87,6 @@
                         .Items(items=>{
                             items.Add().Id("user-account").Text("Profile").Click(@<text>function() { location.href = '@Url.Action("Profile","Account")'; }</text>);
                             items.Add().Id("user-orders").Text("Orders").Click(@<text>function() { location.href = '@Url.Action("Index","Orders")'; }</text>);
-                            items.Add().Id("about-page").Text("About us").Click(@<text>function() { location.href = '@Url.Action("About","Account")'; }</text>);
                             items.Add().Id("user-logout").Text("Log out").Click(@<text>function() { location.href = '@Url.Action("LogOut","Account")'; }</text>);
                         })
                     )
@@ -241,3 +131,11 @@
 		getShoppingCartItemsCount();
 	})
 </script>
+
+<style>
+    [aria-controls="headerCategoriesDDL_listbox"].k-focus::after,
+    [aria-controls="headerCategoriesDDL_listbox"]:focus-within::after,
+    [aria-controls="headerCategoriesDDL_listbox"]:focus::after {
+        border: unset;
+    }
+</style>
