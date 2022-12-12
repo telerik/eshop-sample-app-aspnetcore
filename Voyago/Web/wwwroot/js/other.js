@@ -56,15 +56,6 @@ function addRatingVisual() {
 	}
 }
 
-function goToCategoryPage(e) {
-	let category = e.sender.text();
-	if (category != "") {
-		if (category == "Clothes") {
-			location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Home/Clothing" : "/Home/Clothing";
-		} else location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Home/" + category : "/Home/" + category;
-	}
-}
-
 function onSummaryDataBound(e) {
 	showSearchResult(e);
 	showCategories(e);
@@ -91,7 +82,7 @@ function showCategories(e) {
 		var count = data[i].items.length;
 		var categoriesElement = $("#availableCategories");
 		let getUrl = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Products/Category?subCategory=" : "/Products/Category?subCategory=";
-		categoriesElement.append("<a href=' " + getUrl + value + "&searchParam=" + searchParam + "' ><p style='color: black;' ><strong>" + value + "</strong> (" + count + " results)</p></a>");
+		categoriesElement.append("<a href=' " + getUrl + value + "&searchParam=" + searchParam + "' ><p><strong>" + value + "</strong> (" + count + " results)</p></a>");
 	}
 }
 

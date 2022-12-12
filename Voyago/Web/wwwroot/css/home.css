@@ -18,52 +18,44 @@
 }
 
 .top-picks-container {
-    height: 30em;
-    left: 0px;
+    height: 480px;
     background-color: #C7E0F4;
 }
 
-.home-heading {
+.home-heading, .categories-title, .recently-viewed-title {
     font-weight: 600;
-    font-size: calc(42px + 0.390625vw);
-    line-height: calc(59px + 0.390625vw);
-    color: #000000;
-    margin: 1.5rem auto 1.5rem 15rem;
+    font-size: 42px;
+    line-height: 59px;
+    color: var(--voyago-black);
+    margin: 24px 0;
 }
 
 .top-picks {
     display: flex;
     flex-direction: row;
-    gap: 1.5vw;
+    gap: 30px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .top-pick-card {
-    background: #FFFFFF;
-    width: 18.5em;
-    height: 20em;
+    background: var(--voyago-white);
+    width: 296.5px;
+    height: 320px;
 }
 
 .top-pick-heading {
     font-weight: 600;
-    font-size: 1.75em;
-    color: #323130;
-    border-radius: 0px;
-    padding: 0.6em 0.3em 0.5em 0.3em;
-    margin: 0;
+    font-size: 28px;
+    padding: 12px 16px;
 }
 
 .top-pick-image {
     width: 100%;
-    height: 16em;
+    height: 256px;
     background-repeat: no-repeat;
     background-size: cover;
     object-fit: cover;
-}
-
-.categories-container {
-    margin: 5em 14em 5em 14em;
 }
 
 .categories-header {
@@ -72,19 +64,8 @@
     justify-content: space-between;
 }
 
-.categories-title {
-    font-weight: 600;
-    font-size: calc(42px + 0.390625vw);
-    line-height: calc(59px + 0.390625vw);
-    color: #000000;
-}
-
 .category-image {
     width: 100%;
-}
-
-.category-heading-components {
-    margin-top: 1.5em;
 }
 
 #productCatalogBtn {
@@ -104,17 +85,23 @@
     max-width: 40%;
 }
 
+.middle-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
 .category-heading {
     font-weight: 600;
-    font-size: 1.75em;
-    line-height: 2.45em;
-    padding-left: 4%;
+    font-size: 28px;
+    line-height: 39px;
+    padding: 12px 16px;
 }
 
 .category-heading-components {
     font-weight: 600;
-    font-size: 1.75em;
-    padding-left: 4%;
+    font-size: 28px;
+    padding: 0 16px;
 }
 
 .column img {
@@ -123,51 +110,30 @@
 }
 
 .recently-viewed {
-    margin: 0em 14em 5em 14em;
+    margin-top:80px;
 }
 
-    .recently-viewed-title {
-        font-weight: 600;
-        font-size: calc(42px + 0.390625vw);
-        line-height: calc(59px + 0.390625vw);
-        color: #000000;
-        margin-bottom: 1.5rem;
-    }
+#recentlyViewedListView .k-listview-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 40px;
+}
 
-    #recentlyViewedListView .k-listview-content {
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        border: none;
-        flex-wrap: wrap;
-    }
+#recentlyViewedListView .k-card {
+    height: 396px;
+}
 
-    #recentlyViewedListView .k-card {
-        height: 27em;
-        width: 260px;
-        margin-left: 20px;
-        margin-right: 0;
-    }
+#recentlyViewedListView .k-card-image-container {
+    height: 268px;
+}
 
-        #recentlyViewedListView .k-card-image {
-            height: auto;
-            max-height: 160px
-        }
-
-        #recentlyViewedListView .k-card-header {
-            padding-block: var(--kendo-card-header-padding-y,.75rem);
-            padding-inline: 0;
-            max-height: 50px;
-        }
-
-        #recentlyViewedListView .k-card-header .card-title {
-            line-height: 1em;
-        }
-
-    .splitter {
-        border: 1px solid #E5E5E5;
-        height: 0px;
-    }
+.splitter {
+    border: 1px solid #E5E5E5;
+    height: 0px;
+    margin: 83px auto 0 auto;
+}
 
 .download-app {
     display: flex;
@@ -175,12 +141,13 @@
     align-items: center;
     justify-content: center;
     gap: 3%;
-    margin: 3em 10em 3em 10em;
+    margin-top: 54px;
 }
 
 .download-text {
-    font-weight: 400;
-    font-size: 1.75em;
+    font-size: 28px;
+    line-height: 39px;
+    color: #605E5C;
 }
 
 .downlaod-icons {
@@ -192,165 +159,111 @@
     margin-left: 24px;
 }
 
-@media (max-width: 1400px) {
-    .recently-viewed {
-        margin: 0em 5em 3em 5em;
+@media (max-width: 1500px) {
+    .wrap-width {
+        max-width: var( --viewport-width );
+        width: calc(100% - 80px);
+    }
+
+    #recentlyViewedListView .k-listview-content {
+        justify-content: center;
     }
 }
 
-@media (max-width: 1300px) {
-    .home-heading {
-        margin: 0.5rem auto 0.5rem 15rem;
+@media (max-width: 800px) {
+    .wrap-width {
+        width: calc(100% - 60px);
     }
 
-    .categories-container {
-        margin: 3em 25em 3em 25em;
-    }
-
-    .categories-header {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .categories-title {
-        align-self: center;
+    .categories-inner {
+        justify-content: center;
     }
 
     .column {
         flex: 100%;
-        max-width: 100%;
-        margin-top: 1%;
+        max-width: 50%;
     }
 
-    #recentlyViewedListView .k-card .card-buttons {
-        height: 40px;
-    }
-}
-
-@media (max-width: 1230px) {
-    .home-heading {
-        margin: 0.5rem auto 0.5rem 7rem;
+    .category-heading-components {
+        padding: 12px 16px;
     }
 
     .recently-viewed {
-        margin: 0em 5em 3em 5em;
+        margin-top: 40px;
     }
 
     .recently-viewed-title {
         text-align: center;
     }
 
-    #recentlyViewedListView .k-listview-content {
+    .download-app {
         flex-direction: column;
-        align-items: center;
         gap: 20px;
-    }
-
-        #recentlyViewedListView .k-listview-content .k-card {
-            flex: 100%;
-            max-width: 100%;
-        }
-}
-
-@media (max-width: 1000px) {
-
-    .categories-container {
-        margin: 3em 15em 3em 15em;
-    }
-}
-
-@media (max-width: 900px) {
-
-    .home-heading {
-        margin: 0.2rem auto 0.4rem 5rem;
-    }
-
-    .recently-viewed {
-        margin: 0em 3em 3em 3em;
-    }
-
-    .download-app {
-        flex-direction: column;
-        margin: 0em 3em 3em 3em;
-    }
-
-    .download-text {
-        margin: 1em auto;
-        text-align: center;
-    }
-}
-
-@media (max-width: 730px) {
-
-    .categories-container {
-        margin: 3em 10em 3em 10em;
-    }
-}
-
-@media (max-width: 630px) {
-
-    #topPicks {
-        width: 60em;
-        height: 19em;
-    }
-
-    .top-pick-card {
-        width: 16em;
-        height: 19em;
-    }
-
-    .top-pick-image {
-        height: 17em;
-    }
-
-    .column {
-        margin-top: 10%;
-    }
-}
-
-@media (max-width: 560px) {
-
-    .categories-container {
-        margin: 3em 3em 3em 3em;
-    }
-}
-
-@media (max-width: 460px) {
-    .home-heading {
-        margin: 0.2rem auto 0.4rem 1rem;
-    }
-
-    .top-pick-card {
-        width: 15em;
-        height: 20em;
-    }
-
-    .top-pick-image {
-        height: 16em;
-    }
-
-    .recently-viewed {
-        margin: 0em 1em 2em 1em;
-    }
-
-    .download-app {
-        margin: 0em 1em 1em 1em;
-    }
-
-    .downlaod-icons {
-        flex-direction: column;
     }
 
     .download-icon-2 {
         margin-left: 0;
     }
-
 }
 
-@media (max-width: 360px) {
-    .categories-container {
-        margin: 3em 2em 3em 2em;
+@media (max-width: 750px) {
+    .wrap-width {
+        width: calc(80% - 30px);
+    }
+
+    .categories-header {
+        flex-direction: column;
+    }
+
+    .categories-title {
+        align-self: center;
+    }
+
+    .categories-inner {
+        margin-top: 40px;
+    }
+
+    .column {
+        max-width: 80%;
+    }
+
+    #recentlyViewedListView .k-card {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #recentlyViewedListView .k-card-image-container {
+        height: auto;
     }
 }
 
+@media (max-width: 530px) {
+    .wrap-width {
+        width: calc(90% - 30px);
+    }
+
+    .download-text {
+        text-align: center;
+    }
+}
+
+@media (max-width: 460px) {
+    #topPicks .k-scrollview-elements {
+        display: none;
+    }
+
+    .column {
+        max-width: 100%;
+    }
+
+    .download-app {
+        margin: 54px auto 0 auto;
+    }
+
+    .downlaod-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
 

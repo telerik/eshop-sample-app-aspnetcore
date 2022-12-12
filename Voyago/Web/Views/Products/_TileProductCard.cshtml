@@ -1,15 +1,13 @@
 ﻿<div class="k-card">
-	<a style="position: relative;" href="@Url.Action("Details", "Products")?productId=#:Id#">
+	<a href="@Url.Action("Details", "Products")?productId=#:Id#" class="k-card-image-container">
 		<img class="k-card-image" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image" />
 		# if(DiscountPct != 0) { #
-			
-				<span class="discount-pct">#:Number(DiscountPct) * 100#% off</span>
-
+			<span class="discount-pct">#:Number(DiscountPct) * 100#% off</span>
 		# } #
 	</a>
 	<div class="k-card-body">
 		<div class="k-card-header">
-			<a style="text-decoration: none;" href="@Url.Action("Details", "Products")?productId=#:Id#">
+			<a href="@Url.Action("Details", "Products")?productId=#:Id#">
 				<div class="card-title">#:Name#</div>
 			</a>
 			@{
@@ -45,5 +43,3 @@
 		</div>
 	</div>
 </div>
-
-<link rel="stylesheet" href="~/css/tile_product_card.css">

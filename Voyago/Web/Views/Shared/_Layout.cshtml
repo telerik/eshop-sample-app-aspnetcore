@@ -5,17 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"] - Web</title>
 
+	<link href="https://cdn.kendostatic.com/2022.3.1109/styles/kendo.fluent-main.min.css" rel="stylesheet" type="text/css" />
+
 	<environment names="Development">
-		<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
+		<bundle name="wwwroot/bundles/styles.min.css" />
 	</environment>
 	<environment names="Staging,Production">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-			  asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
-			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-		<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+		<link rel="stylesheet" href="~/bundles/styles.min.css" asp-append-version="true" />
 	</environment>
-	<link href="https://cdn.kendostatic.com/2022.3.1109/styles/kendo.fluent-main.min.css" rel="stylesheet" type="text/css" />
+	
 	<script src="https://cdn.kendostatic.com/2022.3.1109/js/jquery.min.js"></script>
 	<script src="https://cdn.kendostatic.com/2022.3.1109/js/jszip.min.js"></script>
 	<script src="https://cdn.kendostatic.com/2022.3.1109/js/kendo.all.min.js"></script>
@@ -45,19 +43,10 @@
 
 	<script>
 		$(document).ready(function () { 
-			$(".search-bar-container").css("visibility", "visible");
-			$(".header-menu .k-dropdownlist").css("visibility", "visible");
+			$(".header").css("visibility", "visible");
 		});
 	</script>
 
-	<environment names="Development">
-		<script src="~/lib/bootstrap/js/bootstrap.js"></script>
-	</environment>
-	<environment names="Staging,Production">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-				asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
-				asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
-	</environment>
 	@RenderSection("scripts", required: false)
 </body>
 </html>

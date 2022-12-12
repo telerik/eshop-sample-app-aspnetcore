@@ -6,7 +6,7 @@ using Telerik.Reporting.Services;
 using Services.Interfaces;
 using Services;
 using Data;
-
+using BundlerMinifier.TagHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().AddNewtonsoftJson();
@@ -42,6 +42,10 @@ builder.Services.AddSession(options =>
     options.Cookie.SameSite = SameSiteMode.Strict;
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+});
+builder.Services.AddBundles(options =>
+{
+	options.AppendVersion = true;
 });
 builder.Services.AddKendo();
 builder.Services.AddTransient<IUserService, UserService>();

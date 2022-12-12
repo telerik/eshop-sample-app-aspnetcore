@@ -1,0 +1,89 @@
+﻿footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 292px;
+    color: var(--voyago-white);
+    background-color: var(--voyago-blue);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.footer-categories,
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.footer-payment-methods, .footer-socials {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.footer-heading {
+    height: 20px;
+    color: var(--voyago-white);
+    font-weight: 600;
+}
+
+.footer-categories-item {
+    color: var(--voyago-white);
+    font-weight: 400;
+}
+
+.footer-payment-methods img {
+    background: var(--voyago-white);
+    min-height: 43.03px;
+    margin-top: 28px;
+}
+
+.footer-socials-icons {
+    margin-top: 28px;
+}
+
+    .footer-socials-icons .social-icon-1 {
+        width: 24px;
+        height: 24px;
+    }
+
+    .footer-socials-icons .social-icon-2 {
+        margin-left: 31.5px;
+    }
+
+.footer-logo {
+    display: flex;
+    margin-top: 120px;
+}
+
+    .footer-logo span {
+        font-family: 'Red Hat Text';
+        font-size: 16px;
+        line-height: 24px;
+        color: var(--voyago-white);
+    }
+
+@media (max-width: 1000px) {
+    .footer-payment-methods {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-socials-icons, .footer-socials .footer-heading, .footer-categories {
+        display: none;
+    }
+
+    .footer-logo span {
+        display: flex;
+    }
+}
+
+@media (max-width: 460px) {
+    .footer-logo {
+        flex-direction: column;
+    }
+}

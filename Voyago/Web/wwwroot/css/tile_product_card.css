@@ -10,29 +10,47 @@
 .k-card {
     box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.1), 0px 1.6px 3.6px rgba(0, 0, 0, 0.13);
     border-radius: 2px;
-    margin-left: 20px;
+    /*    margin-left: 20px;
     margin-right: 20px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 20px;*/
     width: 330px;
-    height: 467px;
+    height: 428px;
 }
 
-.k-card-image {
+.k-card-image-container {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 264px;
 }
 
-.k-card-header {
-    padding-block: var(--kendo-card-header-padding-y,.10rem);
+.k-card-image {
+    width: 100%;
+    max-width: initial;
+    height: auto;
 }
 
-    .k-card-header .card-title {
-        font-weight: 600;
-        font-size: 1em;
-        line-height: 2.4em;
-        color: #000000;
-    }
+.k-card-header .card-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.discount-pct {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    /*    font-size: 10px;
+    line-height: 14px;*/
+    color: var(--voyago-white);
+    background: var(--voyago-blue);
+    padding: 2%;
+    padding-right: 4%;
+}
 
 .k-card-header .avg-rating {
     display: flex;
@@ -41,60 +59,40 @@
     justify-content: start;
 }
 
-    span.rating-text {
-        font-weight: 500;
-        font-size: 0.93rem;
-    }
-
-span.discount-pct {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #FFFFFF;
-    background: var(--voyago-blue);
-    padding: 2%;
-    padding-right: 4%;
+.k-card-header .rating-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 .price-container {
     display: flex;
     flex-direction: row;
-    gap: 25px;
+    align-items: flex-start;
+    padding: 0px 0px 0px 12px;
+    gap: 10px;
 }
 
-    .card-price {
-        font-weight: 400;
-        padding: 0px 0px 0px 12px;
-        font-size: 2rem;
-        color: var(--voyago-blue);
-    }
-
-    .card-old-price {
-        font-weight: 500;
-        font-size: 26px;
-        line-height: 46px;
-        letter-spacing: -0.9px;
-        color: indianred;
-        text-decoration: line-through;
-    }
+.card-price {
+    font-size: 16px;
+    color: var(--voyago-blue);
+    line-height: 22px;
+}
 
 .k-card .card-buttons {
     height: 58px;
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 12px;
-    gap: 3%;
+    gap: 8px;
 }
 
-    .k-card .card-buttons .cart-btn {
-        width: 264px;
-        height: 34px;
-    }
+.k-card .card-buttons .cart-btn {
+    width: 264px;
+    height: 34px;
+}
 
-    .k-card .card-buttons .favorites-btn {
-        width: 34px;
-        height: 34px;
-    }
+.k-card .card-buttons .favorites-btn {
+    width: 34px;
+    height: 34px;
+}

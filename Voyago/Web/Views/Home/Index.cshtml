@@ -20,27 +20,29 @@
 	</div>
 
 	<div id="top-picks" class="top-picks-container">
-		<div class="home-heading">Top picks</div>
-		<div class="top-picks-scrollview-container">
-			@(Html.Kendo().ScrollView()
-				.Name("topPicks")
-				.EnablePager(false)
-				.ContentHeight("100%")
-				.TemplateId("topPicks-template")
-				.DataSource(dataSource => dataSource
+		<div class="wrap-width">
+			<div class="home-heading">Top picks</div>
+			<div class="top-picks-scrollview-container">
+				@(Html.Kendo().ScrollView()
+					.Name("topPicks")
+					.EnablePager(false)
+					.ContentHeight("100%")
+					.TemplateId("topPicks-template")
+					.DataSource(dataSource => dataSource
 					.Custom()
 					.Type("aspnetmvc-ajax")
-					.Transport(transport => transport.Read(read => read.Action("GetTopSellingSubCategories", "Home",  new { count = 12 })))
+					.Transport(transport => transport.Read(read => read.Action("GetTopSellingSubCategories", "Home", new { count = 12 })))
 					.Schema(s => s.Data("Data").Total("Total"))
 					.ServerPaging(false)
 					.PageSize(4)
-				)
-				.HtmlAttributes(new { style = "width: 90em; max-width: 100%; height: 20em; margin: auto; background: none;" })
-			)
+					)
+					.HtmlAttributes(new { style = "max-width: 100%; height: 20em; margin: auto; background: none;" })
+					)
+			</div>
 		</div>
 	</div>
 
-	<div class="categories-container">
+	<div class="categories-container wrap-width">
 		<div class="categories-header">
 			<div class="categories-title">Categories</div>
 			@(Html.Kendo().Button()
@@ -57,12 +59,12 @@
 					<img src="~/images/accessories.png" class="category-image" />
 				</a>
 			</div>
-		    <div class="column">
+		    <div class="column middle-container">
 				<a href="@Url.Action("Bikes","Home")">
 					<div class="category-heading">Bikes</div>
 					<img src="~/images/bikes.png" class="category-image" />
 				</a>
-				<a href="@Url.Action("Components","Home")" class="components-header">
+				<a href="@Url.Action("Components","Home")">
 					<div class="category-heading-components">Components</div>
 					<img src="~/images/components.png" class="category-image" />
 				</a>
@@ -76,7 +78,7 @@
 		</div>
 	</div>
 
-	<div class="recently-viewed">
+	<div class="recently-viewed wrap-width">
 		<div class="recently-viewed-title">Recently Viewed</div>
 			@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 				.Name("recentlyViewedListView")
@@ -92,7 +94,7 @@
 			)
 	</div>
 
-	<hr class="splitter">
+	<hr class="splitter wrap-width">
 	<div class="download-app">
 		<span class="download-text">Download Voyago application</span>
 		<span class="downlaod-icons">
@@ -128,7 +130,7 @@ $(document).ready(function () {
 			$("#topPicks").data("kendoScrollView").resize(true);
 
 			
-			if (window.matchMedia("screen and (max-width: 960px)").matches) {
+			if (window.matchMedia("screen and (max-width: 1130px)").matches) {
                 topPicksSV.setDataSource(
 					new kendo.data.DataSource({
 						type:"aspnetmvc-ajax",
@@ -139,7 +141,7 @@ $(document).ready(function () {
 						schema:{data:"Data",total:"Total"}
 					})
 				);
-            } else if(window.matchMedia("screen and (max-width: 1370px)").matches) {
+            } else if(window.matchMedia("screen and (max-width: 1450px)").matches) {
                 topPicksSV.setDataSource(
                     new kendo.data.DataSource({
                         type: "aspnetmvc-ajax",
@@ -183,5 +185,3 @@ $(document).ready(function () {
 		background-image: url('@Url.Content("~/images/home_main_5.png")');
 	}
 </style>
-
-<link rel="stylesheet" href="~/css/home.css">

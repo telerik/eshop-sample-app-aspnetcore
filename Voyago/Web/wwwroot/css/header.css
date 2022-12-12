@@ -1,0 +1,79 @@
+﻿.header {
+    width: var( --viewport-width );
+    margin: auto;
+    padding-inline: var( --viewport-padding-inline );
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-image {
+    display: block;
+    width: 238px;
+    margin: 28px auto;
+}
+
+.search-bar-container {
+    margin-left: 72px;
+}
+
+.search-bar-container .k-autocomplete {
+    display: flex;
+    align-items: center;
+    width: 634px;
+    height: 38px;
+}
+
+.k-autocomplete #searchBar {
+    color: #605E5C;
+}
+
+.k-autocomplete .k-i-search {
+    color: var( --voyago-blue );
+}
+
+.header-menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#favoritesBadge {
+    margin-left: 57px;
+}
+
+#shoppingCartBadge {
+    margin-left: 22px;
+}
+
+.profileItem .k-menu-expand-arrow {
+    display: none;
+}
+
+@media (max-width: 1500px) {
+    .header {
+        width: calc(100% - 80px);
+        flex-direction: column;
+    }
+
+    .search-bar-container {
+        margin: auto;
+    }
+
+    .search-bar-container .k-autocomplete {
+        width: 60vw;
+    }
+
+    .header-menu-container {
+        display: flex;
+        justify-content: center;
+        margin: 28px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .k-menu-horizontal {
+        flex-direction: column;
+    }
+}
