@@ -3,11 +3,7 @@
     flex-direction: column;
 }
 
-#topPicks .k-scrollview-wrap li.k-scrollview-page {
-    width: inherit !important;
-}
-
-#scrollView .k-scrollview-wrap .image {
+.scrollview-container .k-scrollview-wrap .image {
     display: inline-block;
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,17 +13,21 @@
     object-fit: cover;
 }
 
-.top-picks-container {
-    height: 480px;
-    background-color: #C7E0F4;
-}
-
 .home-heading, .categories-title, .recently-viewed-title {
     font-weight: 600;
     font-size: 42px;
     line-height: 59px;
     color: var(--voyago-black);
     margin: 24px 0;
+}
+
+.top-picks-container {
+    height: 480px;
+    background-color: #C7E0F4;
+}
+
+.top-picks-scrollview-container .k-scrollview-wrap li.k-scrollview-page {
+    width: inherit !important;
 }
 
 .top-picks {
@@ -58,20 +58,16 @@
     object-fit: cover;
 }
 
-.categories-header {
+.categories-container .categories-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.category-image {
-    width: 100%;
-}
-
-#productCatalogBtn {
-    height: 38px;
-    align-self: center;
-}
+    .categories-container .categories-header .k-button {
+        height: 38px;
+        align-self: center;
+    }
 
 .categories-inner {
     display: flex;
@@ -80,56 +76,57 @@
     gap: 3%;
 }
 
-.column {
-    flex: 30%;
-    max-width: 40%;
-}
+    .categories-inner .column {
+        flex: 30%;
+        max-width: 40%;
+    }
 
-.middle-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between
-}
+    .categories-inner .middle-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between
+    }
 
-.category-heading {
-    font-weight: 600;
-    font-size: 28px;
-    line-height: 39px;
-    padding: 12px 16px;
-}
+    .categories-inner .column .category-heading {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 39px;
+        padding: 12px 16px;
+    }
 
-.category-heading-components {
-    font-weight: 600;
-    font-size: 28px;
-    padding: 0 16px;
-}
+    .categories-inner .column .category-heading-components {
+        font-weight: 600;
+        font-size: 28px;
+        padding: 0 16px;
+    }
 
-.column img {
-    margin-top: 8px;
-    vertical-align: middle;
-}
+    .categories-inner .column .category-image {
+        width: 100%;
+        margin-top: 8px;
+        vertical-align: middle;
+    }
 
 .recently-viewed {
     margin-top:80px;
 }
 
-#recentlyViewedListView .k-listview-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 40px;
-}
+    .recently-viewed .k-listview-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
 
-#recentlyViewedListView .k-card {
-    height: 396px;
-}
+        .recently-viewed .k-listview-content .k-card {
+            height: 396px;
+        }
 
-#recentlyViewedListView .k-card-image-container {
-    height: 268px;
-}
+        .recently-viewed .k-listview-content .k-card-image-container {
+            height: 268px;
+        }
 
-.splitter {
+.home-content .splitter {
     border: 1px solid #E5E5E5;
     height: 0px;
     margin: 83px auto 0 auto;
@@ -160,33 +157,24 @@
 }
 
 @media (max-width: 1500px) {
-    .wrap-width {
-        max-width: var( --viewport-width );
-        width: calc(100% - 80px);
-    }
-
-    #recentlyViewedListView .k-listview-content {
+    .recently-viewed .k-listview-content {
         justify-content: center;
     }
 }
 
 @media (max-width: 800px) {
-    .wrap-width {
-        width: calc(100% - 60px);
-    }
-
     .categories-inner {
         justify-content: center;
     }
 
-    .column {
-        flex: 100%;
-        max-width: 50%;
-    }
+        .categories-inner .column {
+            flex: 100%;
+            max-width: 50%;
+        }
 
-    .category-heading-components {
-        padding: 12px 16px;
-    }
+            .categories-inner .column .category-heading-components {
+                padding: 12px 16px;
+            }
 
     .recently-viewed {
         margin-top: 40px;
@@ -207,15 +195,11 @@
 }
 
 @media (max-width: 750px) {
-    .wrap-width {
-        width: calc(80% - 30px);
-    }
-
-    .categories-header {
+    .categories-container .categories-header {
         flex-direction: column;
     }
 
-    .categories-title {
+    .categories-container .categories-header .categories-title {
         align-self: center;
     }
 
@@ -223,36 +207,32 @@
         margin-top: 40px;
     }
 
-    .column {
-        max-width: 80%;
-    }
+        .categories-inner .column {
+            max-width: 80%;
+        }
 
-    #recentlyViewedListView .k-card {
+    .recently-viewed .k-listview-content .k-card {
         max-width: 100%;
         height: auto;
     }
 
-    #recentlyViewedListView .k-card-image-container {
+    .recently-viewed .k-listview-content .k-card-image-container {
         height: auto;
     }
 }
 
 @media (max-width: 530px) {
-    .wrap-width {
-        width: calc(90% - 30px);
-    }
-
     .download-text {
         text-align: center;
     }
 }
 
 @media (max-width: 460px) {
-    #topPicks .k-scrollview-elements {
+    .top-picks-container .k-scrollview .k-scrollview-elements {
         display: none;
     }
 
-    .column {
+    .categories-inner .column {
         max-width: 100%;
     }
 

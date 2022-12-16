@@ -33,7 +33,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult GetCategory(string categoryName)
         {
-            if(categoryName != null)
+            if(categoryName != null && categoryName != "Other")
             {
                 return View(categoryName);
             }

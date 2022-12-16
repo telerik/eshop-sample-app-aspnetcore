@@ -10,6 +10,10 @@
     justify-content: space-evenly;
 }
 
+footer a:hover {
+     color: var(--voyago-white); 
+}
+
 .footer-categories,
 .footer-contacts {
     display: flex;
@@ -18,7 +22,8 @@
     margin-top: 20px;
 }
 
-.footer-payment-methods, .footer-socials {
+.footer-payment-methods, 
+.footer-socials {
     display: flex;
     flex-direction: column;
     margin-top: 40px;
@@ -73,7 +78,9 @@
 }
 
 @media (max-width: 560px) {
-    .footer-socials-icons, .footer-socials .footer-heading, .footer-categories {
+    .footer-socials-icons, 
+    .footer-socials .footer-heading, 
+    .footer-categories {
         display: none;
     }
 

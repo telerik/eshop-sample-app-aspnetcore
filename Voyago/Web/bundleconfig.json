@@ -7,10 +7,11 @@
       "wwwroot/css/footer.css",
       "wwwroot/css/home.css",
       "wwwroot/css/tile_product_card.css",
+      "wwwroot/css/favorites.css",
       "wwwroot/css/main_controls.css",
       "wwwroot/css/list_view_header.css",
       "wwwroot/css/all_products_list_view.css",
-      "wwwroot/css/favorites.css",
+      "wwwroot/css/list_product_card.css",
       "wwwroot/css/summary.css"
     ]
   }
