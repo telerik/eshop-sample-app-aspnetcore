@@ -2,7 +2,32 @@
 	ViewData["Title"] = ViewBag.SubCategory;
 }
 
-<div class="category-page-container">
+<style>
+	.category-content-container {
+		display: flex;
+		flex-direction: row;
+		gap: 40px;
+		margin-top: 19px;
+	}
+
+	.no-product-msg {
+		text-align: center;
+		padding: 2%;
+	}
+
+@@media (max-width: 800px) {
+	.category-content-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.products-listView-container .k-listview .k-listview-content {
+		justify-content: center;
+	}
+}
+</style>
+
+<div class="category-page-container wrap-width">
 	@(Html.Kendo().Breadcrumb()
 		.Name("breadcrumb")
 		.Navigational(true)
@@ -127,26 +152,3 @@
         });
 	});
 </script>
-
-<style>
-	#breadcrumb {
-		margin-left: 30px;
-	}
-
-	.category-content-container {
-		display: flex;
-		flex-direction: row;
-	}
-
-	#allProductsListView .k-listview-content {
-		margin-top: 2%;
-		margin-right: 2%;
-	}
-
-	.no-product-msg {
-		text-align: center;
-		padding: 2%;
-	}
-</style>
-
-<link rel="stylesheet" href="~/css/favorites.css">

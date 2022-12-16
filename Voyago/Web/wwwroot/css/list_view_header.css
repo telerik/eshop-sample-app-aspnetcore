@@ -5,40 +5,35 @@
 }
 
 .result-count {
-    margin-bottom: -30px;
-    margin-left: 25px;
     display: flex;
     flex-direction: row;
-    gap: 5px;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 58px;
-    letter-spacing: -0.9px;
-    color: #000000;
+    gap: 10px;
 }
 
-    .result-count p.category-title {
-        font-weight: 600;
-        font-size: calc(42px + 0.390625vw);
-        line-height: calc(59px + 0.390625vw);
-        color: #000000;
-    }
+.result-count .category-title {
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 59px;
+    color: var( --voyago-black );
+}
 
-    .list-view-header-controls {
-        align-self: end;
-        display: flex;
-        flex-direction: row;
-        margin-right: 30px;
-        gap: 36px;
-    }
-
-#excelExport {
-    background: none;
-    border-radius: 0;
+.list-view-header-controls {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
 }
 
 [aria-controls="sortBy_listbox"] {
-    background: none;
+    background: var( --voyago-white );
     border: 1px solid #605E5C;
     border-radius: 2px;
+}
+
+@media (max-width: 1200px) {
+    .list-view-header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
 }

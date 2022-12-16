@@ -1,104 +1,106 @@
-﻿<div class="controls">
-
-	@{
-		if (Context.Request.Path.ToString().Contains("Summary"))
-		{
-			@await Html.PartialAsync("_SummaryControls.cshtml")
-		}
-	}
-
-	<div>Filters</div>
-
-	@{
-		if (Context.Request.Path.ToString().Contains("Category"))
-		{
-			<div class="control">
-				<a href="@Url.Action("Category", "Products")?subCategory=@ViewBag.SubCategory">
-					<div class="clear-all">
-						<div style="color: black;">Clear All</div>
-						<img class="close-button" src="~/images/close_button.svg" alt="Clear All">
-					</div>
-				</a>
-			</div>
-		}
-		else if (Context.Request.Path.ToString().Contains("Summary"))
-		{
-			<div class="control">
-				<a href="@Url.Action("Summary", "Products")">
-					<div class="clear-all">
-						<div style="color: black;">Clear All</div>
-						<img class="close-button" src="~/images/close_button.svg" alt="Clear All">
-					</div>
-				</a>
-			</div>
-		}
-	}
-
-	<div class="control">
-		<div>Show</div>
-		@(Html.Kendo().RadioGroup()
-			.Name("discountPicker")
-			.Items(i =>
+﻿<div class="filters-container">
+	<div class="controls">
+		@{
+			if (Context.Request.Path.ToString().Contains("Summary"))
 			{
-				i.Add().Label("All").Value("1");
-				i.Add().Label("Discounted items only").Value("2");
-			})
-			.Value("1")
-			.Events(e => e.Change("toggleDiscountPicker"))
-			)
-	</div>
-
-	@{
-		if (Context.Request.Path.ToString().Contains("Category"))
-		{
-			@await Html.PartialAsync("_CategoryControls.cshtml")
+				@await Html.PartialAsync("_SummaryControls.cshtml")
+			}
 		}
-	}
 
-	<div class="control">
-		<div class="control-label">Rating</div>
-		@(Html.Kendo().CheckBoxGroup()
-			.Name("ratingPicker")
-			.Items(i =>
+		<div class="filters-title">Filters</div>
+
+		@{
+			if (Context.Request.Path.ToString().Contains("Category"))
 			{
-				i.Add().Value("5").CssClass("rating-5");
-				i.Add().Value("4").CssClass("rating-4");
-				i.Add().Value("3").CssClass("rating-3");
-				i.Add().Value("2").CssClass("rating-2");
-				i.Add().Value("1").CssClass("rating-1");
-			})
-			.Events(e => e.Change("filterDataSource"))
-			)
-	</div>
+				<div class="control">
+					<a href="@Url.Action("Category", "Products")?subCategory=@ViewBag.SubCategory">
+						<div class="clear-all">
+							<div class="control-label">Clear All</div>
+							<img class="close-button" src="~/images/close_button.svg" alt="Clear All"/>
+						</div>
+					</a>
+				</div>
+			}
+			else if (Context.Request.Path.ToString().Contains("Summary"))
+			{
+				<div class="control">
+					<a href="@Url.Action("Summary", "Products")">
+						<div class="clear-all">
+							<div class="control-label">Clear All</div>
+							<img class="close-button" src="~/images/close_button.svg" alt="Clear All"/>
+						</div>
+					</a>
+				</div>
+			}
+		}
 
-	<div class="control">
-		<div class="control-label">Price</div>
-		@(Html.Kendo().RangeSlider()
-			.Name("priceSlider")
-			.Min(0)
-			.Max(4000)
-			.SmallStep(100)
-			.LargeStep(1000)
-			.TickPlacement(SliderTickPlacement.Both)
-			.Orientation(SliderOrientation.Horizontal)
-			.HtmlAttributes(new { @class = "price-slider" })
-			.Events(e => e.Change("filterDataSource"))
+		<div class="control">
+			<div class="control-label">Show</div>
+			@(Html.Kendo().RadioGroup()
+				.Name("discountPicker")
+				.Items(i =>
+				{
+					i.Add().Label("All").Value("1");
+					i.Add().Label("Discounted items only").Value("2");
+				})
+				.Value("1")
+				.Events(e => e.Change("toggleDiscountPicker"))
 			)
-	</div>
+		</div>
 
-	<div class="control">
-		<div class="control-label">Weight</div>
-		@(Html.Kendo().RangeSlider()
-			.Name("weightSlider")
-			.Min(0)
-			.Max(1500)
-			.SmallStep(25)
-			.LargeStep(500)
-			.TickPlacement(SliderTickPlacement.Both)
-			.Orientation(SliderOrientation.Horizontal)
-			.HtmlAttributes(new { @class = "weight-slider" })
-			.Events(e => e.Change("filterDataSource"))
+		@{
+			if (Context.Request.Path.ToString().Contains("Category"))
+			{
+				@await Html.PartialAsync("_CategoryControls.cshtml")
+			}
+		}
+
+		<div class="control">
+			<div class="control-label">Rating</div>
+			@(Html.Kendo().CheckBoxGroup()
+				.Name("ratingPicker")
+				.Items(i =>
+				{
+					i.Add().Value("5").CssClass("rating-5");
+					i.Add().Value("4").CssClass("rating-4");
+					i.Add().Value("3").CssClass("rating-3");
+					i.Add().Value("2").CssClass("rating-2");
+					i.Add().Value("1").CssClass("rating-1");
+				})
+				.Events(e => e.Change("filterDataSource"))
 			)
+		</div>
+
+		<div class="control">
+			<div class="control-label">Price</div>
+			@(Html.Kendo().RangeSlider()
+				.Name("priceSlider")
+				.Min(0)
+				.Max(4000)
+				.SmallStep(100)
+				.LargeStep(1000)
+				.TickPlacement(SliderTickPlacement.Both)
+				.Orientation(SliderOrientation.Horizontal)
+				.HtmlAttributes(new { @class = "price-slider" })
+				.Tooltip(tooltip => tooltip.Format("{0:c0}"))
+				.Events(e => e.Change("filterDataSource"))
+			)
+		</div>
+
+		<div class="control">
+			<div class="control-label">Weight</div>
+			@(Html.Kendo().RangeSlider()
+				.Name("weightSlider")
+				.Min(0)
+				.Max(1500)
+				.SmallStep(25)
+				.LargeStep(500)
+				.TickPlacement(SliderTickPlacement.Both)
+				.Orientation(SliderOrientation.Horizontal)
+				.HtmlAttributes(new { @class = "weight-slider" })
+				.Events(e => e.Change("filterDataSource"))
+			)
+		</div>
 	</div>
 </div>
 
@@ -107,5 +109,3 @@
 		addRatingVisual();
 	});
 </script>
-
-<link rel="stylesheet" href="~/css/main_controls.css">
