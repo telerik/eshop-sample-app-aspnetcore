@@ -9,7 +9,7 @@
 		if (ViewBag.ItemsCount == 0)
 		{
 			<div class="empty-shopping-cart-container">
-				<img class="empty-cart-image" src="~/images/shopping_cart_empty.svg" alt="Your shopping cart is empty">
+				<img class="empty-cart-image" src="~/images/shopping_cart_empty.svg" alt="Your shopping cart is empty"/>
 				<p class="empty-cart-heading">Unfortunately, your cart is empty...</p>
 				<div class="empty-cart-description">
 					<p>Looks like you have not added anything to your cart. Go ahead and <a style="color: var(--voyago-blue);"  href="@Url.Action("Index", "Home")#top-picks">explore our top-picks.</a>
@@ -26,7 +26,7 @@
 				.Columns(columns =>
 				{
 					columns.Bound(p => p.ProductName).ClientTemplateId("shoppingCartProduct-template");
-					columns.Bound(p => p.ProductPrice).HtmlAttributes(new { @class = "currency" });
+					columns.Bound(p => p.ProductPrice);
 					columns.Bound(p => p.Quantity).Editable("function() { return false; }")
 						.HtmlAttributes(new { @class = "templateCell" })
 						.ClientTemplateId("quantityEditor-template");
@@ -53,32 +53,31 @@
 				)
 				.Events(e => e.DataBound("shoppingCartGridOnDataBound"))
 				)
-				<div class="shopping-cart-bottom">
-					<div>
-						<div class="sub-total">
-							<div class="sub-total-val">Sub-total:</div>
-							<div class="sub-total-val" id="subTotalValue"></div>
-						</div>
-						<span class="tax-and-shipping">Tax and shipping cost will be calculated later</span>
+			<div class="sub-total-container">
+				<div class="sub-total-details">
+					<div class="sub-total">
+						<div>Sub-total:</div>
+						<div id="subTotalValue"></div>
 					</div>
-					@(Html.Kendo().Button()
+					<span class="tax-and-shipping">Tax and shipping cost will be calculated later</span>
+				</div>
+				@(Html.Kendo().Button()
 					.Name("checkoutButton")
 					.Content("Check-out")
 					.ThemeColor(ThemeColor.Primary)
 					.Events(e => e.Click("checkoutShoppingCart"))
-					)
-				</div>
+				)
+			</div>
 		}
 	}
 </div>
 
 <script id="shoppingCartProduct-template" type="text/html">
-	<div class="product-col">
-		<a href="@Url.Action("Details", "Products")?productId=#:ProductId#">
-			<img width="160" height="120" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:ProductPhotoId#" alt="#:ProductName# image">
+	<div class="product-column">
+		<a class="product-image-container" href="@Url.Action("Details", "Products")?productId=#:ProductId#">
+			<img class="product-image" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:ProductPhotoId#" alt="#:ProductName# image"/>
 		</a>
-
-		<div class="product-info">
+		<div class="product-details">
 			<a href="@Url.Action("Details", "Products")?productId=#:ProductId#">
 				<p class="product-name">#:ProductName#</p>
 			</a>
@@ -98,8 +97,6 @@
 		.Rounded(Rounded.None)
 		.Events(e => e.Change("updateShoppingCartChanges"))
 		.ToClientTemplate()
-		)
+	)
 </script>
-
-<link rel="stylesheet" href="~/css/shopping_cart.css">
 
