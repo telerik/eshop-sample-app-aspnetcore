@@ -30,7 +30,7 @@
     border-radius: 2px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
     .list-view-header {
         flex-direction: column;
         gap: 20px;

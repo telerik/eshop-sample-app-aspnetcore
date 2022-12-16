@@ -49,7 +49,7 @@
     margin: auto 24px 22px 24px;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
     .filters-container {
         width: auto;
         padding-inline: 10px;

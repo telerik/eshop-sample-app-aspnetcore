@@ -71,7 +71,7 @@ footer a:hover {
         color: var(--voyago-white);
     }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
     .footer-payment-methods {
         display: none;
     }
@@ -89,7 +89,7 @@ footer a:hover {
     }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
     .footer-logo {
         flex-direction: column;
     }

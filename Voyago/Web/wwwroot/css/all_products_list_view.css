@@ -36,13 +36,13 @@
         }
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
     .products-listView-container {
         width: 50vw;
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .products-listView-container {
         width: 100%;
     }

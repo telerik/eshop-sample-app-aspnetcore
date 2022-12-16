@@ -162,7 +162,7 @@
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
     .categories-inner {
         justify-content: center;
     }
@@ -194,7 +194,7 @@
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
     .categories-container .categories-header {
         flex-direction: column;
     }
@@ -219,15 +219,13 @@
     .recently-viewed .k-listview-content .k-card-image-container {
         height: auto;
     }
-}
 
-@media (max-width: 530px) {
     .download-text {
         text-align: center;
     }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
     .top-picks-container .k-scrollview .k-scrollview-elements {
         display: none;
     }

@@ -57,9 +57,9 @@
     }
 
     .list-product-info-container .avg-rating .rating-text {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 22px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 17px;
     }
 
 .list-product-info-container .list-product-description {
@@ -86,7 +86,7 @@
         height: 34px;
     }
 
-@media (max-width: 1250px) {
+@media (max-width: 1280px) {
     .list-product-container {
         flex-direction: column;
     }
@@ -109,7 +109,7 @@
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .list-product-image-container {
         width: auto;
     }

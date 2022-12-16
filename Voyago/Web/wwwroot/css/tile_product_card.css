@@ -49,12 +49,19 @@
     flex-direction: row;
     align-items: baseline;
     justify-content: start;
+    gap: 4px;
 }
 
+    .k-card-header .avg-rating .k-icon {
+        width: 20px;
+        height: 20px;
+        padding: 8px 2px;
+    }
+
 .k-card-header .rating-text {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 22px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
 }
 
 .price-container {
