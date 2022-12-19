@@ -4,12 +4,12 @@
 
 @model Models.InputModels.LoginUserInpuModel
 
-<div class="login-container">
-    <img class="logo" src="~/images/logo.svg" alt="Voyago">
+<div class="login-register-container">
+    <img class="logo" src="~/images/logo.svg" alt="Voyago"/>
 
     @(Html.Kendo().Form<Models.InputModels.LoginUserInpuModel>()
         .Name("loginForm")
-        .HtmlAttributes(new { controller="Account", action="Login", method="POST"})
+        .HtmlAttributes(new { controller = "Account", action = "Login", method = "POST", @class = "login-register-form"})
         .Validatable(v => 
         {
             v.ValidateOnBlur(true);
@@ -34,7 +34,7 @@
     )
 
     <div class="register-prompt">
-        <p>Don’t have an account? <a class="login-link" href="@Url.Action("Register","Account")" style="color:var(--voyago-blue);">Register</a></p>
+        <p>Don’t have an account?</p><a class="login-link" href="@Url.Action("Register","Account")">Register</a>
     </div>
 </div>
 
@@ -43,6 +43,4 @@
         <span class="k-button-text">Login</span>
     </button>
 </script>
-
-<link rel="stylesheet" href="~/css/login_form.css"/>
 

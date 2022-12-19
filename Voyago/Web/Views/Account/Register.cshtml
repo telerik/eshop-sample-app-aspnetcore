@@ -2,12 +2,12 @@
 	ViewData["Title"] = "Register Page";
 }
 
-<div class="register-container">
-	<img class="logo" src="~/images/logo.svg" alt="Voyago">
+<div class="login-register-container">
+	<img class="logo" src="~/images/logo.svg" alt="Voyago"/>
 
 	@(Html.Kendo().Form<Models.InputModels.RegisterUserInpuModel>()
 		.Name("registerForm")
-		.HtmlAttributes(new { controller="Account", action="Register", method="POST"})
+		.HtmlAttributes(new { controller = "Account", action = "Register", method = "POST", @class = "login-register-form" })
 		.Validatable(v =>
 		{
 			v.ValidateOnBlur(true);
@@ -34,7 +34,7 @@
 	)
 
 	<div class="login-prompt">
-		<p>Already have an account? <a class="login-link" href="@Url.Action("Login","Account")" style="color:var(--voyago-blue);">Login</a></p>
+		<p>Already have an account? </p><a class="login-link" href="@Url.Action("Login","Account")">Login</a>
 	</div>
 </div>
 
@@ -43,5 +43,3 @@
 		<span class="k-button-text">Register</span>
 	</button>
 </script>
-
-<link rel="stylesheet" href="~/css/register_form.css"/>
