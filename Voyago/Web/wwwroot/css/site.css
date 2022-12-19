@@ -36,14 +36,6 @@ a, a:hover {
     color: var(--voyago-dark-grey);
 }
 
-.k-i-arrow-n::before {
-    content: "\e013" !important;
-}
-
-.k-i-arrow-s::before {
-    content: "\e015" !important;
-}
-
 .wrap-width {
     width: var( --viewport-width );
     padding-inline: var( --viewport-padding-inline );

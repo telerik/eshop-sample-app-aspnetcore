@@ -3,9 +3,11 @@
     "outputFileName": "wwwroot/bundles/styles.min.css",
     "inputFiles": [
       "wwwroot/css/site.css",
+      "wwwroot/css/login-register.css",
       "wwwroot/css/header.css",
       "wwwroot/css/footer.css",
       "wwwroot/css/home.css",
+      "wwwroot/css/home_categories.css",
       "wwwroot/css/tile_product_card.css",
       "wwwroot/css/main_controls.css",
       "wwwroot/css/list_view_header.css",
@@ -13,7 +15,13 @@
       "wwwroot/css/list_product_card.css",
       "wwwroot/css/summary.css",
       "wwwroot/css/favorites.css",
-      "wwwroot/css/shopping_cart.css"
+      "wwwroot/css/shopping_cart.css",
+      "wwwroot/css/product_details.css",
+      "wwwroot/css/contacts.css",
+      "wwwroot/css/about.css",
+      "wwwroot/css/profile.css",
+      "wwwroot/css/orders.css",
+      "wwwroot/css/order_details.css"
     ]
   }
 ]

@@ -3,7 +3,7 @@
 }
 @model Models.ViewModels.ProductDetailsViewModel;
 
-<div class="details-container">
+<div class="model-details-container wrap-width">
 	@(Html.Kendo().Breadcrumb()
 		.Name("breadcrumb")
 		.Navigational(true)
@@ -33,23 +33,23 @@
 		})
 	)
 	<div class="model-details">
-		<div class="model-image">
-			<img src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=@Model.PhotoId">			
+		<div class="model-image-container">
+			<img class="model-image" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=@Model.PhotoId"/>			
 		</div>
-		<div class="model-info">
-			<div class="info-top">
-				<h1 class="details-heading">
+		<div class="model-info-container">
+			<div class="model-heading">
+				<div class="model-title">
 					@{
 						if (Model.Model == null)
 						{
-																									@Model.Name
+							@Model.Name
 						}
 						else
 						{
-																									@Model.Model
+							@Model.Model
 						}
 					}
-				</h1>
+				</div>
 				@(Html.Kendo().Rating()
 					.Name("productRating")
 					.Min(1)
@@ -59,81 +59,82 @@
 					.Readonly(true)
 					.Label(false)
 				)
-				<hr class="splitter1">
 			</div>
-			<div class="info-bottom">
-				<div class="bottom-left">
-					<div class="info-row" style="gap:8%;">
-						<p class="info-title">Product Name</p>
-						<p class="info-value">@Model.Name</p>
+			<hr class="splitter1">
+			<div class="model-data">
+				<div class="model-data-left-container">
+					<div class="model-data-row">
+						<span class="title">Product Name</span>
+						<span class="value">@Model.Name</span>
 					</div>
-					<div class="info-row" style="gap:13%;">
-						<p class="info-title">Product No</p>
-						<p>@Model.ProductNumber</p>
+					<div class="model-data-row">
+						<span class="title">Product No</span>
+						<span class="value">@Model.ProductNumber</span>
 					</div>
-					
-						@{
-							if (Model.Size != null)
-							{
-																							<div class="info-row" style="gap:25%;">
-																								<p class="info-title">Size</p>
-																								@(Html.Kendo().DropDownList()
-										.Name("sizePicker")
-										.Value(@Model.Size)
-										.FillMode(FillMode.None)
-										.Rounded(Rounded.None)
-										.DataSource(source =>
+					@{
+						if (Model.Size != null)
+						{
+							<div class="model-data-row">
+								<span class="title">Size</span>
+								<span class="value size">
+									@(Html.Kendo().DropDownList()
+									.Name("sizePicker")
+									.Value(@Model.Size)
+									.FillMode(FillMode.None)
+									.Rounded(Rounded.None)
+									.DataSource(source =>
+									{
+										source.Read(read =>
 										{
-											source.Read(read =>
-											{
-												read.Action("GetAvailableSizes", "Products", new { productId = @Model.Id });
-											});
-										})
-										.Events(e => e.Change(@<text>function () { selectAlternateProductVersion(@Model.ModelId); }</text>))
-																								)
-																						 	</div>
-							}
-						}
-					@{
-						if(Model.Weight != 0)
-						{
-																	<div class="info-row" style="gap:20%;">
-																		<p class="info-title">Weight</p>
-																		<p>@Model.Weight</p>
-																	</div>
+											read.Action("GetAvailableSizes", "Products", new { productId = @Model.Id });
+										});
+									})
+									.Events(e => e.Change(@<text>function () { selectAlternateProductVersion(@Model.ModelId); }</text>))
+										)
+								</span>
+							</div>
 						}
 					}
 					@{
-						if(Model.Color != null)
+						if (Model.Weight != 0)
 						{
-																			<div class="info-row" style="gap:22%;">
-																				<p class="info-title">Color</p>
-																				<ul id="colorPicker"></ul>
-																			</div>
+							<div class="model-data-row">
+								<span class="title">Weight</span>
+								<span class="value">@Model.Weight</span>
+							</div>
 						}
 					}
 					@{
-						if(Model.Description != null) 
+						if (Model.Color != null)
 						{
-																			<div class="info-row" style="gap:11%;">
-																				<p class="info-title">Description</p>
-																				<p class="info-description">@Model.Description</p>
-																			</div>
+							<div class="model-data-row">
+								<span class="title">Color</span>
+								<div class="value"><ul id="colorPicker"></ul></div>
+							</div>
+						}
+					}
+					@{
+						if (Model.Description != null)
+						{
+							<div class="model-data-row">
+								<span class="title">Description</span>
+								<span class="value model-description">@Model.Description</span>
+							</div>
 						}
 					}
 				</div>
-				<div class="bottom-right">
+				<div class="model-data-right-container">
 					@{
 						if (Model.DiscountPct != 0)
 						{
-																									<label class="price"> @(string.Format("{0:C}", Model.FinalPrice))</label>
+							<div class="price"> @(string.Format("{0:C}", Model.FinalPrice))</div>
 						}
 						else
 						{
-																									<label class="price">$@Model.ListPrice.ToString("N2")</label>
+							<div class="price">$@Model.ListPrice.ToString("N2")</div>
 						}
 					}
-					<div class="product-buttons">
+					<div class="buttons-container">
 						@(Html.Kendo().Button()
 							.Name("addToCartButton_" + @Model.Id)
 							.Content("Add to cart")
@@ -142,14 +143,14 @@
 							.HtmlAttributes(new { type = "button" })
 							.Events(e => e.Click("addProductToShoppingCart"))
 							.Enable(Model.InStock > 0)
-						)
+							)
 						@(Html.Kendo().Button()
 							.Name("addToFavoritesButton_" + @Model.Id)
 							.Content("Add to Favorites")
 							.Icon("heart-outline")
-							.HtmlAttributes(new { type = "button"  })
+							.HtmlAttributes(new { type = "button" })
 							.Events(e => e.Click("addProductToFavorites"))
-						)
+							)
 					</div>
 				</div>
 			</div>
@@ -161,9 +162,9 @@
 	@{
 		if (Model.ModelId != null)
 		{
-								<div class="similar-products">
-									<div class="similar-products-title">Similar Products</div>
-									@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+			<div class="similar-products">
+				<div class="similar-products-title">Similar Products</div>
+					@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
 					.Name("similarProductsListView")
 					.TagName("div")
 					.ClientTemplateId("product-template")
@@ -175,8 +176,8 @@
 						.Read(r => r.Action("ReadSimilarProducts", "Products", new { productId = Model.Id, subCategoryId = @Model.SubCategoryId, count = 4 }).Type(HttpVerbs.Get))
 					)
 					.Events(e => e.DataBound("distinguishFavorites"))
-									)
-								</div>
+					)
+			</div>
 		}
 	}
 </div>
@@ -205,5 +206,3 @@
 		distinguishFavorites();
 	});
 </script>
-
-<link rel="stylesheet" href="~/css/product_details.css">
