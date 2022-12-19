@@ -1,91 +1,84 @@
 ﻿.profile-container {
     display: flex;
     flex-direction: column;
-    margin: 6.3% auto 5.3% auto;
-    width: 40%;
-    min-width: 400px;
+    align-items: center;
+    width: 600px;
+    padding-inline: var( --viewport-padding-inline );
+    margin: auto;
 }
 
-    .profile-header {
+.profile-header {
     font-weight: 600;
-    font-size: calc(42px + 0.390625vw);
-    line-height: calc(59px + 0.390625vw);
-    text-align: center;
-    color: #000000;
+    font-size: 42px;
+    line-height: 59px;
+    color: var(--voyago-black);
 }
 
-.k-tabstrip-items {
-    justify-content: center;
+.profile-container .k-tabstrip {
+    width: 100%;
+    margin-top: 36px;
+}
+
+.profile-container .k-tabstrip-items {
+    justify-content: space-around;
     font-weight: 600;
+    color: #201F1E;
 }
 
-    .k-tabstrip-items .k-item {
+    .profile-container .k-tabstrip-items .k-item {
         min-width: 27%;
     }
 
-        .k-tabstrip-items .k-item .k-link {
+        .profile-container .k-tabstrip-items .k-item .k-link {
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .k-tabstrip-items .k-item .k-image {
+        .profile-container .k-tabstrip-items .k-item .k-image {
             width: 16px;
             height: 16px;
         }
 
-#personal_details .k-form-layout, #shipping_details .k-form-layout {
-    row-gap: 17px;
-    column-gap: 24px;
-}
-
-.k-form-field {
-    height: 64px;
-}
-
-#password_details .k-form-field:nth-child(1) {
-    height: 85px;
-}
-
-.k-input-inner {
+.profile-container .k-form .k-input-inner {
     height: 34px;
 }
 
-.k-label.k-form-label {
-    height: 20px;
+.profile-container .k-label.k-form-label {
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var( --voyago-dark-grey );
 }
 
-.k-button.k-form-submit {
+.profile-container .k-form-hint {
+    color: #605E5C;
+}
+
+.profile-container .k-button.k-form-submit {
     padding: 9px 21px;
-    gap: 8px;
     width: 72px;
     height: 38px;
-    gap: 8px;
 }
 
-.k-button.k-form-clear {
+.profile-container .k-button.k-form-clear {
     padding: 9px 21px;
-    gap: 8px;
     width: 84px;
     height: 38px;
 }
 
-.k-form-buttons .k-button-text {
+.profile-container .k-form-buttons .k-button-text {
     font-weight: 600;
-    height: 20px;
 }
 
-@media (max-width: 650px) {
-    #password_details .k-form-field {
-        height: 80px;
-    }
-
-    .k-tabstrip-items .k-item {
-        min-width: 0;
-    }
-}
-
-@media (max-width: 450px) {
+@media (max-width: 1500px) {
     .profile-container {
-        min-width: 300px;
+        max-width: 600px;
+        width: calc(100% - 80px);
     }
+
+        .profile-container .k-tabstrip-items {
+            justify-content: center;
+        }
 }

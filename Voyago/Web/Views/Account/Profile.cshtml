@@ -19,7 +19,7 @@
             .ImageUrl("~/images/tab-user.png")
             .Selected(true)
 			.Content(@<text>
-                            @(Html.Kendo().Form<Models.InputModels.ProfileUserInputModel>()
+                @(Html.Kendo().Form<Models.InputModels.ProfileUserInputModel>()
                     .Name("personal_details")
                     .HtmlAttributes(new { action = "SaveUserPersonalDetails", controller = "Account", method = "POST" })
                     .ButtonsTemplateId("profileFormsButtons")
@@ -45,13 +45,12 @@
                                 .MaskedTextBox()
                                 .Mask("999-000-0000")
                                 .HtmlAttributes(new { data_validmask_msg = "Phone number is incomplete"}));
-                    })
-                            )
-                         </text>);
+                    }))
+            </text>);
             tabstrip.Add().Text("Password")
             .ImageUrl("~/images/tab-password.png")
             .Content(@<text>
-                            @(Html.Kendo().Form<Models.InputModels.PasswordUserInputModel>()
+                @(Html.Kendo().Form<Models.InputModels.PasswordUserInputModel>()
                     .Name("password_details")
                     .HtmlAttributes(new { action = "SaveUserPassword", controller = "Account", method = "POST" })
                     .ButtonsTemplateId("profileFormsButtons")
@@ -61,7 +60,7 @@
                         v.ValidationSummary(vs => vs.Enable(false));
                     })
                     .Layout("grid")
-                    .Grid(g => g.Cols(1).Gutter(38))
+                    .Grid(g => g.Cols(1).Gutter(17))
                     .Items(i =>
                     {
                         i.Add()
@@ -73,19 +72,18 @@
                             .Field(f => f.ConfimPassword)
                             .InputHtmlAttributes(new {@type = "password"})
                             .Label(l => l.Text("Confim Password"));
-                    })
-                            )
-                        </text>);
+                    }))
+            </text>);
 			tabstrip.Add()
             .Text("Shipping address")
             .ImageUrl("~/images/tab-address.png")
             .Content(@<text>
-                            @(Html.Kendo().Form<Models.InputModels.AddressUserInputModel>()
+                @(Html.Kendo().Form<Models.InputModels.AddressUserInputModel>()
                     .Name("shipping_details")
                     .HtmlAttributes(new { action = "SaveUserShippingDetails", controller = "Account", method = "POST" })
                     .ButtonsTemplateId("profileFormsButtons")
                     .Layout("grid")
-                    .Grid(g => g.Cols(2))
+                    .Grid(g => g.Cols(2).Gutter(17))
                     .Validatable(v =>
                     {
                         v.ValidateOnBlur(true);
@@ -154,9 +152,8 @@
                                         }
                                     })
                             );
-                    })
-                            )
-                        </text>);
+                    }))
+            </text>);
 		})
 	)
 </div>
@@ -221,5 +218,3 @@
         });
     });
 </script>
-<link rel="stylesheet" href="~/css/profile.css"/>
-				
