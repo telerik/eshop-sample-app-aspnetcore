@@ -30,12 +30,14 @@
             columns.Template("<img src='data:image/png;base64, #:ProductPhoto#' alt='#: data.ProductName #' style='width:100%;'/>").Width(120);
             columns.Bound(p => p.ProductName).Title("Product Name").Width(240);
             columns.Bound(p => p.Quantity).ClientFooterTemplate("Quantity: #=sum#").Width(172)
-             .HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
+            .HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
+            .FooterHtmlAttributes(new { style = "text-align: right; justify-content: right" })
             .HtmlAttributes(new { style = "text-align: right" });
             columns.Bound(p => p.UnitPrice).Title("Price").Format("{0:c}").Width(172).HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
             .HtmlAttributes(new { style = "text-align: right" });
             columns.Bound(p => p.LineTotal).Title("Total").Format("{0:c}").ClientFooterTemplate("Total: $#=sum#").Width(172)
             .HeaderHtmlAttributes(new { style = "text-align: right; justify-content: right" })
+            .FooterHtmlAttributes(new { style = "text-align: right; justify-content: right" })
             .HtmlAttributes(new { style = "text-align: right" });
         })
         .Scrollable(s => s.Height("auto"))
@@ -58,5 +60,3 @@
         .Content("View Invoice"))
     </div>
 </div>
-
-<link rel="stylesheet" href="~/css/order_details.css">
