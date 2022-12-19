@@ -9,8 +9,6 @@
         .Name("contacts")
         .HtmlAttributes(new { action = "Index", controller = "Contacts", method = "POST", @class="contact-form" })
         .ButtonsTemplateId("contactsFormButtons")
-         .Layout("grid")
-        .Grid(g => g.Cols(1).Gutter(17))
         .Items(i =>
         {
             i.Add()
@@ -88,5 +86,3 @@
         $("#contacts").kendoValidator();
     });
 </script>
-
-<link rel="stylesheet" href="~/css/contacts.css"/>
