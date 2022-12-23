@@ -25,7 +25,6 @@ function removeItemFromShoppingCart(itemId) {
 	grid.dataSource.sync();
 
 	grid.dataSource.bind("sync", function (e) {
-		console.log(e.sender.data().length);
 		if (e.sender.data().length == 0) {
 			location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/ShoppingCart" : "/Account/ShoppingCart";
 		}
