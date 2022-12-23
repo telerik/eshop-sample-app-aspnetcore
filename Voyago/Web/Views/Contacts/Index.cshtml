@@ -8,6 +8,11 @@
     @(Html.Kendo().Form<Models.InputModels.ContactsInputModel>()
         .Name("contacts")
         .HtmlAttributes(new { action = "Index", controller = "Contacts", method = "POST", @class="contact-form" })
+        .Validatable(v =>
+        {
+            v.ValidateOnBlur(true);
+            v.ValidationSummary(vs => vs.Enable(false));
+        })
         .ButtonsTemplateId("contactsFormButtons")
         .Items(i =>
         {
@@ -79,10 +84,4 @@
     <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary k-form-submit" type="submit">
         <span class="k-button-text">Submit</span>
     </button>
-</script>
-
-<script>
-    $(document).ready( function() {
-        $("#contacts").kendoValidator();
-    });
 </script>

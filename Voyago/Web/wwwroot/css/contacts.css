@@ -20,15 +20,12 @@
     min-width: 150px;
 }
 
-.contact-form .k-form-field .k-input-inner:not(#Message),
-.contact-form .k-form-field-wrap .k-captcha-input .k-input {
-    height: 38px !important;
-    padding: 0px;
+.contact-form .k-form-field .k-input-inner:not(#Message) {
+    height: 38px;
 }
 
 .contact-form .k-form-field #Message {
     height: 110px;
-    padding: 0px;
 }
 
 .contact-form .k-label.k-form-label {

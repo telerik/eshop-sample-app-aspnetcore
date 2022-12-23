@@ -17,6 +17,7 @@
 
 .orders-container .k-grid {
     margin-top: 24px;
+    width: 100%;
 }
 
 .orders-container .k-grid .k-header {
@@ -41,7 +42,7 @@
 
 @media (max-width: 480px) {
     .orders-container {
-        max-width: 300px;
+        max-width: 350px;
         width: 100%;
         padding-inline: 2px;
     }

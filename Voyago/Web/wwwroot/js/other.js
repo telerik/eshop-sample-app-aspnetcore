@@ -11,7 +11,6 @@ function hideRecentlyViewedIfEmpty(e) {
 }
 
 function onCategoryDataBound(e) {
-	console.log(this.dataSource.total());
 	if (this.dataSource.total() == 0) {
 		$(".no-product-msg").show();
 	} else $(".no-product-msg").hide();

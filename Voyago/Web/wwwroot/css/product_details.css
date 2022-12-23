@@ -50,6 +50,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 500px;
 }
 
     .model-info-container .model-data-left-container .model-data-row {
@@ -59,13 +60,15 @@
     }
 
     .model-info-container .model-data-left-container .title {
+        display: flex;
+        align-self: center;
         color: #605E5C;
         flex: 0 0 20%;
     }
 
-    .model-info-container .model-data-left-container .size .k-dropdownlist {
-        width: 174px;
-    }
+.model-info-container .model-data-left-container .size .k-dropdownlist {
+    width: 174px;
+}
 
     .model-info-container .model-data-right-container .price {
         font-weight: 600;
@@ -127,13 +130,17 @@
             align-self: center;
             width: auto;
         }
-}
 
-@media (max-width: 768px) {
     .model-info-container .model-data {
         flex-direction: column;
     }
 
+    .model-info-container .model-data-left-container {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
     .model-info-container .model-data-left-container .title {
         flex: 0 0 30%;
     }
@@ -145,5 +152,11 @@
     .similar-products .k-listview-content .k-card {
         max-width: 100%;
         height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .model-info-container .model-data-left-container .title {
+        flex: 0 0 40%;
     }
 }

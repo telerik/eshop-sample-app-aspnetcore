@@ -20,14 +20,16 @@ function shoppingCartGridOnDataBound() {
 function removeItemFromShoppingCart(itemId) {
 	var rowToRemove = $("#remove_" + itemId).parent().parent();
 	var grid = getShoppingCartGrid();
-	var refresh = grid.dataSource.data().length == 1;
 
 	grid.removeRow(rowToRemove);
 	grid.dataSource.sync();
 
-	if (refresh) {
-		location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/ShoppingCart" : "/Account/ShoppingCart";
-    }
+	grid.dataSource.bind("sync", function (e) {
+		console.log(e.sender.data().length);
+		if (e.sender.data().length == 0) {
+			location.href = window.location.href.indexOf('fluent-eshop-voyago') > 0 ? "/fluent-eshop-voyago/Account/ShoppingCart" : "/Account/ShoppingCart";
+		}
+	});
 }
 
 function updateShoppingCartChanges() {
