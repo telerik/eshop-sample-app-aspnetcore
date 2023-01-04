@@ -1,0 +1,88 @@
+﻿<div class="header" style="visibility: hidden;">
+
+    <button id="configure" class="k-rpanel-toggle k-button k-button-md k-button-rectangle k-button-solid-primary btn-toggle">
+        <span class="k-icon k-i-menu"></span>
+    </button>
+
+    <a href="@Url.Action("Index","Home")" class="site-logo">
+        <img class="logo-image" src="~/images/logo.svg" alt="E-Shop">
+    </a>
+    <div class="search-bar-container">
+        @(Html.Kendo().AutoComplete()
+            .Name("searchBar")
+            .DataTextField("ProductName")
+            .Placeholder("Search")
+            .ClearButton(false)
+            .Suggest(false)
+            .Filter("contains")
+            .MinLength(2)
+            .DataSource(source => source
+            .ServerFiltering(true)
+            .Read(read => read.Action("GetSearchSuggestions", "Home").Data("onAdditionalData")))
+            .TemplateId("searchBar-template")
+            .Events(e => e.Select("onSearchSelect").Change("searchProducts"))
+            )
+    </div>
+    <div class="header-menu-container">
+        <kendo-responsivepanel name="responsive-panel" auto-close="false" breakpoint="480" orientation="top">
+            @(Html.Kendo().Menu()
+                .Name("HeaderMenu")
+                .Items(items =>
+                {
+                    items.Add().Text("Categories").Items(children =>
+                    {
+                        children.Add().Text("Accessories").Action("Accessories", "Home");
+                        children.Add().Text("Bikes").Action("Bikes", "Home");
+                        children.Add().Text("Clothes").Action("Clothing", "Home");
+                        children.Add().Text("Components").Action("Components", "Home");
+                    });
+                    items.Add().Text("Favorites").HtmlAttributes(new { @id = "favoritesBadgeItem" }).Action("Favorites", "Account");
+                    items.Add().Text("Contacts").Action("Index", "Contacts");
+                    items.Add().Text("About").Action("About", "Home");
+                    items.Add().Text("").HtmlAttributes(new { @class = "profileItem" }).ImageUrl("~/images/profile.svg").Items(children =>
+                    {
+                        children.Add().Text("Profile").Action("Profile", "Account");
+                        children.Add().Text("Orders").Action("Index", "Orders");
+                        children.Add().Text("Log out").Action("LogOut", "Account");
+                    });
+                    items.Add().Text(" ").HtmlAttributes(new { @id = "shoppingCartBadgeItem" }).Action("ShoppingCart", "Account").ImageUrl("~/images/cart.svg");
+                })
+            )
+        </kendo-responsivepanel>
+    </div>
+</div>
+
+<script id="searchBar-template" type="text/html">
+	<span class="k-state-default">
+		<span>
+			#:data.ProductName#
+		</span>
+		# if(data.SubCategory != null) { #
+			in #:data.SubCategory#
+		# } #
+	</span>
+</script>
+
+<script>
+	$(document).ready(function () {
+        var favoritesBadgeElement = $('<span id="favoritesBadge"></span>').kendoBadge({
+            position: "edge",
+            rounded: "full",
+            themeColor: "primary",
+            text: '0'
+        });
+        $("#HeaderMenu").find('#favoritesBadgeItem').append(favoritesBadgeElement);
+
+        var shoppingCartBadgeElement = $('<span id="shoppingCartBadge"></span>').kendoBadge({
+            position: "edge",
+            rounded: "full",
+            themeColor: "primary",
+            text: '0'
+        });
+        $("#HeaderMenu").find('#shoppingCartBadgeItem').append(shoppingCartBadgeElement);
+
+		$(".k-autocomplete").prepend("<span class='k-icon k-i-search' style='width:36px;height:36px;'></span>");
+		getFavoritesCount();
+		getShoppingCartItemsCount();
+	})
+</script>

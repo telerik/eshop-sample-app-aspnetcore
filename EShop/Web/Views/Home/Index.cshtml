@@ -1,0 +1,187 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="home-content">
+	<div class="scrollview-container">
+		@(Html.Kendo().ScrollView()
+			.Name("scrollView")
+			.ContentHeight("100%")
+			.Items(x =>
+			{
+				x.Add().Content("<div class='image image1'></div>");
+				x.Add().Content("<div class='image image2'></div>");
+				x.Add().Content("<div class='image image3'></div>");
+				x.Add().Content("<div class='image image4'></div>");
+				x.Add().Content("<div class='image image5'></div>");
+			})
+			.HtmlAttributes(new { style = "width:100vw; max-width: 100%; margin: auto; height: 64.14vh;" })
+		)
+	</div>
+
+	<div id="top-picks" class="top-picks-container">
+		<div class="wrap-width">
+			<div class="home-heading">Top picks</div>
+			<div class="top-picks-scrollview-container">
+				@(Html.Kendo().ScrollView()
+					.Name("topPicks")
+					.EnablePager(false)
+					.ContentHeight("100%")
+					.TemplateId("topPicks-template")
+					.DataSource(dataSource => dataSource
+					.Custom()
+					.Type("aspnetmvc-ajax")
+					.Transport(transport => transport.Read(read => read.Action("GetTopSellingSubCategories", "Home", new { count = 12 })))
+					.Schema(s => s.Data("Data").Total("Total"))
+					.ServerPaging(false)
+					.PageSize(4)
+					)
+					.HtmlAttributes(new { style = "max-width: 100%; height: 20em; margin: auto; background: none;" })
+					)
+			</div>
+		</div>
+	</div>
+
+	<div class="categories-container wrap-width">
+		<div class="categories-header">
+			<div class="categories-title">Categories</div>
+			@(Html.Kendo().Button()
+				.Name("productCatalogBtn")
+				.Icon("download")
+				.Events(ev => ev.Click("productCatalogClick"))
+				.Content("Download  Product Catalog"))
+		</div>
+
+		<div class="categories-inner"> 
+			<div class="column">
+				<a href="@Url.Action("Accessories","Home")">
+					<div class="category-heading">Accessories</div>
+					<img src="~/images/accessories.png" class="category-image" />
+				</a>
+			</div>
+		    <div class="column middle-container">
+				<a href="@Url.Action("Bikes","Home")">
+					<div class="category-heading">Bikes</div>
+					<img src="~/images/bikes.png" class="category-image" />
+				</a>
+				<a href="@Url.Action("Components","Home")">
+					<div class="category-heading-components">Components</div>
+					<img src="~/images/components.png" class="category-image" />
+				</a>
+		  </div> 
+		  <div class="column">
+				<a href="@Url.Action("Clothing","Home")">
+					<div class="category-heading">Clothes</div>
+					<img src="~/images/clothes.png" class="category-image" />
+				</a>
+		  </div>
+		</div>
+	</div>
+
+	<div class="recently-viewed wrap-width">
+		<div class="recently-viewed-title">Recently Viewed</div>
+			@(Html.Kendo().ListView<Models.ViewModels.ProductAllViewModel>()
+				.Name("recentlyViewedListView")
+				.TagName("div")
+				.ClientTemplateId("product-template")
+				.Bordered(false)
+				.DataSource(dataSource => dataSource
+					.Ajax()
+					.ServerOperation(true)
+					.Read(r => r.Action("GetRecentlyViewedProducts", "Home").Type(HttpVerbs.Get))
+				)
+				.Events(e => e.DataBound("onRecentlyViewedDataBound"))
+			)
+	</div>
+
+	<hr class="splitter wrap-width">
+	<div class="download-app">
+		<span class="download-text">Download E-Shop application</span>
+		<span class="downlaod-icons">
+			<img src="~/images/gplay.svg" class="download-icon-1"/>
+			<img src="~/images/appstore.svg" class="download-icon-2" />
+		</span>
+	</div>
+</div>
+
+<script id="topPicks-template" type="text/html">
+	<div class="top-picks">
+		# for (var i = 0; i < data.length; i++) { #
+		<div class="top-pick-card">
+			<a href="@Url.Action("Category", "Products")?subCategory=#=data[i].Name#">
+				<div class="top-pick-heading">#= data[i].Name #</div>
+				<img src="~/images/#=data[i].ImageName#" class="top-pick-image"/>
+			</a>
+		</div>
+		# } #
+	</div>
+</script>
+
+<script type="text/html" id="product-template">
+	@await Html.PartialAsync("~/Views/Products/_TileProductCard.cshtml")
+</script>
+
+<script>
+$(document).ready(function () {
+		let topPicksSV = $("#topPicks").data("kendoScrollView");
+
+        $(window).on('resize', function () {
+			$("#scrollView").data("kendoScrollView").resize(true);
+			$("#topPicks").data("kendoScrollView").resize(true);
+
+			
+			if (window.matchMedia("screen and (max-width: 1130px)").matches) {
+                topPicksSV.setDataSource(
+					new kendo.data.DataSource({
+						type:"aspnetmvc-ajax",
+						transport:{
+							read:{url: '@Url.Action("GetTopSellingSubCategories","Home")?count=12'}
+						},
+						pageSize: 2,
+						schema:{data:"Data",total:"Total"}
+					})
+				);
+            } else if(window.matchMedia("screen and (max-width: 1450px)").matches) {
+                topPicksSV.setDataSource(
+                    new kendo.data.DataSource({
+                        type: "aspnetmvc-ajax",
+                        transport: {
+                            read:{url: '@Url.Action("GetTopSellingSubCategories","Home")?count=12'}
+                        },
+                        pageSize: 3,
+                        schema: { data: "Data", total: "Total" }
+                    })
+                );
+			} else {
+				topPicksSV.setDataSource(
+                    new kendo.data.DataSource({
+                        type: "aspnetmvc-ajax",
+                        transport: {
+                            read:{url: '@Url.Action("GetTopSellingSubCategories","Home")?count=12'}
+                        },
+                        pageSize: 4,
+                        schema: { data: "Data", total: "Total" }
+                    })
+                );
+			}
+        });
+});
+</script>
+
+<style>
+	.image1 {
+		background-image: url('@Url.Content("~/images/home_main_1.png")');
+	}
+	.image2 {
+		background-image: url('@Url.Content("~/images/home_main_2.png")');
+	}
+	.image3 {
+		background-image: url('@Url.Content("~/images/home_main_3.png")');
+	}
+	.image4 {
+		background-image: url('@Url.Content("~/images/home_main_4.png")');
+	}
+	.image5 {
+		background-image: url('@Url.Content("~/images/home_main_5.png")');
+	}
+</style>

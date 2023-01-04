@@ -1,0 +1,118 @@
+﻿.list-product-container {
+    width: 100%;
+    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.1), 0px 1.6px 3.6px rgba(0, 0, 0, 0.13);
+    border-radius: 2px;
+    padding: 12px;
+    gap: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+.list-product-image-container {
+    width: 272px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.list-product-image {
+    width: 100%;
+}
+
+.list-product-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 710px;
+}
+
+.list-product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-product-controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-product-name {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 39px;
+}
+
+.list-product-info-container .avg-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: start;
+    gap: 4px;
+}
+
+    .list-product-info-container .avg-rating .k-icon {
+        width: 20px;
+        height: 20px;
+        padding: 8px 2px;
+    }
+
+    .list-product-info-container .avg-rating .rating-text {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 17px;
+    }
+
+.list-product-info-container .list-product-description {
+    text-align: left;
+    width: 249px;
+}
+
+.list-product-controls .price {
+    font-size: 32px;
+    line-height: 45px;
+    color: var(--eshop-blue);
+    text-align: right;
+}
+
+.list-product-controls .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 23px;
+}
+
+    .list-product-controls .buttons-container .k-button {
+        width: 260px;
+        height: 34px;
+    }
+
+@media (max-width: 1280px) {
+    .list-product-container {
+        flex-direction: column;
+    }
+
+    .list-product-image-container {
+        align-self: center;
+    }
+
+    .list-product-info-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+        .list-product-info-container .list-product-description {
+            width: 100%;
+        }
+
+    .list-product-controls .buttons-container .k-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-product-image-container {
+        width: auto;
+    }
+}
+
+

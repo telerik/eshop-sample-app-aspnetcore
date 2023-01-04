@@ -1,0 +1,72 @@
+﻿@{
+	ViewData["Title"] = "Favorites";
+}
+
+<div class="favorites-container">
+	<div class="favorites-title">Favorites</div>
+	<div class="favorites-header">
+		<a class="continue-shopping" href="@Url.Action("Index","Home")">Continue shopping</a>
+		@(Html.Kendo().Button()
+			.Name("favouritesReportBtn")
+			.Icon("download")
+			.Enable(true)
+			.Events(ev => ev.Click("favouritesReportClick"))
+			.Content("Download PDF")
+		)
+	</div>
+	
+	@(Html.Kendo().ListView<Models.ViewModels.FavoriteProductViewModel>()
+		.Name("favoritesListView")
+		.TagName("div")
+		.Bordered(false)
+		.ClientTemplateId("favoriteProduct-template")
+		.Events(ev => ev.DataBound("onListViewDataBound"))
+		.DataSource(dataSource => dataSource
+			.Ajax()
+			.ServerOperation(true)
+			.Read(r => r.Action("GetFavoriteProducts", "Account").Type(HttpVerbs.Get))
+		)
+	)
+</div>
+
+<script id="favoriteProduct-template" type="text/html">
+	<div class="favorite-product-container">
+		<a href="@Url.Action("Details","Products")?productId=#:Id#" class="favorite-product-image-container">
+			<img class="favorite-product-image" src="@Url.Action("GetProductLargePhotoById", "Products")?photoId=#:PhotoId#" alt="#:Name# image"/>
+		</a>
+		<div class="favorite-product-info-container">
+			<div class="favorite-product-details">
+				<a href="@Url.Action("Details","Products")?productId=#:Id#">
+					<div class="favorite-product-name">#:Name#</div>
+				</a>
+				<div class="avg-rating">
+					<span class="k-icon k-i-star"></span>
+					<span class="rating-text">#:AverageRating#/5</span>
+				</div>
+				<p class="favorite-product-description">#:Description#</p>
+			</div>
+			<div class="favorite-product-controls">
+				<div class="price">#:kendo.toString(FinalPrice, "c")#</div>
+				<div class="buttons-container">
+						@(Html.Kendo().Button()
+							.Name("addToCartButton_#=Id#")
+							.HtmlAttributes(new { type = "button" })
+							.Icon("cart")
+							.ThemeColor(ThemeColor.Primary)
+							.Content("Add to cart")
+							.Events(e => e.Click("addProductToShoppingCart"))
+							.ToClientTemplate()
+						)
+						@(Html.Kendo().Button()
+							.Name("removeFromFavoritesButton_#=Id#")
+							.HtmlAttributes(new { type = "button" })
+							.Icon("heart")
+							.Content("Added to Favorites")
+							.Events(e => e.Click("removeProductFromFavorites"))
+							.ToClientTemplate()
+						)
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
