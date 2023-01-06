@@ -82,6 +82,20 @@
         $("#HeaderMenu").find('#shoppingCartBadgeItem').append(shoppingCartBadgeElement);
 
 		$(".k-autocomplete").prepend("<span class='k-icon k-i-search' style='width:36px;height:36px;'></span>");
+
+        if (window.matchMedia("screen and (max-width: 480px)").matches) {
+            $("#HeaderMenu").data("kendoMenu").setOptions({ orientation: "vertical" });
+        }
+
+        $(window).resize(function(){
+            if (window.matchMedia("screen and (max-width: 480px)").matches) {
+                $("#HeaderMenu").data("kendoMenu").setOptions({ orientation: "vertical" });
+            }
+            if (window.matchMedia("screen and (min-width: 480px)").matches) {
+                $("#HeaderMenu").data("kendoMenu").setOptions({ orientation: "horizontal" });
+            }
+        });
+
 		getFavoritesCount();
 		getShoppingCartItemsCount();
 	})

@@ -76,4 +76,7 @@
     .k-menu-horizontal {
         flex-direction: column;
     }
+    .header-menu-container {
+        margin: 28px 170px 28px 0;
+    }
 }
