@@ -38,7 +38,7 @@ The sample application showcases some of the most popular Telerik UI for ASP.NET
   [13]: https://demos.telerik.com/aspnet-core/menu
   [14]: https://demos.telerik.com/aspnet-core/captcha
   
-## Prerequisits
+## Prerequisites
 
  - [.NET 6.0][15]
  - [Visual Studio 2022][16]
@@ -51,8 +51,10 @@ The sample application showcases some of the most popular Telerik UI for ASP.NET
 ## Running this app
 
 1. [Add the Telerik Nuget feed as a Package Source](https://docs.telerik.com/aspnet-core/installation/nuget-install).
-1. Copy the .bak file from the `DatabaseFiles` folder to your SQL Server backup location.
-1. Restore the sample database either through the [SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server) or by using the [RESTORE command](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=tsql#restore-to-sql-server).
+1. Copy the `.bak` file from the `DatabaseFiles` folder to your SQL Server backup location.
+1. Restore the sample database through any of the approaches below:
+  * Use SQL Server Management Studio (SSMS)&#8212;Follow the steps in the [Restore to SQL Server article](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server). Note: You need to select the `EShopDatabase.bak` file.
+  * Use Transact-SQL (T-SQL)&#8212;Run the `RESTORE DATABASE` command as described in the article linked [here](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=tsql#restore-to-sql-server).
 1. Open `EShop.sln` with Visual Studio.
 1. Open the terminal and enter the `Web` directory (`...\fluent-eshop-core\EShop\Web`).
 1. Run `npm install` to install the dependencies from the `package.json` file. This step is required to activate the `gulp tasks` defined in the `gulpfile.js` when running the app. 
