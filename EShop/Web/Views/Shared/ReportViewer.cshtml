@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Report Viewer";
+    var parameter = Html.Raw(Json.Serialize(Model.Parameters));
+}
+
+@model Models.ViewModels.ReportSourceModel
+
+	<script src="~/api/reports/resources/js/telerikReportViewer-16.2.22.1109.min.js/"></script>
+
+    <style>
+        .report-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-inline: var( --viewport-padding-inline );
+            margin: auto;
+            height: 1078px;
+            width: 981px;
+        }
+
+        #reportViewer1 {
+            overflow: hidden;
+            font-family: Segoe UI; 
+        }
+
+        #reportViewer1, .trv-report-viewer {
+            height: 100%;
+            width: 100%;
+        }
+
+        .trv-side-menu {
+            z-index: 99;
+        }
+
+        ul.trv-menu-large {
+            flex-wrap: wrap;
+        }
+
+        .trv-pages-area .trv-page-container {
+            overflow-x: hidden;
+        }
+
+        #backOrderBtn {
+        align-self: start;
+            color: var(--eshop-blue);
+        }
+
+        @@media (max-width: 1500px) {
+            .report-container {
+                max-width: 980px;
+                width: calc(100% - 80px);
+                height: 800px;
+             }
+        }
+    </style>
+
+    <div class="report-container">
+        @{
+            if(Model.Parameters != null)
+            {
+                    @(Html.Kendo().Button()
+                           .Name("backOrderBtn")
+                           .HtmlAttributes(new { type = "button" })
+                           .FillMode(ButtonFillMode.Flat)
+                           .Icon("chevron-left")
+                           .Content("Back to order")
+                           .Events(ev => ev.Click("backOrderBtnClick"))
+                    )
+            }
+        }
+        <div id="reportViewer1">
+            loading...
+       </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#reportViewer1")
+                .telerik_ReportViewer({
+
+                    // The URL of the service which will serve reports.
+                    // The URL corresponds to the name of the controller class (ReportsController).
+                    // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
+                    serviceUrl: "@Context.Request.PathBase.Value/api/reports",
+
+                    // The URL for custom report viewer template. The template can be edited -
+                    // new functionalities can be added and unneeded ones can be removed.
+                    // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
+                     //templateUrl: '/Views/Shared/telerikReportViewerTemplate-16.1.22.622.html',
+
+                    //ReportSource - report description
+                    reportSource: {
+                        // The report can be set to a report file name (trdx report definition)
+                        // or CLR type name (report class definition).
+                        report: '@Model.ReportId',
+                        parameters: @parameter
+                    },
+
+                    // Specifies whether the viewer is in interactive or print preview mode.
+                    // PRINT_PREVIEW - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
+                    // INTERACTIVE - Displays the report in its original width and height without paging. Additionally interactivity is enabled.
+                    viewMode: telerikReportViewer.ViewModes.INTERACTIVE,
+
+                    // Sets the scale mode of the viewer.
+                    // Three modes exist currently:
+                    // FIT_PAGE - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
+                    // FIT_PAGE_WIDTH - The report will be zoomed in or out so that the width of the screen and the width of the report match.
+                    // SPECIFIC - Uses the scale to zoom in and out the report.
+                    scaleMode: telerikReportViewer.ScaleModes.FIT_PAGE_WIDTH,
+
+                    // Zoom in and out the report using the scale
+                    // 1.0 is equal to 100%, i.e. the original size of the report
+                    scale: 0.6,
+					enableAccessibility: false,
+                    sendEmail: { enabled: true },
+                    ready: function () {
+                        //this.refreshReport();
+                    }
+                });
+        });
+
+        function backOrderBtnClick(e) {
+            history.back();
+        }
+    </script>

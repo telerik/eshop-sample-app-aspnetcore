@@ -1,0 +1,40 @@
+﻿@{
+	ViewData["Title"] = "Clothing";
+}
+
+<div class="sub-category-container wrap-width">
+	@(Html.Kendo().Breadcrumb()
+		.Name("breadcrumb")
+		.Navigational(true)
+		.Items(items =>
+		{
+			items.Add()
+			.Type(BreadcrumbItemType.RootItem)
+			.Href(@Url.Action("Index", "Home"))
+			.ShowText(false)
+			.Icon("home")
+			.ShowIcon(true);
+			items.Add()
+			.Type(BreadcrumbItemType.Item)
+			.Href(@Url.Action("Clothing", "Home"))
+			.Text("Clothes")
+			.ShowText(true);
+		})
+	)
+
+	<div class="category-heading-large">Clothes</div>
+	<div class="sub-category-images">
+		<div class="column-clothes">
+			<a href="@Url.Action("Category", "Products")?subCategory=Jerseys">
+				<div class="category-heading">Jerseys</div>
+				<img src="~/images/jerseys.png" class="category-large-image" />
+			</a>
+		</div>
+		<div class="column-clothes">
+			<a href="@Url.Action("Category", "Products")?subCategory=Shorts">
+				<div class="category-heading">Shorts</div>
+				<img src="~/images/shorts.png" class="category-large-image" />
+			</a>
+		</div>
+	</div>
+</div>

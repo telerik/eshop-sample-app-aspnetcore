@@ -1,14 +1,14 @@
 #  Telerik UI for ASP.NET Core E-Shop application
 
-Voyago is an e-shop app built with <a href="https://www.telerik.com/aspnet-core-ui" target="_blank">Telerik UI for ASP.NET Core</a> components within ASP.NET Core application. The sample app demonstrates the most common use cases related to online stores – product categories, product lists and details, shopping cart, similar and recently viewed products, user profile, sophisticated product filters, and so on. Besides that, the demo includes integration with <a href="https://www.telerik.com/products/reporting.aspx" target="_blank">Telerik Reporting</a> to showcase how to generate order invoice, print product catalogue, or export favorite products in PDF. The styling is powered by the new built-in <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/sass-themes/overview" target="_blank">Fluent theme</a>, which is available for all Telerik and Kendo UI components.
+The E-Shop app is built with <a href="https://www.telerik.com/aspnet-core-ui" target="_blank">Telerik UI for ASP.NET Core</a> components within ASP.NET Core application. The sample app demonstrates the most common use cases related to online stores – product categories, product lists and details, shopping cart, similar and recently viewed products, user profile, sophisticated product filters, and so on. Besides that, the demo includes integration with <a href="https://www.telerik.com/products/reporting.aspx" target="_blank">Telerik Reporting</a> to showcase how to generate order invoice, print product catalogue, or export favorite products in PDF. The styling is powered by the new built-in <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/sass-themes/overview" target="_blank">Fluent theme</a>, which is available for all Telerik and Kendo UI components. The products data is based on AdventureWorks sample database.
 
 ----------
 
 ## Featured Telerik UI for ASP.NET Core components
 
-The sample app showcases some of the most popular Telerik UI for ASP.NET Core components, such as:
+The sample application showcases some of the most popular Telerik UI for ASP.NET Core components, such as:
 
- - [Grid][1]
+ - [Data Grid][1]
  - [Scrollview][2]
  - [ListView][3]
  - [AutoComplete][4]
@@ -18,8 +18,10 @@ The sample app showcases some of the most popular Telerik UI for ASP.NET Core co
  - [Rating][8]
  - [CheckBoxGroup][9]
  - [RadioGroup][10]
- - [Map][11]
-
+ - [ButtonGroup][11]
+ - [Map][12]
+ - [Menu][13]
+ - [Captcha][14]
 
   [1]: https://demos.telerik.com/aspnet-core/grid
   [2]: https://demos.telerik.com/aspnet-core/scrollview
@@ -31,14 +33,29 @@ The sample app showcases some of the most popular Telerik UI for ASP.NET Core co
   [8]: https://demos.telerik.com/aspnet-core/rating
   [9]: https://demos.telerik.com/aspnet-core/checkboxgroup
   [10]: https://demos.telerik.com/aspnet-core/radiogroup
-  [11]: https://demos.telerik.com/aspnet-core/map
+  [11]: https://demos.telerik.com/aspnet-core/buttongroup
+  [12]: https://demos.telerik.com/aspnet-core/map
+  [13]: https://demos.telerik.com/aspnet-core/menu
+  [14]: https://demos.telerik.com/aspnet-core/captcha
   
-## Prerequisits
+## Prerequisites
 
- - [.NET 6.0][12]
- - [Microsoft SQL Server][13]
+ - [.NET 6.0][15]
+ - [Visual Studio 2022][16]
+ - [Microsoft SQL Server 2019][17]
 
-[12]: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
-[13]: https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+[15]: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+[16]: https://visualstudio.microsoft.com/downloads/
+[17]: https://www.microsoft.com/en-us/sql-server/sql-server-downloads
 
-To run the database, use the transact-SQL script in the Database script folder.
+## Running this app
+
+1. [Add the Telerik Nuget feed as a Package Source](https://docs.telerik.com/aspnet-core/installation/nuget-install).
+1. Copy the `.bak` file from the `DatabaseFiles` folder to your SQL Server backup location.
+1. Restore the sample database through any of the approaches below:
+  * Use SQL Server Management Studio (SSMS)&#8212;Follow the steps in the [Restore to SQL Server article](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server). Note: You need to select the `AspNetCoreEshop.bak` file and the name of the database should be `AspNetCoreEshop`.
+  * Use Transact-SQL (T-SQL)&#8212;Run the `RESTORE DATABASE` command as described in the article linked [here](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=tsql#restore-to-sql-server).
+1. Open `EShop.sln` with Visual Studio.
+1. Open the terminal and enter the `Web` directory (`...\fluent-eshop-core\EShop\Web`).
+1. Run `npm install` to install the dependencies from the `package.json` file. This step is required to activate the `gulp tasks` defined in the `gulpfile.js` when running the app. 
+1. Run the application (Hit `Ctrl` + `F5`).
