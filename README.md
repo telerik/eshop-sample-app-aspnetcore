@@ -53,7 +53,7 @@ The sample application showcases some of the most popular Telerik UI for ASP.NET
 1. [Add the Telerik Nuget feed as a Package Source](https://docs.telerik.com/aspnet-core/installation/nuget-install).
 1. Copy the `.bak` file from the `DatabaseFiles` folder to your SQL Server backup location.
 1. Restore the sample database through any of the approaches below:
-  * Use SQL Server Management Studio (SSMS)&#8212;Follow the steps in the [Restore to SQL Server article](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server). Note: You need to select the `EShopDatabase.bak` file.
+  * Use SQL Server Management Studio (SSMS)&#8212;Follow the steps in the [Restore to SQL Server article](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server). Note: You need to select the `AspNetCoreEshop.bak` file and the name of the database should be `AspNetCoreEshop`.
   * Use Transact-SQL (T-SQL)&#8212;Run the `RESTORE DATABASE` command as described in the article linked [here](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=tsql#restore-to-sql-server).
 1. Open `EShop.sln` with Visual Studio.
 1. Open the terminal and enter the `Web` directory (`...\fluent-eshop-core\EShop\Web`).

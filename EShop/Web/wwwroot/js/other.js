@@ -23,7 +23,7 @@ function distinguishFavorites() {
 		var currentButton = $(this);
 		var icon = currentButton.find(".k-icon");
 		var productId = this.id.split("_")[1];
-		var getUrl = window.location.href.indexOf('eshop') > 0 ? "/eshop/Account/ProductIsInFavorites?productId=" : "/Account/ProductIsInFavorites?productId=";
+		var getUrl = window.location.href.indexOf('eshop') > 0 ? "/aspnet-core/eshop/Account/ProductIsInFavorites?productId=" : "/Account/ProductIsInFavorites?productId=";
 		$.get(getUrl + productId, function (data) {
 			if (data) {
 				if (currentButton.find(".k-button-text")) {
@@ -80,7 +80,7 @@ function showCategories(e) {
 		var value = data[i].value;
 		var count = data[i].items.length;
 		var categoriesElement = $("#availableCategories");
-		let getUrl = window.location.href.indexOf('eshop') > 0 ? "/eshop/Products/Category?subCategory=" : "/Products/Category?subCategory=";
+		let getUrl = window.location.href.indexOf('eshop') > 0 ? "/aspnet-core/eshop/Products/Category?subCategory=" : "/Products/Category?subCategory=";
 		categoriesElement.append("<a href=' " + getUrl + value + "&searchParam=" + searchParam + "' ><p><strong>" + value + "</strong> (" + count + " results)</p></a>");
 	}
 }
@@ -117,7 +117,7 @@ function searchProducts(e) {
 }
 
 function searchByNameAndCategory(name, subCategory) {
-	location.href = window.location.href.indexOf('eshop') > 0 ? "/eshop/Products/Category?searchParam=" + name + "&subCategory=" + subCategory : "/Products/Category?searchParam=" + name + "&subCategory=" + subCategory;
+	location.href = window.location.href.indexOf('eshop') > 0 ? "/aspnet-core/eshop/Products/Category?searchParam=" + name + "&subCategory=" + subCategory : "/Products/Category?searchParam=" + name + "&subCategory=" + subCategory;
 }
 
 function searchByName(name) {
@@ -125,7 +125,7 @@ function searchByName(name) {
 		filterDataSource();
 	}
 	else {
-		location.href = window.location.href.indexOf('eshop') > 0 ? "/eshop/Products/Summary?searchParam=" + name : "/Products/Summary?searchParam=" + name;
+		location.href = window.location.href.indexOf('eshop') > 0 ? "/aspnet-core/eshop/Products/Summary?searchParam=" + name : "/Products/Summary?searchParam=" + name;
 	}
 }
 
@@ -140,7 +140,7 @@ function changeUserCountry(e) {
 }
 
 function productCatalogClick() {
-	location.href = window.location.href.indexOf('eshop') > 0 ? "/eshop/Home/ProductCatalog" : "/Home/ProductCatalog";
+	location.href = window.location.href.indexOf('eshop') > 0 ? "/aspnet-core/eshop/Home/ProductCatalog" : "/Home/ProductCatalog";
 }
 
 function onContactsFormSubmit(e) {
