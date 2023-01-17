@@ -279,29 +279,6 @@ namespace Services
             return colors;
         }
 
-        //public IEnumerable<SortParmeterViewModel> GetAllSortParameters()
-        //{
-        //    PropertyInfo[] properties = typeof(ProductAllViewModel).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        //    var parameters = new List<SortParmeterViewModel>();
-        //    foreach (var property in properties.Where(p => !p.Name.Contains("Id")))
-        //    {
-        //        var text = property.Name;
-        //        for (int i = 1; i < text.Length; ++i)
-        //        {
-        //            if (Char.IsUpper(text[i]))
-        //            {
-        //                text = text.Insert(i++, " ");
-        //            }
-        //        }
-        //        var asc = new SortParmeterViewModel() { Text = text + " - Ascending", Value = property.Name, Direction = "asc" };
-        //        var desc = new SortParmeterViewModel() { Text = text + " - Descending", Value = property.Name, Direction = "desc" };
-        //        parameters.Add(asc);
-        //        parameters.Add(desc);
-        //    }
-
-        //    return parameters;
-        //}
 
         public async Task<byte[]?> GetProductThumbnailById(int photoId)
         {
