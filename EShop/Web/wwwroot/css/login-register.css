@@ -1,0 +1,76 @@
+﻿.login-register-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    height: 100vh;
+}
+
+.login-register-form {
+    margin-top: 5%;
+    width: 420px;
+    min-width: 150px;
+}
+
+.login-register-form .k-form-field {
+    margin-top: 17px;
+}
+
+.login-register-form .k-input-inner {
+    line-height: 26px;
+}
+
+.login-register-form .k-label.k-form-label {
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var( --eshop-dark-grey );
+}
+
+.login-register-form .k-form-buttons {
+    margin-top: 64px;
+}
+
+.login-register-form .k-button.k-form-submit {
+    width: 100%;
+    height: 48px;
+    border-radius: 2px;
+    padding: 14px 21px;
+}
+
+.login-register-form .k-form .k-button-text {
+    height: 20px;
+    font-weight: 600;
+}
+
+.login-prompt,
+.register-prompt {
+    width: 10%;
+    min-width: 250px;
+    display: flex;
+    font-weight: 600;
+    margin-top: 64px;
+}
+
+.login-link {
+    color: var( --eshop-blue );
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+.login-register-form .k-form-hint {
+    font-style: normal;
+    font-size: 12px;
+    line-height: 17px;
+    color: #605E5C;
+}
+
+@media (max-width: 600px) {
+    .login-register-form {
+        width: 80%;
+        min-width: 150px;
+    }
+}

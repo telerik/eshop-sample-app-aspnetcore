@@ -1,0 +1,46 @@
+﻿@{
+	ViewData["Title"] = "Bikes";
+}
+
+<div class="sub-category-container wrap-width">
+	@(Html.Kendo().Breadcrumb()
+		.Name("breadcrumb")
+		.Navigational(true)
+		.Items(items =>
+		{
+			items.Add()
+			.Type(BreadcrumbItemType.RootItem)
+			.Href(@Url.Action("Index", "Home"))
+			.ShowText(false)
+			.Icon("home")
+			.ShowIcon(true);
+			items.Add()
+			.Type(BreadcrumbItemType.Item)
+			.Href(@Url.Action("Bikes", "Home"))
+			.Text("Bikes")
+			.ShowText(true);
+		})
+	)
+
+	<div class="category-heading-large">Bikes</div>
+	<div class="sub-category-images">
+		<div class="column">
+			<a href="@Url.Action("Category", "Products")?subCategory=Mountain Bikes">
+				<div class="category-heading">Mountain Bikes</div>
+				<img src="~/images/mountain_bikes.png" class="category-large-image" />
+			</a>
+		</div>
+		<div class="column">
+			<a href="@Url.Action("Category", "Products")?subCategory=Road Bikes">
+				<div class="category-heading">Road Bikes</div>
+				<img src="~/images/road_bikes.png" class="category-large-image" />
+			</a>
+		</div>
+		<div class="column">
+			<a href="@Url.Action("Category", "Products")?subCategory=Touring Bikes">
+				<div class="category-heading">Touring Bikes</div>
+				<img src="~/images/touring_bikes.png" class="category-large-image" />
+			</a>
+		</div>
+	</div>
+</div>

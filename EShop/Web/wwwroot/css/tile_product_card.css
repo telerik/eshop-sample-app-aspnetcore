@@ -1,0 +1,90 @@
+﻿﻿.k-listview {
+    border: none;
+}
+
+.k-listview-content > .k-focus {
+    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.1), 0px 1.6px 3.6px rgba(0, 0, 0, 0.13);
+    border-radius: 2px;
+}
+
+.k-card {
+    box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.1), 0px 1.6px 3.6px rgba(0, 0, 0, 0.13);
+    border-radius: 2px;
+    width: 315px;
+    height: 428px;
+}
+
+.k-card-image-container {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    height: 264px;
+}
+
+.k-card-image {
+    width: 100%;
+    max-width: initial;
+}
+
+.k-card-header .card-title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.discount-pct {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--eshop-white);
+    background: var(--eshop-blue);
+    padding: 2%;
+    padding-right: 4%;
+}
+
+.k-card-header .avg-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: start;
+    gap: 4px;
+}
+
+    .k-card-header .avg-rating .k-icon {
+        width: 20px;
+        height: 20px;
+        padding: 8px 2px;
+    }
+
+.k-card-header .rating-text {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
+}
+
+.card-price {
+    font-size: 16px;
+    color: var(--eshop-blue);
+    line-height: 22px;
+    padding: 0px 0px 0px 12px;
+}
+
+.k-card .card-buttons {
+    height: 58px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+}
+
+.k-card .card-buttons .cart-btn {
+    width: 264px;
+    height: 34px;
+}
+
+.k-card .card-buttons .favorites-btn {
+    width: 34px;
+    height: 34px;
+}
