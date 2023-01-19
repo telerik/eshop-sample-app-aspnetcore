@@ -6,7 +6,7 @@ echo "Last release version is $LATEST_RELEASE"
 function getCurrentVersion {
     for file in `find . -type f -name "*.cshtml"`  
     do
-        CURRENT_VERSION=$(grep -hnr "kendo.cdn" $file | head -1 |cut -d '/' -f 4)
+        CURRENT_VERSION=$(grep -hnr "cdn.kendostatic" $file | head -1 |cut -d '/' -f 4)
         if [ ! -z "$CURRENT_VERSION" ]
             then
                 CURRENT_GLOBAL_VERSION=$CURRENT_VERSION
