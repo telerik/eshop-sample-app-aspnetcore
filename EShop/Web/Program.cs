@@ -7,25 +7,32 @@ using Services.Interfaces;
 using Services;
 using Data;
 using BundlerMinifier.TagHelpers;
+using Telerik.Reporting.Services.AspNetCore;
+using Telerik.Reporting.Services.Engine;
+using Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().AddNewtonsoftJson();
 builder.Services.AddControllers();
 builder.Services.AddMvc();
+
 builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp => new ReportServiceConfiguration
 {
-	ReportingEngineConfiguration = sp.GetService<IConfiguration>(),
-	HostAppId = "Html5ReportViewerDemo",
-	Storage = new FileStorage(),
-	ReportSourceResolver = new UriReportSourceResolver(
-		System.IO.Path.Combine(GetReportsDir(sp)))
+    ReportingEngineConfiguration = sp.GetService<IConfiguration>(),
+    HostAppId = "Html5ReportViewerDemo",
+    Storage = new FileStorage(),
+    ReportSourceResolver = new UriReportSourceResolver(
+        System.IO.Path.Combine(GetReportsDir(sp)))
 });
 
 builder.Services.AddDbContext<EShopDatabaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EShopDatabase"));
-    options.UseLazyLoadingProxies();
+    var wwwrootDirectory = builder.Environment.WebRootPath;
+    var fileName = "demos.db";
+
+     options.UseSqlite(@"DataSource=demos.db");
 });
+
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

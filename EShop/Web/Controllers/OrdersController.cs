@@ -58,7 +58,9 @@ namespace Web.Controllers
         public async Task<IActionResult> OrderDetails_Read([DataSourceRequest] DataSourceRequest request, int orderNumber)
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var orderDetails = await orderService.GetOrderDetailsById(orderNumber, userEmail).ToDataSourceResultAsync(request);
+            var orderDetails = await orderService.GetOrderDetailsById(orderNumber, userEmail)
+                .ToList()
+                .ToDataSourceResultAsync(request);
             return Json(orderDetails);
         }
 
@@ -67,7 +69,7 @@ namespace Web.Controllers
         {
             ReportSourceModel report = new ReportSourceModel()
             {
-                ReportId = "OrderInvoiceNew.trdp",
+                ReportId = "OrderInvoice.trdp",
                 Parameters = new Dictionary<string, object>()
             };
             report.Parameters.Add("OrN", orderNumber);
