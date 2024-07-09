@@ -42,19 +42,15 @@ The sample application showcases some of the most popular Telerik UI for ASP.NET
 
  - [.NET 6.0][15]
  - [Visual Studio 2022][16]
- - [Microsoft SQL Server 2019][17]
+ - [SQLite][17]
 
 [15]: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 [16]: https://visualstudio.microsoft.com/downloads/
-[17]: https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+[17]: https://www.sqlite.org/
 
 ## Running this app
 
 1. [Add the Telerik Nuget feed as a Package Source](https://docs.telerik.com/aspnet-core/installation/nuget-install).
-1. Copy the `.bak` file from the `DatabaseFiles` folder to your SQL Server backup location.
-1. Restore the sample database through any of the approaches below:
-  * Use SQL Server Management Studio (SSMS)&#8212;Follow the steps in the [Restore to SQL Server article](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms#restore-to-sql-server). Note: You need to select the `AspNetCoreEshop.bak` file and the name of the database should be `AspNetCoreEshop`.
-  * Use Transact-SQL (T-SQL)&#8212;Run the `RESTORE DATABASE` command as described in the article linked [here](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=tsql#restore-to-sql-server).
 1. Open `EShop.sln` with Visual Studio.
 1. Open the terminal and enter the `Web` directory (`...\eshop-sample-app-aspnetcore\EShop\Web`).
 1. Run `npm install` to install the dependencies from the `package.json` file. This step is required to activate the `gulp tasks` defined in the `gulpfile.js` when running the app. 
