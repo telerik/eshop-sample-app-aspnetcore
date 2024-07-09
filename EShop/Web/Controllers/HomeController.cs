@@ -67,7 +67,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult ProductCatalog()
         {
-            ReportSourceModel report = new ReportSourceModel() { ReportId = "ProductCatalogNew.trdp" };
+            ReportSourceModel report = new ReportSourceModel() { ReportId = "ProductCatalog.trdp" };
 
             return View("~/Views/Shared/ReportViewer.cshtml", report);
         }
