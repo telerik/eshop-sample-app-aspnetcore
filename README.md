@@ -40,7 +40,7 @@ The sample application showcases some of the most popular Telerik UI for ASP.NET
   
 ## Prerequisites
 
- - [.NET 6.0][15]
+ - [.NET 8.0][15]
  - [Visual Studio 2022][16]
  - [SQLite][17]
 
