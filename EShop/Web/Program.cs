@@ -7,9 +7,6 @@ using Services.Interfaces;
 using Services;
 using Data;
 using BundlerMinifier.TagHelpers;
-using Telerik.Reporting.Services.AspNetCore;
-using Telerik.Reporting.Services.Engine;
-using Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().AddNewtonsoftJson();
@@ -22,7 +19,7 @@ builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp => new ReportSe
     HostAppId = "Html5ReportViewerDemo",
     Storage = new FileStorage(),
     ReportSourceResolver = new UriReportSourceResolver(
-        System.IO.Path.Combine(GetReportsDir(sp)))
+        Path.Combine(GetReportsDir(sp)))
 });
 
 builder.Services.AddDbContext<EShopDatabaseContext>(options =>
@@ -30,7 +27,7 @@ builder.Services.AddDbContext<EShopDatabaseContext>(options =>
     var wwwrootDirectory = builder.Environment.WebRootPath;
     var fileName = "demos.db";
 
-     options.UseSqlite(@"DataSource=demos.db");
+    options.UseSqlite(@"Data Source=" + wwwrootDirectory + Path.DirectorySeparatorChar + @"demos.db;");
 });
 
 builder.Services.AddControllersWithViews()
