@@ -10,6 +10,11 @@ function shoppingCartGridOnDataBound() {
 	var rows = this.tbody.children();
 	var dataItems = this.dataSource.view();
 	for (var i = 0; i < dataItems.length; i++) {
+
+		var ntbComponent = $(this).find('.quantity-editor[data-role="numerictextbox"]')
+		if (ntbComponent.data("kendoNumericTextBox")) {
+			return;
+		}
 		kendo.bind(rows[i], dataItems[i]);
 	}
 

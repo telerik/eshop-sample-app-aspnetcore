@@ -2,6 +2,12 @@
 	ViewData["Title"] = "Shopping Cart";
 }
 
+<style>
+	.header-right {
+		justify-content: end;
+	}
+</style>
+
 <div class="shopping-cart-container">
 	<div class="shopping-cart-title">Your cart items</div>
 
@@ -25,7 +31,7 @@
 				.Name("shoppingCartGrid")
 				.Columns(columns =>
 				{
-					columns.Bound(p => p.ProductName).ClientTemplateId("shoppingCartProduct-template");
+					columns.Bound(p => p.ProductName).ClientTemplateId("shoppingCartProduct-template").Width(600);
 					columns.Bound(p => p.ProductPrice);
 					columns.Bound(p => p.Quantity).Editable("function() { return false; }")
 						.HtmlAttributes(new { @class = "templateCell" })

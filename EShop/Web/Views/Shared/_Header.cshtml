@@ -1,7 +1,7 @@
 ﻿<div class="header" style="visibility: hidden;">
 
     <button id="configure" class="k-rpanel-toggle k-button k-button-md k-button-rectangle k-button-solid-primary btn-toggle">
-        <span class="k-icon k-i-menu"></span>
+        <span class="k-font-icon k-icon k-i-menu"></span>
     </button>
 
     <a href="@Url.Action("Index","Home")" class="site-logo">
@@ -81,7 +81,7 @@
         });
         $("#HeaderMenu").find('#shoppingCartBadgeItem').append(shoppingCartBadgeElement);
 
-		$(".k-autocomplete").prepend("<span class='k-icon k-i-search' style='width:36px;height:36px;'></span>");
+        $(".k-autocomplete").prepend("<span class='k-font-icon k-font-icon k-icon k-i-search' style='width:36px;height:36px;'></span>");
 
         if (window.matchMedia("screen and (max-width: 480px)").matches) {
             $("#HeaderMenu").data("kendoMenu").setOptions({ orientation: "vertical" });

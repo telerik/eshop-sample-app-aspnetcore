@@ -15,16 +15,20 @@
 		padding: 2%;
 	}
 
-@@media (max-width: 768px) {
-	.category-content-container {
-		flex-direction: column;
-		align-items: center;
+	@@media (max-width: 768px) {
+		.category-content-container {
+			flex-direction: column;
+			align-items: center;
+		}
+	
+		.products-listView-container .k-listview .k-listview-content {
+			justify-content: center;
+		}
 	}
 
-	.products-listView-container .k-listview .k-listview-content {
-		justify-content: center;
+	.k-checkbox-wrap {
+		align-self: auto !important;
 	}
-}
 </style>
 
 <div class="category-page-container wrap-width">
