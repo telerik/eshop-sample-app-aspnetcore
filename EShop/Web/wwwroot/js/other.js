@@ -29,8 +29,7 @@ function distinguishFavorites() {
 				if (currentButton.find(".k-button-text")) {
 					currentButton.find(".k-button-text").text("Added to favorites");
 				}
-				icon.removeClass("k-i-heart-outline");
-				icon.addClass("k-i-heart");
+				kendo.ui.icon(icon, { icon: "heart" });
 			}
 		});
 	});
@@ -136,7 +135,7 @@ function changeUserCountry(e) {
 	} else {
 		stateDDL.value("");
 		stateDDL.enable(false);
-    }
+	}
 }
 
 function productCatalogClick() {
