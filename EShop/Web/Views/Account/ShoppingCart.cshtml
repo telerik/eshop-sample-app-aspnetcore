@@ -93,16 +93,6 @@
 </script>
 
 <script id="quantityEditor-template" type="text/html">
-	@(Html.Kendo().NumericTextBox()
-		.Name("quantityEditor_#=ShoppingCartItemId#")
-		.HtmlAttributes(new { data_bind = "value: Quantity", @class = "quantity-editor" })
-		.Decimals(0)
-		.Format("\\#")
-		.Min(1)
-		.Max(100)
-		.Rounded(Rounded.None)
-		.Events(e => e.Change("updateShoppingCartChanges"))
-		.ToClientTemplate()
-	)
+    <input class="quantity-editor" data-bind="value: #:Quantity#" id="quantityEditor_#=ShoppingCartItemId#" name="quantityEditor_#=ShoppingCartItemId#" value="" />
 </script>
 
