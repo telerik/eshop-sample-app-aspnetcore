@@ -40,11 +40,11 @@ The sample application showcases some of the most popular Telerik UI for ASP.NET
   
 ## Prerequisites
 
- - [.NET 8.0][15]
+ - [.NET 9.0][15]
  - [Visual Studio 2022][16]
  - [SQLite][17]
 
-[15]: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+[15]: https://dotnet.microsoft.com/en-us/download/dotnet/9.0
 [16]: https://visualstudio.microsoft.com/downloads/
 [17]: https://www.sqlite.org/
 
