@@ -5,8 +5,10 @@ namespace Web.Controllers
     using Microsoft.AspNetCore.Mvc;
     using System.Net.Mail;
     using System.Net;
+    using Web.Attributes;
 
     [Route("api/reports")]
+    [JsonConfigFilter]
     public class ReportsController : ReportsControllerBase
     {
         public ReportsController(IReportServiceConfiguration reportServiceConfiguration)
