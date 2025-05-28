@@ -15,7 +15,7 @@
 		if (ViewBag.ItemsCount == 0)
 		{
 			<div class="empty-shopping-cart-container">
-				<img class="empty-cart-image" src="~/images/shopping_cart_empty.svg" alt="Your shopping cart is empty"/>
+				<img class="empty-cart-image" src="@Url.Content("~/images/shopping_cart_empty.svg")" alt="Your shopping cart is empty"/>
 				<p class="empty-cart-heading">Unfortunately, your cart is empty...</p>
 				<div class="empty-cart-description">
 					<p>Looks like you have not added anything to your cart. Go ahead and <a style="color: var(--eshop-blue);"  href="@Url.Action("Index", "Home")#top-picks">explore our top-picks.</a>
@@ -95,4 +95,3 @@
 <script id="quantityEditor-template" type="text/html">
     <input class="quantity-editor" data-bind="value: #:Quantity#" id="quantityEditor_#=ShoppingCartItemId#" name="quantityEditor_#=ShoppingCartItemId#" value="" />
 </script>
-

@@ -5,7 +5,7 @@
     </button>
 
     <a href="@Url.Action("Index","Home")" class="site-logo">
-        <img class="logo-image" src="~/images/logo.svg" alt="E-Shop">
+        <img class="logo-image" src="@Url.Content("~/images/logo.svg")" alt="E-Shop">
     </a>
     <div class="search-bar-container">
         @(Html.Kendo().AutoComplete()

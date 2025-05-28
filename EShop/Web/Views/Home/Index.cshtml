@@ -56,23 +56,23 @@
 			<div class="column">
 				<a href="@Url.Action("Accessories","Home")">
 					<div class="category-heading">Accessories</div>
-					<img src="~/images/accessories.png" class="category-image" />
+					<img src="@Url.Content("~/images/accessories.png")" class="category-image" />
 				</a>
 			</div>
 		    <div class="column middle-container">
 				<a href="@Url.Action("Bikes","Home")">
 					<div class="category-heading">Bikes</div>
-					<img src="~/images/bikes.png" class="category-image" />
+					<img src="@Url.Content("~/images/bikes.png")" class="category-image" />
 				</a>
 				<a href="@Url.Action("Components","Home")">
 					<div class="category-heading-components">Components</div>
-					<img src="~/images/components.png" class="category-image" />
+					<img src="@Url.Content("~/images/components.png")" class="category-image" />
 				</a>
 		  </div> 
 		  <div class="column">
 				<a href="@Url.Action("Clothing","Home")">
 					<div class="category-heading">Clothes</div>
-					<img src="~/images/clothes.png" class="category-image" />
+					<img src="@Url.Content("~/images/clothes.png")" class="category-image" />
 				</a>
 		  </div>
 		</div>
@@ -98,8 +98,8 @@
 	<div class="download-app">
 		<span class="download-text">Download E-Shop application</span>
 		<span class="downlaod-icons">
-			<img src="~/images/gplay.svg" class="download-icon-1"/>
-			<img src="~/images/appstore.svg" class="download-icon-2" />
+			<img src="@Url.Content("~/images/gplay.svg")" class="download-icon-1"/>
+			<img src="@Url.Content("~/images/appstore.svg")" class="download-icon-2" />
 		</span>
 	</div>
 </div>
@@ -110,7 +110,7 @@
 		<div class="top-pick-card">
 			<a href="@Url.Action("Category", "Products")?subCategory=#=data[i].Name#">
 				<div class="top-pick-heading">#= data[i].Name #</div>
-				<img src="~/images/#=data[i].ImageName#" class="top-pick-image"/>
+				<img src="@Url.Content("~/images/#=data[i].ImageName#")" class="top-pick-image"/>
 			</a>
 		</div>
 		# } #
