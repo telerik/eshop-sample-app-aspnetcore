@@ -3,7 +3,7 @@
 }
 
 <div class="login-register-container">
-	<img class="logo" src="~/images/logo.svg" alt="E-Shop"/>
+	<img class="logo" src="@Url.Content("~/images/logo.svg")" alt="E-Shop"/>
 
 	@(Html.Kendo().Form<Models.InputModels.RegisterUserInpuModel>()
 		.Name("registerForm")

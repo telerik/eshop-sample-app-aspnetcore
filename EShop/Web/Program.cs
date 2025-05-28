@@ -65,6 +65,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts(); // The default HSTS value is 30 days. More: https://aka.ms/aspnetcore-hsts.
 }
 app.UseHttpsRedirection();
+app.UsePathBase("/aspnet-core/eshop/");
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();

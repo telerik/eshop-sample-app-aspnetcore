@@ -5,7 +5,7 @@
 @model Models.InputModels.LoginUserInpuModel
 
 <div class="login-register-container">
-    <img class="logo" src="~/images/logo.svg" alt="E-Shop"/>
+    <img class="logo" src="@Url.Content("~/images/logo.svg")" alt="E-Shop"/>
 
     @(Html.Kendo().Form<Models.InputModels.LoginUserInpuModel>()
         .Name("loginForm")
@@ -34,7 +34,7 @@
     )
 
     <div class="register-prompt">
-        <p>Don’t have an account?</p><a class="login-link" href="@Url.Action("Register","Account")">Register</a>
+        <p>Don't have an account?</p><a class="login-link" href="@Url.Action("Register","Account")">Register</a>
     </div>
 </div>
 
@@ -43,4 +43,3 @@
         <span class="k-button-text">Login</span>
     </button>
 </script>
-
