@@ -3,7 +3,7 @@
 
 var gulp = require("gulp"),
     concat = require("gulp-concat"),
-    cssmin = require("gulp-cssmin"),
+    cleanCss = require("gulp-clean-css"),
     merge = require("merge-stream"),
     del = require("del"),
     bundleconfig = require("./bundleconfig.json");
@@ -30,7 +30,7 @@ function minCss() {
     var tasks = getBundles(regex.css).map(function (bundle) {
         return gulp.src(bundle.inputFiles, { base: "." })
             .pipe(concat(bundle.outputFileName))
-            .pipe(cssmin())
+            .pipe(cleanCss())
             .pipe(gulp.dest("."));
     });
     return merge(tasks);
