@@ -18,7 +18,7 @@
     <PackageReference Include="Telerik.Reporting.Services.AspNetCore" Version="19.3.25.1119" />
     <PackageReference Include="Telerik.Reporting.WebServiceDataSource" Version="19.3.25.1119" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.0" />
-    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2025.4.1111" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2026.1.212" />
     <PackageReference Include="Telerik.Web.Captcha" Version="2.0.1" />
   </ItemGroup>
 
